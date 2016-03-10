@@ -1,9 +1,9 @@
 export class Visit{
 
-patient_id: number;
-staff_id: number;
-room: number;
-date: Date;
+private patient_id: number;
+private staff_id: number;
+private room: number;
+private date: Date;
 
 constructor(pid: number, sid: number, r:number, d:Date){
     this.patient_id = pid;
