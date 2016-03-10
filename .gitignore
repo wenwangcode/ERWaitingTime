@@ -9,9 +9,8 @@
 
 .idea/
 *.iml
+.idea/workspace.xml
 
 # ignore compilation codes
-out/
-target/
-/out
-/target
+node_modules/
+
