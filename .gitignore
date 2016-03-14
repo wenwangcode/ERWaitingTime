@@ -9,7 +9,7 @@
 
 .idea/
 *.iml
-
+typings/
 .idea/workspace.xml
 
 # ignore compilation codes
