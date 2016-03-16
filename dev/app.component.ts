@@ -5,21 +5,19 @@ import {RouteConfig} from "angular2/router";
 
 @Component({
     selector: 'my-app',
-    //template: '<patient></patient>, <visit></visit>',
+    template: '<visit></visit>' +
+    '<patient></patient>',
     directives: [PatientComponent, VisitComponent]
 })
 
 @RouteConfig([
     {
         path: "/visit",
-        name: "visit",
         template: '<patient></patient>',
-        component: VisitComponent,
-        useAsDefault: true
+        component: VisitComponent
     },
     {
         path: "/patients",
-        name: "patient",
         template: '<visit></visit>',
         component: PatientComponent
 

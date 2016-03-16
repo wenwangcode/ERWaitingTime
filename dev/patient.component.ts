@@ -9,6 +9,8 @@ import {Patient} from './patient';
     template:
         `<h1>hello world</h1>`
 })
+
+
 export class PatientComponent{
     patients:Array<Patient>;
 
