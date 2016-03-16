@@ -11,7 +11,7 @@ import {Patient} from './patient';
 })
 
 
-export class PatientComponent{
+export class PatientsComponent{
     patients:Array<Patient>;
 
     constructor(){
