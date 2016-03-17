@@ -6,6 +6,7 @@ import {Patient} from './patient';
 
 @Component({
     selector:'patient',
+    templateURL:'views/patients.component.html'
 })
 
 
