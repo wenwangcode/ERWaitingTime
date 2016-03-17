@@ -2,7 +2,7 @@
  * Created by wendywang on 2016-03-16.
  */
 
-export class Patient{
+export class Staff{
 
     private s_id: number;
     private s_lname: string;
