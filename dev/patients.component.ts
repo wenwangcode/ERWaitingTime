@@ -28,4 +28,5 @@ export class PatientsComponent{
         this.patients.splice(index,1);
     }
 
+
 }

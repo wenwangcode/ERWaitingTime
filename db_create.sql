@@ -1,3 +1,8 @@
+drop database if exists ERWaitingTime;
+create database ERWaitingTime;
+
+use ERWaitingTime;
+
 create table staff(
 	specialization varchar(50),
 	experience_in_years int,
@@ -80,3 +85,6 @@ create table visit(
 	constraint pk_visit primary key (pid,sid),
 	constraint fk_visit_patient foreign key (pid) references patient (pid),
 	constraint fk_visit_staff foreign key (sid) references staff (sid));
+
+select * from staff
+

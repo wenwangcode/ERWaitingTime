@@ -1,10 +1,19 @@
 /**
  * Created by wendywang on 2016-03-16.
  */
+var mySQL = require('mysql');
+var connection = mySQL.createConnection({
+    host : 'localhost',
+    user : 'root',
+    password : '639288',
+    database : 'me'
+});
 
-//http://mysqlhighavailability.com/the-javascript-connector-for-mysql-you-never-heard-of/
-var mySQLClient = require('mysql-js');
-var properties = new mySQLClient.ConnectionProperties('mysql');
-properties.user = '';
-properties.password = '';
-//mySQLClient.openSession(properties, onOpenSession);
+connection.connect();
+connection.query('SELECT * FROM patient', function(err, rows, fields) {
+    if (err) throw err;
+
+    console.log('the solution is: ', rows[0]);
+});
+
+connection.end();
