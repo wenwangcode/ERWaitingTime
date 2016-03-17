@@ -4,6 +4,8 @@ create database ERWaitingTime;
 use ERWaitingTime;
 
 create table staff(
+	s_lname varchar(20),
+	s_fname varchar(20),
 	specialization varchar(50),
 	experience_in_years int,
 	sid int,

@@ -1,17 +1,11 @@
-# Logs and databases #
-######################
 *.log
-
-# OS generated files #
-######################
 .DS_Store
 .DS_Store?
-
 .idea/
 *.iml
 typings/
 .idea/workspace.xml
-
-# ignore compilation codes
+*.js
+*.js.map
 node_modules/
 
