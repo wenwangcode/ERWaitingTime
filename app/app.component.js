@@ -1,4 +1,4 @@
-System.register(['angular2/core', './visit.component', './patients.component', "angular2/router"], function(exports_1, context_1) {
+System.register(['angular2/core', "angular2/router", "./login", "./home"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,21 +10,23 @@ System.register(['angular2/core', './visit.component', './patients.component', "
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, visit_component_1, patients_component_1, router_1;
+    var core_1, router_1, login_1, home_1, router_2, core_2;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (visit_component_1_1) {
-                visit_component_1 = visit_component_1_1;
-            },
-            function (patients_component_1_1) {
-                patients_component_1 = patients_component_1_1;
+                core_2 = core_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+                router_2 = router_1_1;
+            },
+            function (login_1_1) {
+                login_1 = login_1_1;
+            },
+            function (home_1_1) {
+                home_1 = home_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -33,19 +35,15 @@ System.register(['angular2/core', './visit.component', './patients.component', "
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        templateUrl: '../view/login.html',
+                    }),
+                    core_2.View({
+                        directives: [router_2.RouterOutlet],
+                        template: "\n    <h1>Login</h1>\n\n    <router-outlet></router-outlet>\n  "
                     }),
                     router_1.RouteConfig([
-                        {
-                            path: "/visit",
-                            template: '<patient></patient>',
-                            component: visit_component_1.VisitComponent
-                        },
-                        {
-                            path: "/patients",
-                            template: '<visit></visit>',
-                            component: patients_component_1.PatientsComponent
-                        }
+                        { path: '/login', as: 'Login', component: login_1.LoginPage },
+                        { path: '/home', as: 'Home', component: home_1.Home },
+                        { path: '/', redirectTo: ['Login'] }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
@@ -56,4 +54,4 @@ System.register(['angular2/core', './visit.component', './patients.component', "
     }
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7WUF3QkE7Z0JBQUE7Z0JBRUEsQ0FBQztnQkFwQkQ7b0JBQUMsZ0JBQVMsQ0FBQzt3QkFDUCxRQUFRLEVBQUUsUUFBUTt3QkFDbEIsV0FBVyxFQUFFLG9CQUFvQjtxQkFDcEMsQ0FBQztvQkFFRCxvQkFBVyxDQUFDO3dCQUNUOzRCQUNJLElBQUksRUFBRSxRQUFROzRCQUNkLFFBQVEsRUFBRSxxQkFBcUI7NEJBQy9CLFNBQVMsRUFBRSxnQ0FBYzt5QkFDNUI7d0JBQ0Q7NEJBQ0ksSUFBSSxFQUFFLFdBQVc7NEJBQ2pCLFFBQVEsRUFBRSxpQkFBaUI7NEJBQzNCLFNBQVMsRUFBRSxzQ0FBaUI7eUJBRS9CO3FCQUNKLENBQUM7O2dDQUFBO2dCQUdGLG1CQUFDO1lBQUQsQ0FGQSxBQUVDLElBQUE7WUFGRCx1Q0FFQyxDQUFBIiwiZmlsZSI6ImFwcC5jb21wb25lbnQuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge0NvbXBvbmVudH0gZnJvbSAnYW5ndWxhcjIvY29yZSc7XG5pbXBvcnQge1Zpc2l0Q29tcG9uZW50fSBmcm9tICcuL3Zpc2l0LmNvbXBvbmVudCc7XG5pbXBvcnQge1BhdGllbnRzQ29tcG9uZW50fSBmcm9tICcuL3BhdGllbnRzLmNvbXBvbmVudCc7XG5pbXBvcnQge1JlZ2lzdGVyQ29tcG9uZW50fSBmcm9tICcuL3JlZ2lzdGVyLmNvbXBvbmVudCc7XG5pbXBvcnQge1JvdXRlQ29uZmlnfSBmcm9tIFwiYW5ndWxhcjIvcm91dGVyXCI7XG5cbkBDb21wb25lbnQoe1xuICAgIHNlbGVjdG9yOiAnbXktYXBwJyxcbiAgICB0ZW1wbGF0ZVVybDogJy4uL3ZpZXcvbG9naW4uaHRtbCcsXG59KVxuXG5AUm91dGVDb25maWcoW1xuICAgIHtcbiAgICAgICAgcGF0aDogXCIvdmlzaXRcIixcbiAgICAgICAgdGVtcGxhdGU6ICc8cGF0aWVudD48L3BhdGllbnQ+JyxcbiAgICAgICAgY29tcG9uZW50OiBWaXNpdENvbXBvbmVudFxuICAgIH0sXG4gICAge1xuICAgICAgICBwYXRoOiBcIi9wYXRpZW50c1wiLFxuICAgICAgICB0ZW1wbGF0ZTogJzx2aXNpdD48L3Zpc2l0PicsXG4gICAgICAgIGNvbXBvbmVudDogUGF0aWVudHNDb21wb25lbnRcblxuICAgIH1cbl0pXG5leHBvcnQgY2xhc3MgQXBwQ29tcG9uZW50IHtcblxufVxuIl0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztZQTJCQTtnQkFDSTtnQkFBZSxDQUFDO2dCQW5CcEI7b0JBQUMsZ0JBQVMsQ0FBQzt3QkFDUCxRQUFRLEVBQUUsUUFBUTtxQkFDckIsQ0FBQztvQkFDRCxXQUFJLENBQUM7d0JBQ0YsVUFBVSxFQUFFLENBQUMscUJBQVksQ0FBQzt3QkFDMUIsUUFBUSxFQUFFLGlFQUlYO3FCQUNGLENBQUM7b0JBRUQsb0JBQVcsQ0FBQzt3QkFDVCxFQUFFLElBQUksRUFBRSxRQUFRLEVBQUUsRUFBRSxFQUFFLE9BQU8sRUFBRSxTQUFTLEVBQUUsaUJBQVMsRUFBRTt3QkFDckQsRUFBRSxJQUFJLEVBQUUsT0FBTyxFQUFFLEVBQUUsRUFBRSxNQUFNLEVBQUUsU0FBUyxFQUFFLFdBQUksRUFBRTt3QkFDOUMsRUFBRSxJQUFJLEVBQUUsR0FBRyxFQUFFLFVBQVUsRUFBRSxDQUFDLE9BQU8sQ0FBQyxFQUFDO3FCQUN0QyxDQUFDOztnQ0FBQTtnQkFJRixtQkFBQztZQUFELENBRkEsQUFFQyxJQUFBO1lBRkQsdUNBRUMsQ0FBQSIsImZpbGUiOiJhcHAuY29tcG9uZW50LmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtDb21wb25lbnR9IGZyb20gJ2FuZ3VsYXIyL2NvcmUnO1xuaW1wb3J0IHtSb3V0ZUNvbmZpZ30gZnJvbSBcImFuZ3VsYXIyL3JvdXRlclwiO1xuaW1wb3J0IHtMb2dpblBhZ2V9IGZyb20gXCIuL2xvZ2luXCI7XG5pbXBvcnQge0hvbWV9IGZyb20gXCIuL2hvbWVcIjtcbmltcG9ydCB7Uk9VVEVSX0RJUkVDVElWRVN9IGZyb20gXCJhbmd1bGFyMi9yb3V0ZXJcIjtcbmltcG9ydCB7Um91dGVyT3V0bGV0fSBmcm9tICdhbmd1bGFyMi9yb3V0ZXInO1xuaW1wb3J0IHtWaWV3fSBmcm9tIFwiYW5ndWxhcjIvY29yZVwiO1xuXG5cbkBDb21wb25lbnQoe1xuICAgIHNlbGVjdG9yOiAnbXktYXBwJyxcbn0pXG5AVmlldyh7XG4gICAgZGlyZWN0aXZlczogW1JvdXRlck91dGxldF0sXG4gICAgdGVtcGxhdGU6IGBcbiAgICA8aDE+TG9naW48L2gxPlxuXG4gICAgPHJvdXRlci1vdXRsZXQ+PC9yb3V0ZXItb3V0bGV0PlxuICBgXG59KVxuXG5AUm91dGVDb25maWcoW1xuICAgIHsgcGF0aDogJy9sb2dpbicsIGFzOiAnTG9naW4nLCBjb21wb25lbnQ6IExvZ2luUGFnZSB9LFxuICAgIHsgcGF0aDogJy9ob21lJywgYXM6ICdIb21lJywgY29tcG9uZW50OiBIb21lIH0sXG4gICAgeyBwYXRoOiAnLycsIHJlZGlyZWN0VG86IFsnTG9naW4nXX1cbl0pXG5cbmV4cG9ydCBjbGFzcyBBcHBDb21wb25lbnQge1xuICAgIGNvbnN0cnVjdG9yKCkge31cbn1cbiJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ==
