@@ -6,9 +6,7 @@ import {RouteConfig} from "angular2/router";
 
 @Component({
     selector: 'my-app',
-    template: '<visit></visit>' +
-    '<patient></patient>',
-    directives: [PatientsComponent, VisitComponent]
+    templateUrl: '../view/login.html',
 })
 
 @RouteConfig([
