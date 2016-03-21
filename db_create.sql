@@ -19,9 +19,10 @@ create table equipment(
 	constraint pk_equipment primary key (eid));
 
 create table patient(
-	is_male BIT(1),
-	pname varchar(30),
+	p_lname varchar(20),
+	p_fname varchar(20),
 	pid int,
+	is_male BIT(1),
 	dob date,
 	constraint pk_patient primary key (pid));
 

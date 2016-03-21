@@ -6,8 +6,7 @@ import {Patient} from './patient';
 
 @Component({
     selector:'patient',
-    template:
-        `<h1>hello world</h1>`
+    templateURL:'views/patients.component.html'
 })
 
 
