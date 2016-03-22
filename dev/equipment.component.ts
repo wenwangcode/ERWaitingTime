@@ -7,8 +7,7 @@ import {Equipment} from "./equipment";
 
 @Component({
     selector:'equipment',
-    template:
-        `<h1>hello world</h1>`
+    templateUrl:'../view/equipment.html',
 })
 
 

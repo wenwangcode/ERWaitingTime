@@ -1,9 +1,5 @@
-/**
- * Created by Joy on 2016-03-21.
- */
 // authentication.ts
 import {Injectable} from 'angular2/core';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class Authentication {

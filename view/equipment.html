@@ -1,0 +1,68 @@
+<html>
+<head>
+    <title>Equipment Register Page</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../home">ERWaitingTime</a>
+
+        </div>
+    </nav>
+</head>
+<body>
+<script>
+    function addRow() {
+        "use strict";
+
+        var table = document.getElementById("table");
+
+        var row= document.createElement("tr");
+        console.log(row);
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+
+        td1.innerHTML = document.getElementById("ID").value;
+        td2.innerHTML  = document.getElementById("Type").value;
+        td3.innerHTML  = document.getElementById("Room").value;
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+
+        table.children[0].appendChild(row);
+    };
+</script>
+<div align="left" style="margin-top: 100px" class="container">
+    <h1>Please register the equipment info below.</h1>
+    <br>
+    <div class="form-group">
+Equipment ID:
+<input type="number" name="ID" id="ID" class="form-control" ng-model="equipment.eid"/><br />
+Equipment Type:
+<input type="text" name="Type" id="Type" class="form-control" ng-model="equipment.type"/><br />
+Room #:
+<input type="number" name="Room" id="Room" class="form-control" ng-model="equipment.room"/><br /><br />
+
+<input type="button" value="Add Equipment +" onclick="addRow()" data-ng-click="addEquipments()" id="add" class="btn btn-primary"><br /><br />
+        </div>
+
+
+    <div class="container">
+        <table id="table" class="table table-striped">
+
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Room</th>
+            </tr>
+
+        </table>
+    </div>
+
+
+    </div>
+
+</body>
+</html>
