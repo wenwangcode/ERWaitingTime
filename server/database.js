@@ -1,19 +1,18 @@
+//mysql -u root -h 127.0.0.1 -p
+//use that to log in
 var mysql  = require('mysql');
 var express  = require('express');
-
 var app = express();
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : '127.0.0.1',
   user     : 'root',
-  password : 'angela',
-  database : 'emergency',
-});
-
+  password : '639288',
+  database : 'ERWaitingTime'})
 connection.connect(function(err){
 if(!err) {
-    console.log("Database is connected ... nn");    
+    console.log("Database is connected ...");
 } else {
-    console.log("Error connecting database ... nn");    
+    console.log(err);
 }
 });
 
@@ -23,8 +22,10 @@ app.get('/visit', getAllFromVisit);
 
 function getAllFromPatient(req,res){
 	connection.query('SELECT * from patient', function(err, rows, fields) {
-  	if (!err)
-    	res.send(rows);
+  	if (!err){
+		res.send(rows);
+		console.log(rows);
+	}
   	else
     	console.log('Error while performing Query.');
 });}
