@@ -3,7 +3,10 @@
 .DS_Store?
 .idea/
 *.iml
+<<<<<<< HEAD
 typings/
+=======
+>>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
 .idea/workspace.xml
 *.js
 *.js.map

@@ -11,7 +11,7 @@ import {Login} from './login.ts';
 
 @Component({
     selector: 'app',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
     template: `
 
     <router-outlet></router-outlet>
