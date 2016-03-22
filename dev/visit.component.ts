@@ -1,5 +1,6 @@
-import {Component,View} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Visit} from './visit';
+import {HTTPService} from './http.service';
 
 @Component({
     selector:'visit',
@@ -26,14 +27,26 @@ import {Visit} from './visit';
         <input type="Date" #date>
         <input type="submit" (click)="
             addVisit(pid.value, sid.value, room.value, date.value)">
-`
+            
+            {{msg}}
+`,
+providers:[HTTPService]
 })
 export class VisitComponent{
+<<<<<<< HEAD
 
+=======
+msg:string;
+>>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
 visits:Array<Visit>;
 
-constructor(){
+constructor(private httpService: HTTPService){
     this.visits = [];
+    this.httpService.getQuery().subscribe(
+        data => this.msg = JSON.stringify(data),
+        err => alert(err),
+        () => console.log("complete")
+    );
 }
 
 
