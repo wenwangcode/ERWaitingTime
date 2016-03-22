@@ -1,7 +1,8 @@
-drop database if exists ERWaitingTime;
-create database ERWaitingTime;
 
-use ERWaitingTime;
+drop database if exists emergency;
+create database emergency;
+
+use emergency;
 
 create table staff(
 	s_lname varchar(20),
@@ -88,6 +89,4 @@ create table visit(
 	constraint pk_visit primary key (pid,sid),
 	constraint fk_visit_patient foreign key (pid) references patient (pid),
 	constraint fk_visit_staff foreign key (sid) references staff (sid));
-
-select * from staff
 
