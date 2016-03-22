@@ -9,7 +9,6 @@
         <a class="navbar-brand" href="../home">ERWaitingTime</a>
     </div>
 </nav>
-
 <div class="container">
     <div class="page-header">
         <div class="page-header" style="margin-top: 100px">
@@ -203,13 +202,18 @@
                     </div>
                 </div>
             </div>
+            <script>
+                $('.col-sm-8').click(function(){
+                    $(this).children('input:checkbox').prop('checked', false);
+                });
+            </script>
             <div class="form-group">
                 <label class="col-sm-4">Gender</label>
                 <div class="col-sm-8">
                     <form action="">
-                        <input type="checkbox" name="occupation" value="Male">Male
+                        <input type="checkbox" name="gender_m" value="Male">Male
                         <br>
-                        <input type="checkbox" name="occupation" value="Female">Female
+                        <input type="checkbox" name="gender_f" value="Female">Female
                     </form>
                 </div>
             </div>

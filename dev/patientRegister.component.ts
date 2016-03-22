@@ -10,4 +10,5 @@ import {Component,View} from 'angular2/core';
 
 
 export class PatientRegisterComponent{
+   
 }
