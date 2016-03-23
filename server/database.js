@@ -3,11 +3,20 @@
 var mysql  = require('mysql');
 var express  = require('express');
 var app = express();
+var HOST = '127.0.0.1';
+var USER = 'root';
+var PASSWORD = '639288';
+var DATABASE = 'ERWaitingTime';
+app.use(function(req, res, next){
+	res.header('Access-Control-Allow-Origin', "*");
+	res.header('Access-Control-Allow-Methods', "GET");
+	res.header('Access-Control-Allow-Headers', "Content-Type");
+});
 var connection = mysql.createConnection({
-  host     : '127.0.0.1',
-  user     : 'root',
-  password : '639288',
-  database : 'ERWaitingTime'})
+  host     : HOST,
+  user     : USER,
+  password : PASSWORD,
+  database : DATABASE});
 connection.connect(function(err){
 if(!err) {
     console.log("Database is connected ...");
@@ -15,26 +24,23 @@ if(!err) {
     console.log(err);
 }
 });
-console.log('123');
-//console.log(app.get('/patient', getAllFromPatient));
+
+app.get('/patient', getAllFromPatient);
 app.get('/staff', getAllFromStaff);
 app.get('/visit', getAllFromVisit);
-var query = connection.query('SELECT * FROM patient');
-console.log(query.on('/patient', function(row) {
-}));
 function getAllFromPatient(req,res){
 	connection.query('SELECT * FROM patient', function(err, rows, fields) {
   	if (!err){
-		req.get(rows);
+		console.log(callback(null, rows[0]).toString);
 	}
   	else
     	console.log('Error while performing Query.');
 });}
 
 function getAllFromStaff(req,res){
-	connection.query('SELECT * from staff', function(err, rows, fields) {
+	connection.query('SELECT * from staff', function(err, data) {
   	if (!err)
-    	res.send(rows);
+    	res.send(JSON.stringify(data));
   	else
     	console.log('Error while performing Query.');
 });}
@@ -47,5 +53,4 @@ function getAllFromVisit(req,res){
       }else
     	console.log('Error while performing Query.');
 });}
-connection.end();
 app.listen(3001);
