@@ -29,9 +29,7 @@ import {Visit} from './visit';
 `
 })
 export class VisitComponent{
-
 visits:Array<Visit>;
-
 constructor(){
     this.visits = [];
 }
