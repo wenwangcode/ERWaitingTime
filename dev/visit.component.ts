@@ -34,8 +34,6 @@ providers:[HTTPService]
 })
 export class VisitComponent{
 
-msg:string;
-
 visits:Array<Visit>;
 
 constructor(private httpService: HTTPService){
