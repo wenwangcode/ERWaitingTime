@@ -11,19 +11,6 @@ import {RouteConfig} from "angular2/router";
     directives: [PatientsComponent, VisitComponent]
 })
 
-@RouteConfig([
-    {
-        path: "/visit",
-        template: '<patient></patient>',
-        component: VisitComponent
-    },
-    {
-        path: "/patients",
-        template: '<visit></visit>',
-        component: PatientsComponent
-
-    }
-])
 export class AppComponent {
 
 }
