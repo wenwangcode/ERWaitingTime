@@ -1,0 +1,91 @@
+<html>
+<head>
+    <title>Equipment Register Page</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../home">ERWaitingTime</a>
+
+        </div>
+    </nav>
+</head>
+<body>
+<div align="left" style="margin-top: 100px" class="container">
+    <h1>Please register the equipment info below.</h1>
+    <br>
+    <div class="form-group">
+Equipment ID:
+<input type="text" name="item" id="item" class="form-control"/><br />
+Equipment Type:
+<input type="text" name="quantity" id="quantity" class="form-control"/><br />
+Room #:
+<input type="text" name="price" id="price" class="form-control"/><br /><br />
+
+<input type="button" value="Add Equipment +" (click)="addEquipments(eid.value, type.value, room.value)" onclick="addRow()" id="add" class="btn btn-primary"><br /><br />
+        </div>
+    <script>
+        function addRow() {
+            "use strict";
+
+            var table = document.getElementById("table");
+
+            var row= document.createElement("tr");
+            console.log(row);
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            var td3 = document.createElement("td");
+
+            td1.innerHTML = document.getElementById("item").value;
+            td2.innerHTML  = document.getElementById("quantity").value;
+            td3.innerHTML  = document.getElementById("price").value;
+
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+
+            table.children[0].appendChild(row);
+        };
+    </script>
+
+    <div class="container" ng-app="my-app">
+        <table id="table" class="table table-striped" ng-controller="equipmentController">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Room</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="#equipment of equipments">
+                <td> {{equipment.eid}} </td>
+                <td> {{equipment.type}} </td>
+                <td> {{equipment.room}} </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br/><br/>
+    </div>
+
+</body>
+
+<script>
+    var myApp = angular.module('my-app', []);
+
+    myApp.controller('equipmentController', function ($scope, $http) {
+
+        $http.get('http://localhost:3000/api/equipment').
+                success(function (data, status, headers, config){
+            $scope.equipments=data;
+
+        }).
+        error(function (data, status, headers, config){
+            alert("error");
+        });
+
+    });
+</script>
+</html>

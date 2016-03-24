@@ -1,19 +1,33 @@
-import {Component,View} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Visit} from './visit';
+import {HTTPService} from './http.service.ts';
 
 @Component({
     selector:'visit',
     templateUrl: 'views/visit.component.html'
 })
 export class VisitComponent{
-visits:Array<Visit>;
-constructor(){
-    this.visits = [];
-}
+    visits:Array<Visit>;
 
+    constructor(private httpService: HTTPService){
+        this.visits = [];
+        this.httpService.getQuery().subscribe(
+            data => this.parseVisit(data),
+            err => alert(err),
+            () => console.log("complete")
+        );
+    }
 
+    parseVisit(json){
+        json.forEach( item => {
+            this.addVisit(item.pid,
+                item.sid,
+                item.room,
+                item.visit_date);
+        })
+    }
 
-addVisit(pid:number, sid:number, room:number, date:Date){
+    addVisit(pid:number, sid:number, room:number, date:Date){
         let visit = new Visit(pid,sid,room,date);
         this.visits.push(visit);
     }

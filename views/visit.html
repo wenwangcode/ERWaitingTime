@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<table>
+    <tr>
+        <th> patient_id </th>
+        <th> staff_id</th>
+        <th> room number</th>
+        <th> date of visit</th>
+    </tr>
+    <tr *ngFor="#visit of visits">
+        <td> {{visit.patient_id}} </td>
+        <td> {{visit.staff_id}} </td>
+        <td> {{visit.room}} </td>
+        <td> {{visit.date}} </td>
+    </tr>
+</table>
+
+<br/><br/>
+<input type="number" min="5000" max="10000" #pid>
+<input type="number" min="0000" max="4999" #sid>
+<input type="number" min="0000" max="10000" #room>
+<input type="Date" #date>
+<input type="submit" (click)="
+            addVisit(pid.value, sid.value, room.value, date.value)">
+
+{{msg}}
+</html>
