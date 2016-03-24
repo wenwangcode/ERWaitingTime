@@ -15,8 +15,14 @@
         <div class="page-header" style="margin-top: 100px">
             <h1>Patient Prescription Entry</h1>
         </div>
+
         <form method="post" role="form" class="login-form form-horizontal">
             <input name="_csrf" type="hidden"/>
+            <p id="demo"></p>
+
+            <script>
+                document.getElementById("demo").innerHTML = Date();
+            </script>
             <script>
                 $(document).ready(function(){
                     var i=1;

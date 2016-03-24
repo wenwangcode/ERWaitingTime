@@ -17,6 +17,10 @@
         </div>
         <form method="post" role="form" class="login-form form-horizontal">
             <input name="_csrf" type="hidden"/>
+            <p id="demo"></p>
+            <script>
+                document.getElementById("demo").innerHTML = Date();
+            </script>
             <div class="form-group">
                 <label class="col-sm-4">Patient ID</label>
                 <div class="col-sm-8">
