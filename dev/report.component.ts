@@ -5,7 +5,7 @@ import {Component,View} from 'angular2/core';
 
 @Component({
     selector:'report',
-    templateURL:'views/report.component.html'
+    templateUrl:'views/report.component.html'
 })
 
 

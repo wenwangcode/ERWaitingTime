@@ -5,7 +5,7 @@ import {Component,View} from 'angular2/core';
 
 @Component({
     selector:'vital',
-    templateURL:'views/vital.component.html'
+    templateUrl:'views/vital.component.html'
 })
 
 

@@ -5,7 +5,7 @@ import {Component,View} from 'angular2/core';
 
 @Component({
     selector:'patient',
-    templateURL:'views/register.component.html'
+    templateUrl:'views/register.component.html'
 })
 
 
