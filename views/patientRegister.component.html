@@ -15,7 +15,6 @@
             <h1>Register Your Patient</h1>
         </div>
         <p id="demo"></p>
-
         <script>
             document.getElementById("demo").innerHTML = Date();
         </script>
@@ -30,7 +29,11 @@
             <div class="form-group">
                 <label class="col-sm-4">Patient ID</label>
                 <div class="col-sm-8">
-                    <p> add patient id </p>
+                    <p id="patient_id"></p>
+                    <script src="../node_modules/uuid/uuid.js">
+                        var x = uuid.v1();
+                        document.getElementById("patient_id").innerHTML = x;
+                    </script>
                 </div>
             </div>
             <div class="form-group">
