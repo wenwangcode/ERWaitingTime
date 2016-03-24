@@ -1,0 +1,79 @@
+<html>
+<head>
+    <title>ERWaitingTime</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="../home">ERWaitingTime</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header">
+        <div class="page-header" style="margin-top: 100px">
+            <h1>Patient Prescription Entry</h1>
+        </div>
+        <form method="post" role="form" class="login-form form-horizontal">
+            <input name="_csrf" type="hidden"/>
+            <script>
+                $(document).ready(function(){
+                    var i=1;
+                    $("#add_row").click(function(){
+                        $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='Name' class='form-control input-md'  /> </td><td><input  name='mail"+i+"' type='text' placeholder='Mail'  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder='Mobile'  class='form-control input-md'></td>");
+
+                        $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+                        i++;
+                    });
+                    $("#delete_row").click(function(){
+                        if(i>1){
+                            $("#addr"+(i-1)).html('');
+                            i--;
+                        }
+                    });
+
+                });
+            </script>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <table class="table table-bordered table-hover" id="tab_logic">
+                        <thead>
+                        <tr >
+                            <th class="text-center">
+                                #
+                            </th>
+                            <th class="text-center">
+                                Prescription Name
+                            </th>
+                            <th class="text-center">
+                                Amount
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr id='addr0'>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                <input type="text"  placeholder='Prescription Name' class="form-control"/>
+                            </td>
+                            <td>
+                                <input type="text" placeholder='Amount' class="form-control"/>
+                            </td>
+                        </tr>
+                        <tr id='addr1'></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="login btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
