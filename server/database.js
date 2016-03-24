@@ -28,7 +28,7 @@ connection.connect(function(err){
 	}
 });
 function getAllFromPatient(req,res){
-	connection.query('SELECT * from patient', function(err, result) {
+	connection.query('SELECT * FROM patient', function(err, result) {
 		if (!err) {
 			res.send(result);
 		}
@@ -37,9 +37,9 @@ function getAllFromPatient(req,res){
 	});}
 
 function getAllFromStaff(req,res){
-	connection.query('SELECT * from staff', function(err, result) {
+	connection.query('SELECT * FROM staff', function(err, result) {
   	if (!err) {
-		res.send(result);
+		console.log(result);
 	}
   	else
     	console.log('Error while performing Query.');
@@ -47,7 +47,7 @@ function getAllFromStaff(req,res){
 app.get('/staff', getAllFromStaff);
 
 function getAllFromVisit(req,res){
-	connection.query('SELECT * from visit', function(err, result) {
+	connection.query('SELECT * FROM visit', function(err, result) {
 		if (!err){
 			res.send(result);
 		}else
