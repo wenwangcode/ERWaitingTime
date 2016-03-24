@@ -4,6 +4,7 @@
 import {Component,View} from 'angular2/core';
 import {Patient} from './patient';
 import {Equipment} from "./equipment";
+import {HTTPService} from "./http.service";
 
 @Component({
     selector:'equipment',
@@ -12,10 +13,17 @@ import {Equipment} from "./equipment";
 
 
 export class EquipmentComponent{
+    msg:string;
+
     equipments:Array<Equipment>;
 
-    constructor(){
+    constructor(private httpService: HTTPService){
         this.equipments = [];
+        this.httpService.getQuery().subscribe(
+            data => this.msg = JSON.stringify(data),
+            err => alert(err),
+            () => console.log("complete")
+        );
     }
 
     addEquipments(eid:number, type:string, room:number){

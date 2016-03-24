@@ -7,7 +7,7 @@ import {isLoggedin}  from './is-loggedin.ts';
 @Component({
     selector: 'home',
     directives: [],
-    templateUrl: '../view/dashboard.html'
+    templateUrl: '../views/dashboard.html'
 })
 
 @CanActivate(() => isLoggedin())

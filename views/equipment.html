@@ -22,7 +22,7 @@ Equipment Type:
 Room #:
 <input type="text" name="price" id="price" class="form-control"/><br /><br />
 
-<input type="button" value="Add Equipment +" onclick="addRow()" id="add" class="btn btn-primary"><br /><br />
+<input type="button" value="Add Equipment +" (click)="addEquipments(eid.value, type.value, room.value)" onclick="addRow()" id="add" class="btn btn-primary"><br /><br />
         </div>
     <script>
         function addRow() {
@@ -58,16 +58,16 @@ Room #:
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="equipment in equipments">
-                <td>{{ equipment.eid }}</td>
-                <td>{{ equipment.type }}</td>
-                <td>{{ equipment.room }}</td>
+            <tr *ngFor="#equipment of equipments">
+                <td> {{equipment.eid}} </td>
+                <td> {{equipment.type}} </td>
+                <td> {{equipment.room}} </td>
             </tr>
             </tbody>
         </table>
     </div>
 
-
+    <br/><br/>
     </div>
 
 </body>

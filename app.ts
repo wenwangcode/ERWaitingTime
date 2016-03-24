@@ -6,6 +6,7 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {Home} from './home.ts';
 import {Login} from './login.ts';
+import {VisitComponent} from "./dev/visit.component.ts";
 
 
 
@@ -17,6 +18,7 @@ import {Login} from './login.ts';
     <router-outlet></router-outlet>
 
   `
+
 })
 @RouteConfig([
     { path: '/', redirectTo: ['Login'] },

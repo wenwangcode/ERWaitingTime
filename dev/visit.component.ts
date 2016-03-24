@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {Visit} from './visit';
-import {HTTPService} from './http.service';
+import {HTTPService} from './http.service.ts';
 
 @Component({
     selector:'visit',
@@ -52,6 +52,7 @@ constructor(private httpService: HTTPService){
 addVisit(pid:number, sid:number, room:number, date:Date){
         let visit = new Visit(pid,sid,room,date);
         this.visits.push(visit);
+
     }
     
     

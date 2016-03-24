@@ -10,7 +10,7 @@ import {Authentication} from './authentication.ts';
 @Component({
     selector: 'login',
     directives: [ FORM_DIRECTIVES, NgIf ],
-    templateUrl: '../view/login.html'
+    templateUrl: '../views/login.html'
 })
 
 export class Login {

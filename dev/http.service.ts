@@ -9,6 +9,6 @@ export class HTTPService{
 	}
 
 	getQuery(){
-		return this.http.get("http://localhost:3002/visit").map(res => res.json());
+		return this.http.get("http://localhost:3000/visit").map(res => res.json());
 	}
 }
