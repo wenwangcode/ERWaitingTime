@@ -31,6 +31,7 @@ create table report(
 	rid number,
 	diagnosis varchar(300),
 	report_date date,
+	symptom_name varchar(30),
 	vid number,
 	pid number,
 	constraint pk_report primary key (rid),
@@ -44,12 +45,6 @@ create table prescription(
 	rid number,
 	constraint pk_prescription primary key (pname, rid),
 	constraint fk_prescription_report foreign key(rid) references report (rid));
-
-create table symptom(
-	sname varchar(30),
-	rid number,
-	constraint pk_symptom primary key (sname, rid),
-	constraint fk_symptom_report foreign key (rid) references report (rid) );
 
 create table write(
 	rid number,
