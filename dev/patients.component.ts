@@ -6,7 +6,7 @@ import {Patient} from './patient';
 
 @Component({
     selector:'patient',
-    templateURL:'views/patients.component.html'
+    templateUrl:'views/patients.component.html'
 })
 
 
@@ -17,12 +17,12 @@ export class PatientsComponent{
         this.patients = [];
     }
 
-    addPatient(gender:string, pname:string, pid:number, dob:Date){
-        let patient = new Patient(gender,pname,pid,dob);
+    addPatient(gender:string, p_fname:string, p_lname:string, pid:number, dob:Date){
+        let patient = new Patient(gender,p_fname,p_lname,pid,dob);
         this.patients.push(patient);
     }
 
-    removeVisit(patient: Patient){
+    removePatient(patient: Patient){
         var index = this.patients.indexOf(patient);
         this.patients.splice(index,1);
     }

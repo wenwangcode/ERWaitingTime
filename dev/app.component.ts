@@ -8,7 +8,7 @@ import {RouteConfig} from "angular2/router";
     selector: 'my-app',
     template: '<visit></visit>' +
     '<patient></patient>',
-    directives: [PatientsComponent, VisitComponent]
+    directives: [VisitComponent, PatientsComponent]
 })
 
 export class AppComponent {
