@@ -3,6 +3,7 @@
  */
 import {Component,View} from 'angular2/core';
 import {Patient} from './patient';
+import {HTTPService} from "./http.service";
 
 @Component({
     selector:'patients',
@@ -13,18 +14,19 @@ import {Patient} from './patient';
 export class PatientsComponent{
     patients:Array<Patient>;
 
-    constructor(){
+    constructor(private httpService: HTTPService){
         this.patients = [];
+        this.httpService.getQuery().subscribe(
+            data => this.parsePatients(data),
+            err => alert(err),
+            () => console.log("complete")
+        );
     }
 
-    addPatient(gender:string, p_fname:string, p_lname:string, pid:number, dob:Date){
-        let patient = new Patient(gender,p_fname,p_lname,pid,dob);
-        this.patients.push(patient);
-    }
-
-    removePatient(patient: Patient){
-        var index = this.patients.indexOf(patient);
-        this.patients.splice(index,1);
+    parsePatients(json) {
+        json.forEach( item => {
+            console.log(item)
+        })
     }
 
 
