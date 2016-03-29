@@ -3,7 +3,6 @@
 var mysql  = require('mysql');
 var express  = require('express');
 var app = express();
-<<<<<<< HEAD
 var HOST = '127.0.0.1';
 var USER = 'root';
 var PASSWORD = '639288';
@@ -57,49 +56,4 @@ function getAllFromVisit(req,res){
 
 app.get('/visit', getAllFromVisit);
 app.listen(3006);
-=======
-var connection = mysql.createConnection({
-  host     : '127.0.0.1',
-  user     : 'root'
-});
-connection.connect(function(err){
-if(!err) {
-    console.log("Database is connected ...");
-} else {
-    console.log(err);
-}
-});
 
-app.get('/patient',getAllFromPatient);
-app.get('/staff', getAllFromStaff);
-app.get('/visit', getAllFromVisit);
-
-function getAllFromPatient(req,res){
-	connection.query('SELECT * from patient', function(err, rows, fields) {
-  	if (!err){
-		res.send(rows);
-		console.log(rows);
-	}
-  	else
-    	console.log('Error while performing Query.');
-});}
-
-function getAllFromStaff(req,res){
-	connection.query('SELECT * from staff', function(err, rows, fields) {
-  	if (!err)
-    	res.send(rows);
-  	else
-    	console.log('Error while performing Query.');
-});}
-
-function getAllFromVisit(req,res){
-	connection.query('SELECT * from visit', function(err, rows, fields) {
-  	if (!err){
-    	res.send(rows);
-        console.log("visit data sent");
-      }else
-    	console.log('Error while performing Query.');
-});}
-
-app.listen(3002);
->>>>>>> Joy

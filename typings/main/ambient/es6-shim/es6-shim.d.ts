@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Compiled using typings@0.6.10
 =======
 <<<<<<< HEAD
@@ -7,6 +8,9 @@
 // Compiled using typings@0.6.9
 >>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
 >>>>>>> 8cb3fb1c444de897b48797ce0ea1695dba347ad4
+=======
+// Compiled using typings@0.6.9
+>>>>>>> richard
 // Source: https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/6697d6f7dadbf5773cb40ecda35a76027e0783b2/es6-shim/es6-shim.d.ts
 // Type definitions for es6-shim v0.31.2
 // Project: https://github.com/paulmillr/es6-shim

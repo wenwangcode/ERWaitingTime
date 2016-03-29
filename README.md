@@ -1,16 +1,13 @@
-create table staff(
-	specialization varchar(50),
-	experience_in_years number,
-	sid number,
-	isDoctor number,
-	constraint pk_staff primary key (sid));
+GET: Query to 'http://localhost:3002/patient' or 'http://localhost:3002/equipment' to get all the relevant table tuples.
+POST: Query to 'http://localhost:3002/<table name>', basically the same as above but use post request.
+   available post-to tables are equipment, vital, report, visit, patient, staff, prescription
+   
+For POST request, you need to query to http://localhost:3002/<table name>/?json={"key":"value"}. Essentially, you need to attach your json object with "json="
+   
+   I'm following the format with http://www.jsontest.com/#validate. Also, I only support "application/x-www-form-urlencoded" content type, so put that in the header.
 
-create table equipment(
-	eid number,
-	type varchar(20),
-	room number,
-	constraint pk_equipment primary key (eid));
 
+<<<<<<< HEAD
 create table patient(
 	gender varchar(6),
 	pname varchar(30),
@@ -75,3 +72,6 @@ create table visit(
 	constraint pk_visit primary key (pid,sid),
 	constraint fk_visit_patient foreign key (pid) references patient (pid),
 	constraint fk_visit_staff foreign key (sid) references staff (sid));
+=======
+The json key is the same as the column name in your mysql database. so pid is just written as pid. 
+>>>>>>> richard
