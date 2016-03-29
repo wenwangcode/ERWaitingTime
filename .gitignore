@@ -5,6 +5,5 @@
 *.iml
 typings/
 .idea/workspace.xml
-*.js
 *.js.map
 node_modules/

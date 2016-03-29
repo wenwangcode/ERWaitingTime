@@ -1,7 +1,3 @@
-/**
- * Created by wendywang on 2016-03-16.
- */
-
 export class Staff{
 
     private s_id: number;

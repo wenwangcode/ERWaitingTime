@@ -5,6 +5,10 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ERWaitingTime node_modules" level="project" />
+<<<<<<< HEAD
     <orderEntry type="library" name="angularjs-DefinitelyTyped" level="application" />
+=======
+    <orderEntry type="library" name="Rx" level="application" />
+>>>>>>> ac10ee06669a4363b67d96c92be35b4890af3b4f
   </component>
 </module>

@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {Visit} from './visit';
+<<<<<<< HEAD
 import {HTTPService} from './http.service.ts';
+=======
+import {HTTPService} from './http.service';
+>>>>>>> ac10ee06669a4363b67d96c92be35b4890af3b4f
 
 @Component({
     selector:'visit',
@@ -28,24 +32,37 @@ import {HTTPService} from './http.service.ts';
         <input type="submit" (click)="
             addVisit(pid.value, sid.value, room.value, date.value)">
             
+<<<<<<< HEAD
             {{msg}}
+=======
+>>>>>>> ac10ee06669a4363b67d96c92be35b4890af3b4f
 `,
 providers:[HTTPService]
 })
 export class VisitComponent{
-
 visits:Array<Visit>;
 
 constructor(private httpService: HTTPService){
     this.visits = [];
     this.httpService.getQuery().subscribe(
+<<<<<<< HEAD
         data => this.msg = JSON.stringify(data),
+=======
+        data => this.parseVisit(data),
+>>>>>>> ac10ee06669a4363b67d96c92be35b4890af3b4f
         err => alert(err),
         () => console.log("complete")
     );
 }
 
-
+parseVisit(json){
+    json.forEach( item => {
+        this.addVisit(item.pid,
+        item.sid,
+        item.room,
+        item.visit_date);
+    })
+}
 
 addVisit(pid:number, sid:number, room:number, date:Date){
         let visit = new Visit(pid,sid,room,date);
