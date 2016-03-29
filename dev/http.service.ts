@@ -7,6 +7,7 @@ export class HTTPService{
 	constructor(private http:Http){
 
 	}
+<<<<<<< HEAD
 	getQuery(){
 		return this.http.get("http://www.localhost:3002/visit").map(res => res.json());
 	}
@@ -24,4 +25,10 @@ export class HTTPService{
 	}
 
 
+=======
+
+	getQuery(){
+		return this.http.get("http://localhost:3002/visit").map(res => res.json());
+	}
+>>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
 }

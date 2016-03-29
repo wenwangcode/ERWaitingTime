@@ -28,16 +28,28 @@ import {HTTPService} from './http.service';
         <input type="submit" (click)="
             addVisit(pid.value, sid.value, room.value, date.value)">
             
+<<<<<<< HEAD
+=======
+            {{msg}}
+>>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
 `,
 providers:[HTTPService]
 })
 export class VisitComponent{
+<<<<<<< HEAD
+=======
+msg:string;
+>>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
 visits:Array<Visit>;
 
 constructor(private httpService: HTTPService){
     this.visits = [];
     this.httpService.getQuery().subscribe(
+<<<<<<< HEAD
         data => this.parseVisit(data),
+=======
+        data => this.msg = JSON.stringify(data),
+>>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
         err => alert(err),
         () => console.log("complete")
     );
