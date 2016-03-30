@@ -6,8 +6,8 @@ import {EquipmentComponent} from "./equipment.component";
 
 @Component({
     selector: 'my-app',
-    directives: [EquipmentComponent],
-    template: '<equipment></equipment>'
+    directives: [Login],
+    template: '<login></login>'
 })
 
 export class AppComponent {
