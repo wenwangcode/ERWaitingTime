@@ -12,16 +12,10 @@
   "dependencies": {
     "angular2": "2.0.0-beta.3",
     "es6-promise": "^3.0.2",
-<<<<<<< HEAD
     "es6-shim": "^0.33.13",
     "express": "^4.13.4",
     "gulp": "^3.9.1",
     "knex": "^0.10.0",
-=======
-    "es6-shim": "^0.33.3",
-    "express": "^4.13.4",
-    "gulp": "^3.9.1",
->>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
     "mysql": "^2.10.2",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.0",

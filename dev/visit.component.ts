@@ -36,20 +36,14 @@ import {HTTPService} from './http.service';
 providers:[HTTPService]
 })
 export class VisitComponent{
-<<<<<<< HEAD
-=======
 msg:string;
->>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
 visits:Array<Visit>;
 
 constructor(private httpService: HTTPService){
     this.visits = [];
     this.httpService.getQuery().subscribe(
-<<<<<<< HEAD
-        data => this.parseVisit(data),
-=======
+        //data => this.parseVisit(data),
         data => this.msg = JSON.stringify(data),
->>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
         err => alert(err),
         () => console.log("complete")
     );

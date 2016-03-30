@@ -2,6 +2,8 @@
  * Created by wendywang on 2016-03-29.
  */
 import {Component,View} from 'angular2/core';
+import {HTTPService} from './http.service';
+import {Patient} from './patient';
 
 @Component({
     selector:'patient',
@@ -244,5 +246,33 @@ import {Component,View} from 'angular2/core';
 
 
 export class PatientRegisterComponent{
+    patients:Array<Patient>;
+
+    //constructor(private httpService: HTTPService){
+    //    this.httpService.getPQuery().subscribe(
+    //        data => this.parseEquipment(data),
+    //        err => alert(err),
+    //        () => console.log("complete")
+    //    );
+    //}
+
+    //parseEquipment(json){
+    //    json.forEach( item => {
+    //        this.addEquipment(item.eid,
+    //            item.type,
+    //            item.room);
+    //    })
+    //}
+
+    //addEquipment(eid:number, type:string, room:number){
+    //    let equipment = new Equipment(eid,type,room);
+    //    this.equipments.push(equipment);
+    //}
+    //
+    //
+    //removeEquipment(equipment:Equipment){
+    //    var index = this.equipments.indexOf(equipment);
+    //    this.equipments.splice(index,1);
+    //}
 
 }
