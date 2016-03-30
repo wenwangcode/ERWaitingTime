@@ -4,11 +4,12 @@ import {Home} from "./dashboard";
 import {Login} from "./login";
 import {EquipmentComponent} from "./equipment.component";
 import {PatientComponent} from "./patient.component";
+import {PatientRegisterComponent} from "./patientRegister.component";
 
 @Component({
     selector: 'my-app',
-    directives: [PatientComponent],
-    template: '<patient></patient>'
+    directives: [PatientRegisterComponent],
+    template: '<patientRegister></patientRegister>'
 })
 
 export class AppComponent {

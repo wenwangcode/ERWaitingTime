@@ -6,8 +6,10 @@ import {HTTPService} from './http.service';
 import {Patient} from './patient';
 
 @Component({
-    selector:'patient',
-    template:`<html>
+    selector:'patientRegister',
+    template:
+        `
+<html>
 <head>
     <title>ERWaitingTime</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
@@ -18,8 +20,7 @@ import {Patient} from './patient';
         <a class="navbar-brand" href="../home">ERWaitingTime</a>
     </div>
 </nav>
-<div class="container">
-    <div class="page-header">
+<div class="page-header">
         <div class="page-header" style="margin-top: 100px">
             <h1>Register Your Patient</h1>
         </div>
@@ -27,7 +28,7 @@ import {Patient} from './patient';
         <script>
             document.getElementById("demo").innerHTML = Date();
         </script>
-        <form method="post" role="form" class="login-form form-horizontal">
+<form method="post" role="form" class="login-form form-horizontal">
             <input name="_csrf" type="hidden"/>
             <div class="form-group">
                 <label class="col-sm-4">Patient Name</label>
@@ -45,7 +46,7 @@ import {Patient} from './patient';
                     </script>
                 </div>
             </div>
-            <div class="form-group">
+ <div class="form-group">
                 <label class="col-sm-4">Date of Birth</label>
                 <div class="col-sm-8">
                     <div class="controls">
@@ -219,53 +220,33 @@ import {Patient} from './patient';
                     </div>
                 </div>
             </div>
-            <script>
-                $('.col-sm-8').click(function(){
-                    $(this).children('input:checkbox').prop('checked', false);
-                });
-            </script>
-            <div class="form-group">
-                <label class="col-sm-4">Gender</label>
-                <div class="col-sm-8">
-                    <form action="">
-                        <input type="checkbox" name="gender_m" value="Male">Male
-                        <br>
-                        <input type="checkbox" name="gender_f" value="Female">Female
-                    </form>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-8">
-                    <button type="submit" class="login btn btn-primary">Register</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>`
+`,
+
+    providers:[HTTPService]
 })
 
 export class PatientRegisterComponent{
+    patients:Array<Patient>;
+    //constructor(private httpService: HTTPService){
+    //    this.httpService.getPQuery().subscribe(
+    //        data => this.parseEquipment(data),
+    //        err => alert(err),
+    //        () => console.log("complete")
+    //    );
+    //}
 
-    constructor(private httpService: HTTPService){
-        this.httpService.postPQuery().subscribe(
-            data => this.parsePatient(data),
-            err => alert(err),
-            () => console.log("complete")
-        );
-    }
+    //parseEquipment(json){
+    //    json.forEach( item => {
+    //        this.addEquipment(item.eid,
+    //            item.type,
+    //            item.room);
+    //    })
+    //}
 
-    parsePatient(json){
-        json.forEach( item => {
-            this.addEquipment(item.eid,
-                item.type,
-                item.room);
-        })
-    }
-
-    addEquipment(eid:number, type:string, room:number){
-        let equipment = new Equipment(eid,type,room);
-        this.equipment = equipment;
-    }
+    //addEquipment(eid:number, type:string, room:number){
+    //    let equipment = new Equipment(eid,type,room);
+    //    this.equipments.push(equipment);
+    //}
     //
     //
     //removeEquipment(equipment:Equipment){
