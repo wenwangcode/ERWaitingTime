@@ -6,7 +6,7 @@ import {HTTPService} from './http.service';
 import {Patient} from './patient';
 
 @Component({
-    selector:'patientRegister',
+    selector:'patientregister',
     template:
         `
 <html>
@@ -24,6 +24,7 @@ import {Patient} from './patient';
         <div class="page-header" style="margin-top: 100px">
             <h1>Register Your Patient</h1>
         </div>
+
         <p id="demo"></p>
         <script>
             document.getElementById("demo").innerHTML = Date();
@@ -31,9 +32,15 @@ import {Patient} from './patient';
 <form method="post" role="form" class="login-form form-horizontal">
             <input name="_csrf" type="hidden"/>
             <div class="form-group">
-                <label class="col-sm-4">Patient Name</label>
+                <label class="col-sm-4">Patient Last Name</label>
                 <div class="col-sm-8">
-                    <input placeholder="Patient Name" required="required" type="text" class="form-control"/>
+                    <input *ngFor="#patient of patients" placeholder="Patient Last Name" required="required" type="text" class="form-control">{{patient.l_name}}</input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4">Patient First Name</label>
+                <div class="col-sm-8">
+                     <input *ngFor="#patient of patients" placeholder="Patient First Name" required="required" type="text" class="form-control">{{patient.f_name}}</input>
                 </div>
             </div>
             <div class="form-group">
@@ -226,32 +233,25 @@ import {Patient} from './patient';
 })
 
 export class PatientRegisterComponent{
-    patients:Array<Patient>;
-    //constructor(private httpService: HTTPService){
-    //    this.httpService.getPQuery().subscribe(
-    //        data => this.parseEquipment(data),
-    //        err => alert(err),
-    //        () => console.log("complete")
-    //    );
-    //}
+    patient: Patient;
+    constructor(private httpService: HTTPService){
+        this.httpService.postPQuery().subscribe(
+            data => this.patient_json(data),
+            err => alert(err)
+        );
+    }
 
-    //parseEquipment(json){
-    //    json.forEach( item => {
-    //        this.addEquipment(item.eid,
-    //            item.type,
-    //            item.room);
-    //    })
-    //}
+    patient_json(json){
+        json.forEach( item => {
+            this.addPatient(item.p_lname, item.p_fname, item.pid, item.is_male, item.dob);
+        })
+    }
 
-    //addEquipment(eid:number, type:string, room:number){
-    //    let equipment = new Equipment(eid,type,room);
-    //    this.equipments.push(equipment);
-    //}
-    //
-    //
-    //removeEquipment(equipment:Equipment){
-    //    var index = this.equipments.indexOf(equipment);
-    //    this.equipments.splice(index,1);
-    //}
+    addPatient(p_lname: string, p_fname: string, pid: number, is_male: string, dob: Date){
+        let patient = new Patient(p_lname, p_fname, pid, is_male, dob);
+        this.patient = patient;
+    }
+
+
 
 }
