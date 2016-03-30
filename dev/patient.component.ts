@@ -48,7 +48,7 @@ import {HTTPService} from './http.service';
     document.getElementById("demo").innerHTML = Date();
 </script>
 <table id="customers">
-     <table>
+     <table align="center">
             <tr>
                 <th> patient_lastname </th>
                 <th> patient_firstname</th>
