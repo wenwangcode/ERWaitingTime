@@ -244,30 +244,28 @@ import {Patient} from './patient';
 </div>`
 })
 
-
 export class PatientRegisterComponent{
-    patients:Array<Patient>;
 
-    //constructor(private httpService: HTTPService){
-    //    this.httpService.getPQuery().subscribe(
-    //        data => this.parseEquipment(data),
-    //        err => alert(err),
-    //        () => console.log("complete")
-    //    );
-    //}
+    constructor(private httpService: HTTPService){
+        this.httpService.postPQuery().subscribe(
+            data => this.parsePatient(data),
+            err => alert(err),
+            () => console.log("complete")
+        );
+    }
 
-    //parseEquipment(json){
-    //    json.forEach( item => {
-    //        this.addEquipment(item.eid,
-    //            item.type,
-    //            item.room);
-    //    })
-    //}
+    parsePatient(json){
+        json.forEach( item => {
+            this.addEquipment(item.eid,
+                item.type,
+                item.room);
+        })
+    }
 
-    //addEquipment(eid:number, type:string, room:number){
-    //    let equipment = new Equipment(eid,type,room);
-    //    this.equipments.push(equipment);
-    //}
+    addEquipment(eid:number, type:string, room:number){
+        let equipment = new Equipment(eid,type,room);
+        this.equipment = equipment;
+    }
     //
     //
     //removeEquipment(equipment:Equipment){

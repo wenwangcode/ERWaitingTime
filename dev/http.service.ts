@@ -3,24 +3,35 @@ import {Injectable} from 'angular2/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 @Injectable()
-export class HTTPService{
-	constructor(private http:Http){
+export class HTTPService {
+	constructor(private http:Http) {
 
 	}
-	getQuery(){
+
+	getQuery() {
 		return this.http.get("http://www.localhost:3002/visit").map(res => res.json());
 	}
-	getEQuery(){
+
+	getEQuery() {
 		return this.http.get("http://www.localhost:3002/equipment").map(res => res.json());
 	}
-	getPQuery(){
+
+	getPQuery() {
 		return this.http.get("http://www.localhost:3002/patient").map(res => res.json());
 	}
-	getSQuery(){
+
+	getSQuery() {
 		return this.http.get("http://www.localhost:3002/staff").map(res => res.json());
 	}
-	postPQuery(){
+
+	postPQuery() {
 		return this.http.post("http://www.localhost:3002/patient",
-			JSON.stringify({"id": 1, "name": "Новые"}),{}).map(res => res.json());
+			JSON.stringify({
+				"pid": 1,
+				"p_lname": "Новые",
+				"p_fname": "sdsds",
+				"is_male": "yes",
+				"dob": "234234"
+			}), {}).map(res => res.json());
 	}
 }

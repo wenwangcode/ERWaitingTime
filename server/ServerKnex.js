@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 
 app.get('/equipment', function(req,res){getAllFromTable(req,res,'equipment');});
 app.get('/patient', function(req,res){getAllFromTable(req,res,'patient');});
-app.get('/staff', function(req,res){getAllFromTable(req,res,'equipment');});
-app.get('/vital', function(req,res){getAllFromTable(req,res,'patient');});
+app.get('/staff', function(req,res){getAllFromTable(req,res,'staff');});
+app.get('/vital', function(req,res){getAllFromTable(req,res,'vital');});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
 app.post('/equipment',function(req,res){postData(req,res,'equipment')});
