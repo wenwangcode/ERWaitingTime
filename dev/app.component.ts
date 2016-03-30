@@ -3,11 +3,12 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {Home} from "./dashboard";
 import {Login} from "./login";
 import {EquipmentComponent} from "./equipment.component";
+import {PatientComponent} from "./patient.component";
 
 @Component({
     selector: 'my-app',
-    directives: [Login],
-    template: '<login></login>'
+    directives: [PatientComponent],
+    template: '<patient></patient>'
 })
 
 export class AppComponent {

@@ -8,7 +8,47 @@ import {HTTPService} from './http.service';
 @Component({
     selector:'patient',
     template: `
-        <table>
+    <html>
+<head>
+    <title>ERWaitingTime</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+        #customers tr:nth-child(even){background-color: #f2f2f2}
+        #customers tr:hover {background-color: #ddd;}
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="../home">ERWaitingTime</a>
+    </div>
+</nav>
+
+<body>
+<div class="page-header" style="margin-top: 100px">
+    <h1><center>Patients List</center></h1>
+</div>
+<p id="demo"></p>
+<script>
+    document.getElementById("demo").innerHTML = Date();
+</script>
+<table id="customers">
+     <table>
             <tr>
                 <th> patient_lastname </th>
                 <th> patient_firstname</th>
@@ -16,7 +56,7 @@ import {HTTPService} from './http.service';
                 <th> patient_gender</th>
                 <th> patient_date</th>
             </tr>
-            <tr *ngFor="#patient of patients"> 
+            <tr *ngFor="#patient of patients">
                 <td> {{patient.p_lname}} </td>
                 <td> {{patient.p_fname}} </td>
                 <td> {{patient.pid}} </td>
@@ -24,16 +64,10 @@ import {HTTPService} from './http.service';
                 <td> {{patient.dob}} </td>
             </tr>
         </table>
-        
-        <br/><br/>
-        <input type="text"   #p_lname>
-        <input type="text" #p_fname>
-        <input type="number" min="0" max="10000"#pid>
-        <input type="text"  #is_male>
-        <input type="number" min="0" max="10000" #dob>
-        <input type="submit" (click)="
-            addPatient(p_lname.value,p_fname.value,pid.value,is_male.value,dob.value)">
-            
+</table>
+</body>
+
+</html>
 `,
     providers:[HTTPService]
 })
@@ -51,7 +85,8 @@ export class PatientComponent{
 
     parsePatient(json){
         json.forEach( item => {
-            this.addPatient(item.p_lname,
+            this.addPatient(
+                item.p_lname,
                 item.p_fname,
                 item.pid,
                 item.is_male,
@@ -61,16 +96,7 @@ export class PatientComponent{
 
     addPatient(p_lname: string, p_fname: string, pid:number,is_male:string, dob:Date){
         let patient = new Patient(p_lname,p_fname,pid,is_male,dob);
-        this.httpService.postPQuery().subscribe(
-            data => this.parsePatient(data),
-            err => alert(err),
-            () => console.log("post complete"));
-    }
-
-
-    removePatient(patient:Patient){
-        var index = this.patients.indexOf(patient);
-        this.patients.splice(index,1);
+        this.patients.push(patient);
     }
 
 }

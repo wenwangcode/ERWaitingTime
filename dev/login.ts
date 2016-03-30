@@ -12,28 +12,27 @@ import {Authentication} from './authentication';
     template: `
 <head>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
-    <!--<script type="text/javascript" src="countdown.js"></script>-->
-
-    <!--<link href="/src/css/countdown.css" type="text/css" rel="stylesheet"/>-->
+    <script type="text/javascript" src="countdown.js"></script>
+    <link href="/src/css/countdown.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <a class="navbar-brand" href="../home">ERWaitingTime</a>
-
     </div>
 </nav>
 
-<div align="center" style="border:1px solid #373cff">
-    <div class="container">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div id="main">
-        <div class="content">
+<div ng-app="" align="center" style="border:1px solid #373cff">
+    <div ng-app="" class="container">
+  <div ng-app="" class="row">
+    <div ng-app="" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div ng-app="" id="main">
+        <div ng-app="" class="content">
           <!-- /.Text Div -->
-          <div class="counter">
-            <h3>Estimated Time Remaining Before Launch:</h3>
-            <div id="countdown"></div>
+          <div ng-app="" class="counter">
+            <h3>Estimated Time:</h3>
+            <div ng-app="" id="countdown"></div>
             <!-- /#Countdown Div -->
           </div>
           <!-- /.Counter Div -->
@@ -48,17 +47,6 @@ import {Authentication} from './authentication';
 </div>
 <!-- /.Container Div -->
 </div>
-
-<script>
-document.getElementById("countdown").innerHTML = "hihihi";
-</script>
-
-<div id="textDiv"></div>
-<script type="text/javascript">
-    var div = document.getElementById("textDiv");
-    div.textContent = "my text";
-    var text = div.textContent;
-</script>
 
 <div class="col-md-6 col-md-offset-3">
     <h2>Login</h2>
@@ -82,7 +70,7 @@ document.getElementById("countdown").innerHTML = "hihihi";
         </div>
     </form>
 </div>
-            
+</body>
 `,
 })
 
@@ -121,4 +109,5 @@ export class Login {
                 console.log(error.message);
             });
     }
+
 }
