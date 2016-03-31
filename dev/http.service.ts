@@ -1,4 +1,4 @@
-import {Http} from 'angular2/http';
+import {Http,Headers} from 'angular2/http';
 import {Injectable} from 'angular2/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
@@ -26,24 +26,17 @@ export class HTTPService {
 		return this.http.get("http://www.localhost:3002/staff").map(res => res.json());
 	}
 
-	postPQuery(info: string) {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-		return this.http.post("http://www.localhost:3002/patient", info, {
-			headers: headers
-		});
+    
+    post() {
+	var json = JSON.stringify({eid: 105, type: 'TV', room: 10});
+	var key = "json=";
+	var param = key + json;
+	var headers = new Headers();
+	headers.append('Content-Type', 'application/x-www-form-urlencoded');
+	console.log("sending post request");
+	return this.http.post('http://localhost:3002/equipment', param, {headers: headers})
+		.map(res=>res.json());
 	}
+
 }
 
-//this.http.post('http://localhost:3001/sessions/create', creds, {
-//            headers: headers
-//        })
-//        .subscribe(
-//            data => {
-//                this.saveJwt(data.json().id_token);
-//                username.value = null;
-//                password.value = null;
-//            },
-//            err => this.logError(err.json().message),
-//            () => console.log('Authentication Complete')
-//        );

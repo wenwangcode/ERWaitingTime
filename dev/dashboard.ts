@@ -24,10 +24,4 @@ import {Authentication} from "./authentication";
 export class Home {
     constructor(public auth: Authentication, public router: Router) {}
 
-    onLogout() {
-        this.auth.logout()
-            .subscribe(
-                () => this.router.navigate(['../Login']),
-            );
-    }
 }

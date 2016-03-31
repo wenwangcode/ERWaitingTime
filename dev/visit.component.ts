@@ -27,11 +27,10 @@ import {HTTPService} from './http.service';
         <input type="Date" #date>
         <input type="submit" (click)="
             addVisit(pid.value, sid.value, room.value, date.value)">
-            
-<<<<<<< HEAD
-=======
-            {{msg}}
->>>>>>> 3f488314d31b679180ad822e64aaccf8a6942a0d
+
+        <button (click)="testPost()"> Test post </button>
+        <button (click)="testGet()"> Refresh </button>
+
 `,
 providers:[HTTPService]
 })
@@ -41,9 +40,21 @@ visits:Array<Visit>;
 
 constructor(private httpService: HTTPService){
     this.visits = [];
-    this.httpService.getQuery().subscribe(
-        //data => this.parseVisit(data),
-        data => this.msg = JSON.stringify(data),
+
+}
+
+testPost(){
+    this.httpService.post().subscribe(
+        data => console.log(data),
+        err => alert(err),
+        () => console.log("complete")
+    );
+}
+
+testGet(){
+    this.visits = [];
+        this.httpService.getQuery().subscribe(
+        data => this.parseVisit(data),
         err => alert(err),
         () => console.log("complete")
     );
