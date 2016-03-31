@@ -12,7 +12,7 @@ import {Authentication} from "./authentication";
 @Component({
     selector: 'dashboard',
     templateUrl: 'templates/dashboard.html',
-    directives: [],
+    directives: [RouterLink],
 })
 
 export class DashboardComponent {
