@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>New Account | ER Waiting Time</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="../assets/css/app.css">
+    </head>
+    <body>
+
+<!----------------------------------------------------------------------------->
+
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="../home">ER Waiting Time</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Equipment <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="../views/equipment.html">List</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="../views/equipment.html">Create</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Patients <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="../views/patients.component.html">List</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="../views/patients.component.html">Create</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visits <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="../views/visit.html">List</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="../views/visit.html">Create</a></li>
+							</ul>
+						</li>
+						<li><a class="logout" href="#" (click)="onLogout()">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container" role="main">
+
+<!----------------------------------------------------------------------------->
+
+			<h1 class="page-header">New Account</h1>
+
+        	<form method="post" class="form-horizontal">
+            	<input name="_csrf" type="hidden">
+
+	            <div class="form-group">
+	                <label class="col-sm-2">First Name</label>
+	                <div class="col-sm-10">
+	                    <input placeholder="First Name" required="required" type="text" class="form-control">
+	                </div>
+	            </div>
+	            <div class="form-group">
+	                <label class="col-sm-2">Last Name</label>
+	                <div class="col-sm-10">
+	                    <input placeholder="Last Name" required="required" type="text" class="form-control">
+	                </div>
+	            </div>
+	            <div class="form-group">
+	                <label class="col-sm-2">Staff ID</label>
+	                <div class="col-sm-10">
+	                    <input placeholder="Staff ID" required="required" type="text" minlength="1" class="form-control">
+	                </div>
+	            </div>
+	            <div class="form-group">
+	                <label class="col-sm-2">Password</label>
+	                <div class="col-sm-10">
+	                    <input placeholder="5 - 20 Digits Password" required="required" type="password" minlength="5" maxlength="20" class="form-control">
+	                </div>
+	            </div>
+	            <div class="form-group">
+	                <label class="col-sm-2">Confirm Password</label>
+	                <div class="col-sm-10">
+	                    <input placeholder="Confirm Your Password" required="required" type="password" class="form-control">
+	                </div>
+	            </div>
+	            <div class="form-group">
+	                <label class="col-sm-2">Experience in Years</label>
+	                <div class="col-sm-10">
+	                    <input placeholder="Your Years of Experience" required="required" type="text" *minlength="1" class="form-control">
+	                </div>
+	            </div>
+	            <div class="form-group">
+	                <div class="col-sm-2 radio-label">Occupation</div>
+	                <div class="col-sm-10">
+						<ul class="radio-options">
+							<li><input type="radio" name="occupation" id="doctor" value="Doctor"><label for="doctor">Doctor</label>
+                        	<li><input type="radio" name="occupation" id="nurse" value="Nurse"><label for="nurse">Nurse</label>
+						</ul>
+	                </div>
+	            </div>
+
+	            <div class="form-group">
+	                <div class="col-sm-offset-2 col-sm-10">
+	                    <button type="submit" class="login btn btn-primary">Register</button>
+	                </div>
+	            </div>
+	        </form>
+
+<!----------------------------------------------------------------------------->
+
+		</div>
+		<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    </body>
+</html>

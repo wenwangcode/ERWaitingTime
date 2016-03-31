@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Patient Vital Entry | ER Waiting Time</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="../assets/css/app.css">
+    </head>
+    <body>
+
+<!----------------------------------------------------------------------------->
+
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="../home">ER Waiting Time</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Equipment <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="../views/equipment.html">List</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="../views/equipment.html">Create</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Patients <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="../views/patients.component.html">List</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="../views/patients.component.html">Create</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visits <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="../views/visit.html">List</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="../views/visit.html">Create</a></li>
+							</ul>
+						</li>
+						<li><a class="logout" href="#" (click)="onLogout()">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container" role="main">
+
+<!----------------------------------------------------------------------------->
+
+			<h1 class="page-header">Patient Vital Entry</h1>
+
+			<table class="table table-striped">
+				<thead>
+				    <tr>
+				        <th>Patient ID</th>
+				        <th>Staff ID</th>
+				        <th>Room Number</th>
+				        <th>Date of Visit</th>
+			    	</tr>
+				</thead>
+				<tbody>
+				    <tr *ngFor="#visit of visits">
+				        <td>{{ visit.patient_id }}</td>
+				        <td>{{ visit.staff_id }}</td>
+				        <td>{{ visit.room }}</td>
+				        <td>{{ visit.date }}</td>
+				    </tr>
+				</tbody>
+			</table>
+
+			<form>
+				<input type="number" min="5000" max="10000" #pid>
+				<input type="number" min="0000" max="4999" #sid>
+				<input type="number" min="0000" max="10000" #room>
+				<input type="Date" #date>
+				<input type="submit" (click)="addVisit(pid.value, sid.value, room.value, date.value)">
+			</form>
+
+			{{msg}}
+
+<!----------------------------------------------------------------------------->
+
+		</div>
+		<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    </body>
+</html>
