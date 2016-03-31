@@ -2,6 +2,8 @@ import {Http} from 'angular2/http';
 import {Injectable} from 'angular2/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import {Headers} from "angular2/http";
+import {PatientRegisterComponent} from 'patientregister.component';
 @Injectable()
 export class HTTPService {
 	constructor(private http:Http) {
@@ -24,14 +26,24 @@ export class HTTPService {
 		return this.http.get("http://www.localhost:3002/staff").map(res => res.json());
 	}
 
-	postPQuery() {
-		return this.http.post("http://www.localhost:3002/patient",
-			JSON.stringify({
-				"pid": 1,
-				"p_lname": "Новые",
-				"p_fname": "sdsds",
-				"is_male": "yes",
-				"dob": "234234"
-			}), {}).map(res => res.json());
+	postPQuery(info: string) {
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post("http://www.localhost:3002/patient", info, {
+			headers: headers
+		});
 	}
 }
+
+//this.http.post('http://localhost:3001/sessions/create', creds, {
+//            headers: headers
+//        })
+//        .subscribe(
+//            data => {
+//                this.saveJwt(data.json().id_token);
+//                username.value = null;
+//                password.value = null;
+//            },
+//            err => this.logError(err.json().message),
+//            () => console.log('Authentication Complete')
+//        );
