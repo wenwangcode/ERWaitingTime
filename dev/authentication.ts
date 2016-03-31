@@ -1,46 +1,45 @@
-/**
- * Created by Joy on 2016-03-28.
- */
 // authentication.ts
 import {Injectable} from 'angular2/core';
-import {Headers} from "angular2/http";
-import {Http} from 'angular2/http';
+import {Observable} from "rxjs/Observable";
+import {Headers, Http} from "angular2/http";
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class Authentication {
     token: string;
-    http:Http;
 
-    constructor() {
-        this.token = localStorage.getItem('token');
+    constructor(private http:Http) {
     }
 
     login(username: String, password: String) {
-        fetch('http://localhost:3001/sessions/create', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username, password
-            })
-        })
-            .then(status)
-            .then(json)
-            .then((response) => {
-                // Once we get the JWT in the response, we save it into localStorage
-                localStorage.setItem('jwt', response.id_token);
-                // and then we redirect the user to the home
-                this.router.parent.navigate('/home');
-            })
-            .catch((error) => {
-                alert(error.message);
-                console.log(error.message);
-            });
+
+         return this.http.post('http://www.localhost:3002/user',JSON.stringify({
+             "username": username,
+             "password": password
+             }), {
+         headers: new Headers({
+         'Content-Type': 'application/json'
+         })
+         }).map((res : any) => {
+         let data = res.json();
+         this.token = data.token;
+         localStorage.setItem('token', this.token);
+         });
+
+         /*
+        if (username === 'test' && password === 'test') {
+            this.token = 'token';
+            localStorage.setItem('token', this.token);
+            return Observable.of('token');
+        }
+
+        return Observable.throw('authentication failure');
+        */
     }
 
     logout() {
+        /*
+         * If we had a login api, we would have done something like this
 
          return this.http.get(this.config.serverUrl + '/auth/logout', {
          headers: new Headers({
@@ -51,7 +50,11 @@ export class Authentication {
          this.token = undefined;
          localStorage.removeItem('token');
          });
+         */
 
+        this.token = undefined;
+        localStorage.removeItem('token');
 
+        return Observable.of(true);
     }
 }

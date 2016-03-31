@@ -4,7 +4,10 @@
 import {Component} from 'angular2/core';
 import {Router, CanActivate, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, NgIf} from 'angular2/common';
+import {Http, Headers} from "angular2/http";
 import {Authentication} from './authentication';
+import {HTTPService} from "./http.service";
+import {User} from "./user";
 
 @Component({
     selector: 'login',
@@ -31,7 +34,7 @@ import {Authentication} from './authentication';
 </div>
 <div class="col-md-6 col-md-offset-3">
     <h2>Login</h2>
-    <form [ngFormModel]="form" (submit)="login($event, username.value, password.value)">
+    <form [ngFormModel]="form" (submit)="$event.preventDefault(); onSubmit(form.value)">
         <div *ngIf="error">Check your password</div>
         <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
             <label for="username">Username</label>
@@ -47,47 +50,31 @@ import {Authentication} from './authentication';
         <div class="form-actions">
             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" [disabled]="!form.valid" class="btn btn-primary">Login</button>
 
-            <a href="/" class="btn btn-link">Register</a>
+            <a href="register.component.html" class="btn btn-link">Register</a>
         </div>
     </form>
 </div>
             
 `,
+    providers: [HTTPService]
 })
 
 
 export class Login {
-    // We inject the router via DI
-    constructor(router: Router) {
-        this.router = router;
+    form: ControlGroup;
+    error: boolean = false;
+    constructor(fb: FormBuilder, public auth: Authentication, public router: Router) {
+        this.form = fb.group({
+            username:  ['', Validators.required],
+            password:  ['', Validators.required]
+        });
     }
 
-    login(event, username, password) {
-        // This will be called when the user clicks on the Login button
-        event.preventDefault();
-
-        // We call our API to log the user in. The username and password are entered by the user
-        fetch('http://localhost:3001/sessions/create', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username, password
-            })
-        })
-            .then(status)
-            .then(json)
-            .then((response) => {
-                // Once we get the JWT in the response, we save it into localStorage
-                localStorage.setItem('jwt', response.id_token);
-                // and then we redirect the user to the home
-                this.router.parent.navigate('/home');
-            })
-            .catch((error) => {
-                alert(error.message);
-                console.log(error.message);
-            });
+    onSubmit(value: any) {
+        this.auth.login(value.username, value.password)
+            .subscribe(
+                (token: any) => { this.router.navigate(['../Home']); },
+                () => { this.error = true; }
+            );
     }
 }

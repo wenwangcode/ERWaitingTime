@@ -1,4 +1,4 @@
-import {Http} from 'angular2/http';
+import {Http, Headers} from 'angular2/http';
 import {Injectable} from 'angular2/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
@@ -19,9 +19,19 @@ export class HTTPService{
 	getSQuery(){
 		return this.http.get("http://www.localhost:3002/staff").map(res => res.json());
 	}
-	postPQuery(){
-		return this.http.post("http://www.localhost:3002/patient", JSON.stringify({"id": 1, "name": "Новые"}),{headers:headers}).map(res => res.json());
+	getUQuery(){
+		return this.http.get("http://www.localhost:3002/user").map(res => res.json());
 	}
 
+	post(jstring,table){
+		var json = JSON.stringify(jstring);
+		var key = "json=";
+		var param = key + json;
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		console.log("sending post request");
+		return this.http.post('http://localhost:3002/'+table, param, {headers: headers})
+			.map(res=>res.json());
+	}
 
 }

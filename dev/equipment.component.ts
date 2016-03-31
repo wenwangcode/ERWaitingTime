@@ -45,8 +45,7 @@ import {HTTPService} from './http.service';
         
         <br/><br/>
         
-        <input type="submit" (click)="
-            addEquipment(eid.value, type.value, room.value)" class="btn btn-primary">
+            <button (click)="testPost(eid.value, type.value, room.value)" class="btn btn-primary"> Submit </button>
     </div>
 
     <br/><br/>
@@ -67,6 +66,18 @@ export class EquipmentComponent{
         this.equipments = [];
         this.httpService.getEQuery().subscribe(
             data => this.parseEquipment(data),
+            err => alert(err),
+            () => console.log("complete")
+        );
+    }
+    testPost(eid,type,room){
+        this.httpService.post(
+            {eid:eid,
+             type:type,
+            room:room},
+            'equipment'
+        ).subscribe(
+            data => console.log(data),
             err => alert(err),
             () => console.log("complete")
         );
