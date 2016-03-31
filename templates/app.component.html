@@ -1,0 +1,72 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../home">ER Waiting Time</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Patients<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a [routerLink]="['Dashboard']">List</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="../views/equipment.html">Register</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../views/patients.component.html">List</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="../views/patients.component.html">Create</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Equipment<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../views/visit.html">List</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="../views/visit.html">Add</a></li>
+                    </ul>
+                </li>
+                <li><a class="logout" href="#" (click)="onLogout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid" role="main">
+
+    <div class="row">
+
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a [routerLink]="['Dashboard']">Dashboard <span class="sr-only">(current)</span></a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a [routerLink]="['Patients']">List Patients</a></li>
+                <li><a href="">Register Patient</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">List Reports</a></li>
+                <li><a href="">Add Report</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">List Equipment</a></li>
+                <li><a href="">Add Equipment</a></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

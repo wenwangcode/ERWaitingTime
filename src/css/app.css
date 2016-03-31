@@ -93,6 +93,22 @@ body {
     padding: 0 20px;
 }
 
+/* Dashboard */
+
+.dashboard-button {
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 30px 5px 40px;
+    background: #ffffff;
+}
+
+.dashboard-button:hover {
+    background: #FBFBFB;
+}
 
 /* Forms */
 

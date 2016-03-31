@@ -7,34 +7,7 @@ import {HTTPService} from './http.service';
 
 @Component({
     selector:'patient',
-    template: `
-        <table>
-            <tr>
-                <th> patient_lastname </th>
-                <th> patient_firstname</th>
-                <th> patient_id</th>
-                <th> patient_gender</th>
-                <th> patient_date</th>
-            </tr>
-            <tr *ngFor="#patient of patients"> 
-                <td> {{patient.p_lname}} </td>
-                <td> {{patient.p_fname}} </td>
-                <td> {{patient.pid}} </td>
-                <td> {{patient.is_male}} </td>
-                <td> {{patient.dob}} </td>
-            </tr>
-        </table>
-        
-        <br/><br/>
-        <input type="text"   #p_lname>
-        <input type="text" #p_fname>
-        <input type="number" min="0" max="10000"#pid>
-        <input type="text"  #is_male>
-        <input type="number" min="0" max="10000" #dob>
-        <input type="submit" (click)="
-            addPatient(p_lname.value,p_fname.value,pid.value,is_male.value,dob.value)">
-            
-`,
+    templateUrl: 'templates/patients.component.html',
     providers:[HTTPService]
 })
 export class PatientComponent{
@@ -42,7 +15,7 @@ export class PatientComponent{
 
     constructor(private httpService: HTTPService){
         this.patients = [];
-        this.httpService.getPQuery().subscribe(
+        this.httpService.getPQuery(
             data => this.parsePatient(data),
             err => alert(err),
             () => console.log("complete")

@@ -11,13 +11,10 @@ import {Authentication} from "./authentication";
 
 @Component({
     selector: 'dashboard',
+    templateUrl: 'templates/dashboard.html',
     directives: [],
-    templateUrl: 'templates/dashboard.html'
 })
 
-
-
-@CanActivate(() => isLoggedin())
 export class DashboardComponent {
     constructor(public auth: Authentication, public router: Router) {}
 
