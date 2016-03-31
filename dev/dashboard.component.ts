@@ -49,7 +49,7 @@ import {Authentication} from "./authentication";
 
 
 @CanActivate(() => isLoggedin())
-export class Home {
+export class DashboardComponent {
     constructor(public auth: Authentication, public router: Router) {}
 
     onLogout() {
