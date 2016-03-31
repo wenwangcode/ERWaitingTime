@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 
 app.get('/equipment', function(req,res){getAllFromTable(req,res,'equipment');});
 app.get('/patient', function(req,res){getAllFromTable(req,res,'patient');});
-
+app.get('/visit', function(req,res){getAllFromTable(req,res,'visit');});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
 app.post('/equipment',function(req,res){postData(req,res,'equipment')});
