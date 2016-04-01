@@ -9,8 +9,8 @@ import {PatientRegisterComponent} from "./patientregister.component";
 
 @Component({
     selector: 'my-app',
-    directives: [PatientRegisterComponent],
-    template: '<patientregister></patientregister>'
+    directives: [Login],
+    template: '<login></login>'
 })
 
 export class AppComponent {
