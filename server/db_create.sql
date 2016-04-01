@@ -23,7 +23,7 @@ create table patient(
 	p_lname varchar(20),
 	p_fname varchar(20),
 	pid int,
-	is_male BIT(1),
+	gender varchar(5),
 	dob date,
 	constraint pk_patient primary key (pid));
 

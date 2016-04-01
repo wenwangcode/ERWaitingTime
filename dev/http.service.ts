@@ -26,16 +26,16 @@ export class HTTPService {
 		return this.http.get("http://www.localhost:3002/staff").map(res => res.json());
 	}
 
-    
-    post() {
-	var json = JSON.stringify({eid: 105, type: 'TV', room: 10});
-	var key = "json=";
-	var param = key + json;
-	var headers = new Headers();
-	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-	console.log("sending post request");
-	return this.http.post('http://localhost:3002/equipment', param, {headers: headers})
-		.map(res=>res.json());
+
+	post(jstring,table){
+		var json = JSON.stringify(jstring);
+		var key = "json=";
+		var param = key + json;
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		console.log("sending post request");
+		return this.http.post('http://localhost:3002/'+table, param, {headers: headers})
+			.map(res=>res.json());
 	}
 
 }

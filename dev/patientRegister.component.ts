@@ -11,7 +11,6 @@ import {Headers} from "angular2/http";
     selector:'patientregister',
     template:
         `
-<html>
 <head>
     <title>ERWaitingTime</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
@@ -27,41 +26,37 @@ import {Headers} from "angular2/http";
     <div class="page-header" style="margin-top: 100px">
         <h1>Register Your Patient</h1>
     </div>
-
-    <p id="demo"></p>
-    <script>
-        document.getElementById("demo").innerHTML = Date();
-    </script>
     <form method="post" role="form" class="login-form form-horizontal">
         <input name="_csrf" type="hidden"/>
         <div class="form-group">
             <label class="col-sm-4">Patient Last Name</label>
             <div class="col-sm-8">
-                <input name="fname" placeholder="Patient Last Name" required="required" type="text" class="form-control">
+                <input name="fname" placeholder="Patient Last Name" required="required" type="text" class="form-control" #p_lname>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4">Patient First Name</label>
             <div class="col-sm-8">
-                <input name="lname" placeholder="Patient First Name" required="required" type="text" class="form-control">
+                <input name="lname" placeholder="Patient First Name" required="required" type="text" class="form-control" #p_fname>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4">Gender</label>
+            <div class="col-sm-8">
+                <input name="gender" placeholder="Gender" required="required" type="text" class="form-control" #p_gender>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4">Patient ID</label>
-            <div class="col-sm-8">
-                <p id="patient_id"></p>
-                <script src="../node_modules/uuid/uuid.js">
-                    var x = uuid.v1();
-                    console.log(x);
-                    document.getElementById("patient_id").innerHTML = x;
-                </script>
+           <div class="col-sm-8">
+                <input name="pid" placeholder="Patient ID" required="required" type="text" class="form-control" #pid>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4">Date of Birth</label>
+            <label class="col-sm-4" #dob>Date of Birth</label>
             <div class="col-sm-8">
                 <div class="controls">
-                    <select name="dob-day" id="dob-day">
+                    <select name="dob-day" id="dob-day" >
                         <option value="">Day</option>
                         <option value="">---</option>
                         <option value="01">01</option>
@@ -234,99 +229,28 @@ import {Headers} from "angular2/http";
     </form>
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-            <button href="home" type="submit" class="login btn btn-primary">Register</button>
+           <button (click)="testPost(p_lname.value, p_fname.value, p_dob.value, pid.value, p_gender.value, dob.value)" class="btn btn-primary"> Submit </button>
         </div>
     </div>
     </div>`,
-    bingings:[HTTPService]
+    providers:[HTTPService]
 })
 
-export class PatientRegisterComponent{
-    patient: Patient;
-    httpService: HTTPService;
+export class PatientRegisterComponent {
+    patient:Patient;
 
-    constructor( p_lname: string, p_fname: string, pid: number, is_male: string, dob: Date){
-
-        let patient = JSON.stringify({p_lname: p_lname.valueOf(), p_fname: p_fname.valueOf(), pid: pid.valueOf(), is_male: is_male.valueOf(), dob: dob.valueOf()});
-        console.log(patient);
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.httpService.postPQuery(patient);
+    constructor(private httpService: HTTPService) {
 
     }
-    //login(event, username, password) {
-    //    // This will be called when the user clicks on the Login button
-    //    event.preventDefault();
-    //
-    //    // We call our API to log the user in. The username and password are entered by the user
-    //    fetch('http://localhost:3001/sessions/create', {
-    //        method: 'POST',
-    //        headers: {
-    //            'Accept': 'application/json',
-    //            'Content-Type': 'application/json'
-    //        },
-    //        body: JSON.stringify({
-    //            username, password
-    //        })
-    //    })
-    //        .then(status)
-    //        .then(json)
-    //        .then((response) => {
-    //            // Once we get the JWT in the response, we save it into localStorage
-    //            localStorage.setItem('jwt', response.id_token);
-    //            // and then we redirect the user to the home
-    //            this.router.parent.navigate('/home');
-    //        })
-    //        .catch((error) => {
-    //            alert(error.message);
-    //            console.log(error.message);
-    //        });
-    //}
-//    constructor(private httpService: HTTPService){
-//        console.log("patientregister_constructor: "+this.httpService.postPQuery().subscribe(
-//            data => this.patient_json(data),
-//            err => alert(err)
-//        ));
-//
-//    }
-//
-//    patient_json(json){
-//        console.log("patient_json: "+json.forEach( item => {
-//            this.addPatient(item.p_lname, item.p_fname, item.pid, item.is_male, item.dob);
-//        }))
-//    }
-//
-//
-//    addPatient(p_lname: string, p_fname: string, pid: number, is_male: string, dob: Date){
-//        let patient = new Patient(p_lname, p_fname, pid, is_male, dob);
-//        this.patient = patient;
-//    }
+    testPost(p_lname, p_fname, pid, is_male, dob){
+        this.httpService.post({p_lname:p_lname, p_fname:p_fname, pid:pid, is_male: is_male, dob: dob},
+            'patient'
+        ).subscribe(
+            data => console.log(data),
+            err => alert(err),
+            () => console.log("complete")
+        );
+    }
 }
 
-//function postData(req,res,table){
-//    var post = JSON.parse(req.body.json);
-//    knex(table).insert(post)
-//        .catch(this.errorHandler)
-//        .return({success:true});
-//}
-//
-//authenticate(username, password) {
-//
-//    let creds = JSON.stringify({ username: username.value, password: password.value });
-//
-//    let headers = new Headers();
-//    headers.append('Content-Type', 'application/json');
-//
-//    this.http.post('http://localhost:3001/sessions/create', creds, {
-//            headers: headers
-//        })
-//        .subscribe(
-//            data => {
-//                this.saveJwt(data.json().id_token);
-//                username.value = null;
-//                password.value = null;
-//            },
-//            err => this.logError(err.json().message),
-//            () => console.log('Authentication Complete')
-//        );
-//}
+
