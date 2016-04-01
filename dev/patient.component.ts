@@ -12,19 +12,18 @@ import {HTTPService} from './http.service';
 })
 export class PatientComponent{
 
+    testString = 'Hello world';
     patients: Patient[] = [];
 
-    constructor(private httpService: HTTPService){
-        this.httpService.getPQuery(
+    constructor(private _httpService: HTTPService){
+    }
+
+    ngOnInit() {
+        this._httpService.getPQuery().subscribe(
             data => this.parsePatient(data),
             err => alert(err),
             () => console.log("complete")
         );
-    }
-
-    ngOnInit() {
-        let data = this.httpService.getPQuery();
-        this.parsePatient(data);
     }
 
     parsePatient(json){
@@ -37,14 +36,27 @@ export class PatientComponent{
         })
     }
 
-    addPatient(p_lname: string, p_fname: string, pid:number,is_male:string, dob:Date){
-        let patient = new Patient(p_lname,p_fname,pid,is_male,dob);
-        this.httpService.postPQuery().subscribe(
-            data => this.parsePatient(data),
+    testPost(p_lname, p_fname, pid, is_male, dob){
+        this._httpService.post(
+            {
+                p_lname: p_lname,
+                p_fname: p_fname,
+                pid: pid,
+                is_male: is_male,
+                dob: dob
+            },
+            'patient'
+        ).subscribe(
+            data => console.log(data),
             err => alert(err),
-            () => console.log("post complete"));
+            () => console.log("complete")
+        );
     }
 
+    addPatient(p_lname: string, p_fname: string, pid:number, is_male:string, dob:Date){
+        let patient = new Patient(p_lname,p_fname,pid,is_male,dob);
+        this.patients.push(patient);
+    }
 
     removePatient(patient:Patient){
         var index = this.patients.indexOf(patient);

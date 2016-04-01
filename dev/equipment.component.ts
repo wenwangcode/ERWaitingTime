@@ -48,7 +48,7 @@ export class EquipmentComponent{
 
     constructor(private httpService: HTTPService){
         this.equipments = [];
-        this.httpService.getEQuery(
+        this.httpService.getEQuery().subscribe(
             data => this.parseEquipment(data),
             err => alert(err),
             () => console.log("complete")
