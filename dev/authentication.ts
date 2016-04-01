@@ -11,30 +11,37 @@ export class Authentication {
     constructor(private http:Http) {
     }
 
-    login(username: String, password: String) {
 
-         return this.http.post('http://www.localhost:3002/user',JSON.stringify({
-             "username": username,
-             "password": password
-             }), {
-         headers: new Headers({
-         'Content-Type': 'application/json'
-         })
-         }).map((res : any) => {
+    login(username: String, password: String) {
+        /*
+        var json = JSON.stringify({
+            username:username,
+            password:password
+        });
+        var key = "json=";
+        var param = key + json;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        console.log("sending post request");
+        return this.http.post('http://localhost:3002/user', param, {headers: headers})
+            .map((res : any) => {
          let data = res.json();
          this.token = data.token;
          localStorage.setItem('token', this.token);
+                Observable.of('token');
          });
 
-         /*
-        if (username === 'test' && password === 'test') {
+         */
+        var un = localStorage.getItem('uns');
+        var pw = localStorage.getItem('pws');
+        if (username === un && password === pw) {
             this.token = 'token';
             localStorage.setItem('token', this.token);
             return Observable.of('token');
         }
 
         return Observable.throw('authentication failure');
-        */
+
     }
 
     logout() {
