@@ -3,6 +3,8 @@
  */
 
 import {Component, OnInit} from 'angular2/core';
+import {Router} from 'angular2/router';
+import {Headers} from 'angular2/http';
 import {HTTPService} from "./http.service";
 import {Patient} from "./patient";
 
@@ -17,10 +19,17 @@ export class PatientRegisterComponent {
     
     patients: Patient[] = [];
     next_id: number;
+    sex: number;
     
-    constructor(private _httpService: HTTPService) {
-    }
+    constructor(
+        private _httpService: HTTPService,
+        private _router: Router
+    ) {}
 
+    ngOnInit() {
+        this.preprocessPatientForm();
+    }
+    
     preprocessPatientForm() {
         this._httpService.getPQuery().subscribe(
             data => this.parsePatientPreprocess(data),
@@ -29,14 +38,14 @@ export class PatientRegisterComponent {
         );
     }
 
-    postPatient(p_lname, p_fname, pid, is_male, dob){
-        this.addPatient(p_lname, p_fname, pid, is_male, dob);
+    postPatient(p_lname: string, p_fname: string, year: string, month: string, day: string){
+        let dob = year + '-' + month + '-' + day;
         this._httpService.post(
             {
                 p_lname: p_lname,
                 p_fname: p_fname,
-                pid: pid,
-                is_male: is_male,
+                pid: this.next_id,
+                is_male: this.sex,
                 dob: dob
             },
             'patient'
@@ -45,19 +54,9 @@ export class PatientRegisterComponent {
             err => alert(err),
             () => console.log("complete")
         );
-    }
-
-    postPatientTest(p_lname: string, p_fname: string, year: string, month: string, day: string, is_male: string) {
-        let dateString = year + '-' + month + '-' + day;
-        // I am aware that this toJSON() method makes converting the datestring an ugly solution, but it works
-        let dob = new Date(dateString).toJSON();
-        if (this.next_id) {
-            this.addPatient(p_lname, p_fname, this.next_id, is_male, dob);
-        }
-    }
-
-    ngOnInit() {
-        this.preprocessPatientForm();
+        let headers = new Headers();
+        console.log(headers.getAll());
+        this._router.navigate(['Dashboard']);
     }
 
     // assigns a unique new patient id (called the pid in the data model)
@@ -88,6 +87,17 @@ export class PatientRegisterComponent {
 
     addPatient(p_lname:string, p_fname:string, pid:number, is_male:string, dob:Date){
         let patient = new Patient(p_lname, p_fname, pid, is_male, dob);
-        this.patients.push(patient);
+        if (!this.findPatient(patient)) {
+            this.patients.push(patient);
+            return true;
+        }
+        return false;
+    }
+    
+    findPatient(patient: Patient) {
+        for (let i = 0; i < this.patients.length; i += 1) {
+            if (patient.pid == this.patients[0].pid) return true;
+        }
+        return false;
     }
 }

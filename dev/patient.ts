@@ -2,11 +2,11 @@
  * Created by wendywang on 2016-03-10.
  */
 export class Patient{
-    private p_lname: string;
-    private p_fname: string;
-    private pid: number;
-    private is_male: string;
-    private dob: Date;
+    public p_lname: string;
+    public p_fname: string;
+    public pid: number;
+    public is_male: string;
+    public dob: Date;
 
     constructor(p_lname: string, p_fname: string, pid:number,is_male:string, dob:Date){
         this.p_lname = p_lname;
