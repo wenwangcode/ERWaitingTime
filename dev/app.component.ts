@@ -16,10 +16,15 @@ import {PatientRegisterComponent} from "./patient-register.component";
 
 @RouteConfig([
     {
+        path: '/login',
+        name: 'Login',
+        component: Login,
+        useAsDefault: true
+    },
+    {
         path: '/dashboard',
         name: 'Dashboard',
         component: DashboardComponent,
-        useAsDefault: true
     },
     {
         path: '/patients',

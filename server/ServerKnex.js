@@ -41,7 +41,7 @@ app.post('/visit',function(req,res){postData(req,res,'visit')});
 app.post('/staff',function(req,res){postData(req,res,'staff')});
 app.post('/prescription',function(req,res){postData(req,res,'prescription')});
 app.post('/user',function(req,res){postData(req,res,'user')});
-
+/*
 function login (username, password, callback) {
 
     var query = "SELECT username, password " +
@@ -63,10 +63,20 @@ function login (username, password, callback) {
     });
 
 }
-
+*/
 
 function getAllFromTable(req,res,table){
 	knex.select().from(table).catch(this.errorHandler).then(rows => res.send(rows));
+}
+
+function deleteFromTable(req,res,table){
+    knex(table)
+        .where('activated', false)
+        .del()
+}
+
+function updateTable(req,res,table){
+
 }
 
 function postData(req,res,table){
