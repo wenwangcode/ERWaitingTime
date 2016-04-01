@@ -30,23 +30,10 @@ export class PatientRegisterComponent {
 
     preprocessPatientForm() {
         this._httpService.getPQuery().subscribe(
-            data => this.next_id = this.parsePatientPreprocess(data),
+            data => this.parsePatientPreprocess(data),
             err => alert(err),
             () => console.log("GET patient data preprocessing complete")
         );
-    }
-    parsePatientPreprocess(json){
-        let patient_ids: number[] = [];
-        let next_id: number = 0;
-        json.forEach( item => {
-            patient_ids.push(item.pid);
-        });
-        for (let i = 0; i < patient_ids.length; i += 1) {
-            if (patient_ids[i] > next_id) next_id = patient_ids[i]
-        }
-        console.log(patient_ids);
-        console.log(next_id + 1);
-        return (next_id + 1);
     }
 
     postPatient(p_lname, p_fname, is_male, dob){
@@ -66,15 +53,32 @@ export class PatientRegisterComponent {
         );
     }
 
-    // ngOnInit() {
-    //     this._httpService.getPQuery().subscribe(
-    //         data => this.parsePatient(data),
-    //         err => alert(err),
-    //         () => console.log("complete")
-    //     )
-    // }
+    postPatientTest(p_lname: string, p_fname: string, year: string, month: string, day: string, is_male: string) {
+        let dateString = year + '-' + month + '-' + day;
+        // I am aware that this toJSON() method makes converting the datestring an ugly solution, but it works
+        let dob = new Date(dateString).toJSON();
+        if (this.next_id) {
+            this.addPatient(p_lname, p_fname, this.next_id, is_male, dob);
+        }
+    }
 
+    ngOnInit() {
+        this.preprocessPatientForm();
+    }
 
+    // assigns a unique new patient id (called the pid in the data model)
+    parsePatientPreprocess(json){
+        let patient_ids: number[] = [];
+        let next_id: number = 0;
+        json.forEach( item => {
+            patient_ids.push(item.pid);
+        });
+        for (let i = 0; i < patient_ids.length; i += 1) {
+            if (patient_ids[i] > next_id) next_id = patient_ids[i]
+        }
+        console.log(next_id + 1);
+        this.next_id = next_id + 1;
+    }
 
     parsePatient(json){
         json.forEach( item => {

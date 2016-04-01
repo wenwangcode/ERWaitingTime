@@ -237,8 +237,10 @@
 	</script>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button (click)="postPatient(p_lname.value, p_fname.value, xxx, year.value+'-'+month.value+'-'+day.value)" class="btn btn-primary"> Submit </button>
-		</div>_
+
+			<button (click)="postPatientTest(p_lname.value, p_fname.value, year.value, month.value, day.value, is_male.value)" class="btn btn-primary"> Submit </button>
+		</div>
+
 	</div>
 </form>
 
