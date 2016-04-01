@@ -7,11 +7,11 @@
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
 	</tr>
-	<tr>
-		<td>Allison</td>
-		<td>Chan</td>
-		<td>Female</td>
-		<td>1994/08</td>
-		<td>01362720-f42d-11e5-93fd-0002a5d5c51b</td>
+	<tr *ngFor="#patient of patients">
+		<td>{{patient.p_lname}}</td>
+		<td>{{patient.p_fname}}</td>
+		<td>{{patient.is_male}}</td>
+		<td>{{patient.dob}}</td>
+		<td>{{patient.pid}}</td>
 	</tr>
 </table>

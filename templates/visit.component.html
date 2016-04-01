@@ -1,23 +1,4 @@
-<h1 class="page-header">Patient Report Entry</h1>
-
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Patient ID</th>
-			<th>Staff ID</th>
-			<th>Room Number</th>
-			<th>Date of Visit</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="#visit of visits">
-			<td> {{visit.patient_id}} </td>
-			<td> {{visit.staff_id}} </td>
-			<td> {{visit.room}} </td>
-			<td> {{visit.date}} </td>
-		</tr>
-	</tbody>
-</table>
+<h1 class="page-header">Log Patient Visit</h1>
 
 <form class="form-horizontal">
 	<div class="form-group">
@@ -36,5 +17,24 @@
 		<label for="date">Date</label>
 		<input type="date" class="form-control" id="date" placeholder="yyyy-mm-dd" #date>
 	</div>
-	<input type="submit" (click)="addVisit(pid.value, sid.value, room.value, date.value)">
+	<input type="submit" class="btn btn-primary" (click)="addVisit(pid.value, sid.value, room.value, date.value)">
 </form>
+
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>Patient ID</th>
+		<th>Staff ID</th>
+		<th>Room Number</th>
+		<th>Date of Visit</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr *ngFor="#visit of visits">
+		<td> {{visit.patient_id}} </td>
+		<td> {{visit.staff_id}} </td>
+		<td> {{visit.room}} </td>
+		<td> {{visit.date}} </td>
+	</tr>
+	</tbody>
+</table>

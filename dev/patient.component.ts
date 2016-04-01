@@ -1,7 +1,7 @@
 /**
  * Created by Joy on 2016-03-28.
  */
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {Patient} from './Patient';
 import {HTTPService} from './http.service';
 
@@ -11,15 +11,20 @@ import {HTTPService} from './http.service';
     providers:[HTTPService]
 })
 export class PatientComponent{
-    patients:Array<Patient>;
+
+    patients: Patient[] = [];
 
     constructor(private httpService: HTTPService){
-        this.patients = [];
         this.httpService.getPQuery(
             data => this.parsePatient(data),
             err => alert(err),
             () => console.log("complete")
         );
+    }
+
+    ngOnInit() {
+        let data = this.httpService.getPQuery();
+        this.parsePatient(data);
     }
 
     parsePatient(json){

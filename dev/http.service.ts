@@ -8,19 +8,19 @@ export class HTTPService{
 
 	}
 	getQuery(){
-		return this.http.get("http://www.localhost:3002/visit").map(res => res.json());
+		return this.http.get("http://localhost:3002/visit").map(res => res.json());
 	}
 	getEQuery(){
-		return this.http.get("http://www.localhost:3002/equipment").map(res => res.json());
+		return this.http.get("http://localhost:3002/equipment").map(res => res.json());
 	}
 	getPQuery(){
-		return this.http.get("http://www.localhost:3002/patient").map(res => res.json());
+		return this.http.get("http://localhost:3002/patient").map(res => res.json());
 	}
 	getSQuery(){
-		return this.http.get("http://www.localhost:3002/staff").map(res => res.json());
+		return this.http.get("http://localhost:3002/staff").map(res => res.json());
 	}
 	getUQuery(){
-		return this.http.get("http://www.localhost:3002/user").map(res => res.json());
+		return this.http.get("http://localhost:3002/user").map(res => res.json());
 	}
 
 	post(jstring,table){
