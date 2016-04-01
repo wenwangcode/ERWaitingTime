@@ -6,6 +6,7 @@ import {Login} from "./login";
 import {EquipmentComponent} from "./equipment.component";
 import {PatientComponent} from "./patient.component";
 import {VisitComponent} from "./visit.component";
+import {PatientRegisterComponent} from "./patient-register.component";
 
 @Component({
     selector: 'my-app',
@@ -24,6 +25,11 @@ import {VisitComponent} from "./visit.component";
         path: '/patients',
         name: 'Patients',
         component: PatientComponent,
+    },
+    {
+        path: '/patients/register',
+        name: 'Patient Registration',
+        component: PatientRegisterComponent,
     },
     {
         path: '/patients/visit',

@@ -3,7 +3,7 @@
 	<tr>
 		<th>Last Name</th>
 		<th>First Name</th>
-		<th>Gender</th>
+		<th>Sex</th>
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
 	</tr>
@@ -11,7 +11,7 @@
 		<td>{{patient.p_lname}}</td>
 		<td>{{patient.p_fname}}</td>
 		<td>{{patient.is_male.data == '1' ? 'male' : 'female'}}</td>
-		<td>{{patient.dob}}</td>
+		<td>{{patient.dob.slice(0,10)}}</td>
 		<td>{{patient.pid}}</td>
 	</tr>
 </table>

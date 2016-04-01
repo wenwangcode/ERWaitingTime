@@ -7,25 +7,67 @@ import {HTTPService} from "./http.service";
 import {Patient} from "./patient";
 
 @Component({
-    selector: '',
-    templateUrl: '',
+    selector: 'patient-register',
+    templateUrl: 'templates/patient-register.component.html',
     providers: [HTTPService,],
-    
+
 })
 
 export class PatientRegisterComponent {
-    
+
     patients: Patient[] = [];
-    
+    next_id: number;
+
     constructor(private _httpService: HTTPService) {
     }
-    
-    ngOnInit() {
+
+    preprocessPatientForm() {
         this._httpService.getPQuery().subscribe(
-            data => this.parsePatient(data),
+            data => this.next_id = this.parsePatientPreprocess(data),
+            err => alert(err),
+            () => console.log("GET patient data preprocessing complete")
+        );
+        this.patients.push(new Patient('test', 'test', this.next_id, '0', '2016-03-31'));
+    }
+
+    postPatient(p_lname, p_fname, pid, is_male, dob){
+        this.addPatient(p_lname, p_fname, pid, is_male, dob);
+        this._httpService.post(
+            {
+                p_lname: p_lname,
+                p_fname: p_fname,
+                pid: pid,
+                is_male: is_male,
+                dob: dob
+            },
+            'patient'
+        ).subscribe(
+            data => console.log(data),
             err => alert(err),
             () => console.log("complete")
-        )
+        );
+    }
+
+    // ngOnInit() {
+    //     this._httpService.getPQuery().subscribe(
+    //         data => this.parsePatient(data),
+    //         err => alert(err),
+    //         () => console.log("complete")
+    //     )
+    // }
+
+    parsePatientPreprocess(json){
+        let patient_ids: number[] = [];
+        let next_id: number = 0;
+        json.forEach( item => {
+            patient_ids.push(item.pid);
+        });
+        for (let i = 0; i < patient_ids.length; i += 1) {
+            if (patient_ids[i] > next_id) next_id = patient_ids[i]
+        }
+        console.log(patient_ids);
+        console.log(next_id + 1);
+        return (next_id + 1);
     }
 
     parsePatient(json){
