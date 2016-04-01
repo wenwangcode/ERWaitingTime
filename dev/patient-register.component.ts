@@ -21,7 +21,7 @@ export class PatientRegisterComponent {
     }
     
     ngOnInit() {
-        this._httpService.getPQuery(
+        this._httpService.getPQuery().subscribe(
             data => this.parsePatient(data),
             err => alert(err),
             () => console.log("complete")
