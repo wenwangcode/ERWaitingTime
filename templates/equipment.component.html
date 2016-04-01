@@ -1,0 +1,71 @@
+<h1 class="page-header">Equipment</h1>
+
+<form class="form-horizontal">
+	<div class="form-group">
+		<label class="col-sm-2" for="equipment-id">Equipment ID:</label>
+		<div class="col-sm-10">
+			<input class="form-control" type="text" name="equipment-id" id="equipment-id" #eid>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2" for="equipment-type">Equipment Type:</label>
+		<div class="col-sm-10">
+			<input class="form-control" type="text" name="equipment-id" id="equipment-type" #type>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2" for="room-number">Room Number:</label>
+		<div class="col-sm-10">
+			<input class="form-control" type="text" name="room-number" id="room-number" #room>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="button" class="btn btn-primary" (click)="addEquipments(eid.value, type.value, room.value)" onclick="addRow()" id="add">Add Equipment +</button>
+		</div>
+	</div>
+	<button (click)="testPost(eid.value, type.value, room.value)" class="btn btn-primary"> Submit </button>
+</form>
+
+<script>
+	function addRow() {
+		"use strict";
+
+		var table = document.getElementById("table");
+
+		var row= document.createElement("tr");
+		console.log(row);
+		var td1 = document.createElement("td");
+		var td2 = document.createElement("td");
+		var td3 = document.createElement("td");
+
+		td1.innerHTML = document.getElementById("equipment-id").value;
+		td2.innerHTML  = document.getElementById("equipment-type").value;
+		td3.innerHTML  = document.getElementById("room-number").value;
+
+		row.appendChild(td1);
+		row.appendChild(td2);
+		row.appendChild(td3);
+
+		table.children[0].appendChild(row);
+	};
+</script>
+
+<div ng-app="my-app">
+	<table id="table" class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Type</th>
+				<th>Room</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="#equipment of equipments">
+				<td> {{equipment.eid}} </td>
+				<td> {{equipment.type}} </td>
+				<td> {{equipment.room}} </td>
+			</tr>
+		</tbody>
+	</table>
+</div>

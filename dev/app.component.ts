@@ -30,6 +30,11 @@ import {VisitComponent} from "./visit.component";
         name: 'Visit',
         component: VisitComponent,
     },
+    {
+        path: '/equipment/list',
+        name: 'Equipment',
+        component: EquipmentComponent,
+    },
 ])
 
 
