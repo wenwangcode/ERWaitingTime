@@ -68,7 +68,7 @@ function login (username, password, callback) {
 function getAllFromTable(req,res,table){
 	knex.select().from(table).catch(this.errorHandler).then(rows => res.send(rows));
 }
-
+/*
 function deleteFromTable(req,res,table){
     knex(table)
         .where('activated', false)
@@ -78,6 +78,7 @@ function deleteFromTable(req,res,table){
 function updateTable(req,res,table){
 
 }
+*/
 
 function postData(req,res,table){
     console.log(req.body.json);
