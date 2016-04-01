@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../home">ER Waiting Time</a>
+            <a class="navbar-brand" [routerLink]="['Dashboard']">ER Waiting Time</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -17,7 +17,7 @@
                     <ul class="dropdown-menu">
                         <li><a [routerLink]="['Dashboard']">List</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="../views/equipment.html">Register</a></li>
+                        <li><a [routerLink]="['Patient Registration']">Register</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -51,7 +51,7 @@
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a [routerLink]="['Patients']">List Patients</a></li>
-                <li><a href="">Register Patient</a></li>
+                <li><a [routerLink]="['Patient Registration']">Register Patient</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="">List Reports</a></li>

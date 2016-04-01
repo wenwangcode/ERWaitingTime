@@ -11,8 +11,7 @@ import {HTTPService} from './http.service';
     providers:[HTTPService]
 })
 export class PatientComponent{
-
-    testString = 'Hello world';
+    
     patients: Patient[] = [];
 
     constructor(private _httpService: HTTPService){
@@ -36,7 +35,17 @@ export class PatientComponent{
         })
     }
 
-    testPost(p_lname, p_fname, pid, is_male, dob){
+    addPatient(p_lname: string, p_fname: string, pid:number, is_male:string, dob:Date){
+        let patient = new Patient(p_lname,p_fname,pid,is_male,dob);
+        this.patients.push(patient);
+    }
+
+    removePatient(patient:Patient){
+        var index = this.patients.indexOf(patient);
+        this.patients.splice(index,1);
+    }
+
+    postPatient(p_lname, p_fname, pid, is_male, dob){
         this._httpService.post(
             {
                 p_lname: p_lname,
@@ -52,15 +61,4 @@ export class PatientComponent{
             () => console.log("complete")
         );
     }
-
-    addPatient(p_lname: string, p_fname: string, pid:number, is_male:string, dob:Date){
-        let patient = new Patient(p_lname,p_fname,pid,is_male,dob);
-        this.patients.push(patient);
-    }
-
-    removePatient(patient:Patient){
-        var index = this.patients.indexOf(patient);
-        this.patients.splice(index,1);
-    }
-
 }
