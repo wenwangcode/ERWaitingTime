@@ -7,7 +7,7 @@ export class HTTPService{
 	constructor(private http:Http){
 
 	}
-	getQuery(){
+	getVQuery(){
 		return this.http.get("http://localhost:3002/visit").map(res => res.json());
 	}
 	getEQuery(){

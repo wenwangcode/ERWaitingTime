@@ -228,7 +228,7 @@
 	</div>
 </form>
 
-<table *ngIf="patients" class="table table-striped" id="patient-list">
+<table *ngIf="patientIds" class="table table-striped" id="patient-list">
 	<tr>
 		<th>Last Name</th>
 		<th>First Name</th>
@@ -237,7 +237,7 @@
 		<th>Patient ID</th>
 		<th>Status</th>
 	</tr>
-	<tr *ngFor="#patient of patients">
+	<tr *ngFor="#patient of patientIds">
 		<td>{{patient.p_lname}}</td>
 		<td>{{patient.p_fname}}</td>
 		<td>{{patient.is_male == '1' ? 'Male' : 'Female'}}</td>
