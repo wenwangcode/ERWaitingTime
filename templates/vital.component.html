@@ -6,41 +6,41 @@
 	<div class="form-group">
 		<label class="col-sm-2">Oxygen Saturation</label>
 		<div class="col-sm-10">
-			<input class="col-sm-3" placeholder="0 - 100%" type="number" min="0" max="100" value="100">
+			<input class="col-sm-3" placeholder="0 - 100%" type="number" min="0" max="100" value="100" #o2>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-sm-2">Temperature</label>
 		<div class="col-sm-10">
-			<input class="col-sm-3" placeholder="Celsius" type="number" min="0" max="100" value="37.0" step="0.1">
+			<input class="col-sm-3" placeholder="Celsius" type="number" min="0" max="100" value="37.0" step="0.1" #temp>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-sm-2">Blood Pressure (Systolic)</label>
 		<div class="col-sm-10">
-			<input class="col-sm-3" placeholder="mmHg" type="number" min="0" max="100" value="110">
+			<input class="col-sm-3" placeholder="mmHg" type="number" min="0" max="100" value="110" #bp>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-sm-2">Pulse</label>
 		<div class="col-sm-10">
-			<input class="col-sm-3" placeholder="bpm" type="number" min="0" max="240" value="70">
+			<input class="col-sm-3" placeholder="bpm" type="number" min="0" max="240" value="70" #bpm>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-sm-2">Respiration</label>
 		<div class="col-sm-10">
-			<input class="col-sm-3" placeholder="VO2 Max" type="number" min="0" max="100" value="30.0" step="0.1">
+			<input class="col-sm-3" placeholder="VO2 Max" type="number" min="0" max="100" value="30.0" step="0.1" #resp>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="submit" class="btn btn-primary">Log Vitals</button>
+			<button (click)="postVitals(o2.value, temp.value, bp.value, bpm.value, resp.value); getVitals()" type="submit" class="btn btn-primary">Log Vitals</button>
 		</div>
 	</div>
 

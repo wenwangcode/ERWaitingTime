@@ -15,11 +15,34 @@ import {HTTPService} from "./http.service";
 export class VitalComponent {
 
     vitals: Vital[];
+    next_id: number;
     
     constructor(private _httpService: HTTPService) {}
     
     ngOnInit() {
         this.getVitals();
+        this.generateNextId();
+    }
+
+    postVitals(oxygen_saturation, temperature, blood_pressure, pulse, respiration){
+        this._httpService.post(
+            {
+                oxygen_saturation: oxygen_saturation,
+                temperature: temperature,
+                blood_pressure: blood_pressure,
+                pulse: pulse,
+                respiration: respiration,
+                vid: this.next_id
+            },
+            'vital'
+        ).subscribe(
+            data => console.log(data),
+            err => alert(err),
+            () => {
+                this.getVitals();
+                this.next_id += 1;
+            }
+        );
     }
     
     getVitals() {
@@ -27,10 +50,31 @@ export class VitalComponent {
         this._httpService.getVIQuery().subscribe(
             data => this.parseVitals(data),
             err => alert(err),
-            () => console.log("complete")
+            () => console.log("getVitals() complete")
         );
     }
-    
+
+    generateNextId() {
+        this._httpService.getVIQuery().subscribe(
+            data => this.parseVitalsForId(data),
+            err => alert(err),
+            () => console.log("generateNextId() complete")
+        );
+    }
+
+    parseVitalsForId(json) {
+        let vital_ids: number[] = [];
+        let next_id: number = 0;
+        json.forEach( item => {
+            vital_ids.push(item.vid);
+        });
+        for (let i = 0; i < vital_ids.length; i += 1) {
+            if (vital_ids[i] > next_id) next_id = vital_ids[i]
+        }
+        console.log(next_id + 1);
+        this.next_id = next_id + 1;
+    }
+
     parseVitals(json) {
         json.forEach( item => {
             this.addVital(

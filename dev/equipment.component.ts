@@ -25,7 +25,7 @@ export class EquipmentComponent{
             () => console.log("complete")
         );
     }
-    testPost(eid,type,room){
+    postEquipment(eid,type,room){
         this.httpService.post(
             {eid:eid,
              type:type,
