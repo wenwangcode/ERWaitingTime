@@ -1,4 +1,4 @@
-<h1 class="page-header">Equipment</h1>
+<h1 class="page-header">Equipments</h1>
 
 <form class="form-horizontal">
 	<div class="form-group">
@@ -19,7 +19,7 @@
 			<input class="form-control" type="text" name="room-number" id="room-number" #room>
 		</div>
 	</div>
-	<button (click)="postEquipment(eid.value, type.value, room.value)" class="btn btn-primary"> Submit </button>
+	<button [routerLink]="['Equipments']" (click)="postEquipment(eid.value, type.value, room.value)" class="btn btn-primary"> Submit </button>
 </form>
 
 

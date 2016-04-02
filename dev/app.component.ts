@@ -5,6 +5,7 @@ import {isLoggedin} from "./is-loggedin";
 import {Authentication} from "./authentication";
 import {DashboardComponent} from "./dashboard.component";
 import {Login} from "./login";
+import {EquipmentAddComponent} from "./equipment-add.component";
 import {EquipmentComponent} from "./equipment.component";
 import {PatientComponent} from "./patient.component";
 import {VisitComponent} from "./visit.component";
@@ -58,8 +59,13 @@ import {VitalComponent} from "./vital.component";
     },
     {
         path: '/equipment/list',
-        name: 'Equipment',
+        name: 'Equipments',
         component: EquipmentComponent,
+    },
+    {
+        path: '/equipment/add',
+        name: 'Add Equipment',
+        component: EquipmentAddComponent,
     },
     {
         path: '/staff',

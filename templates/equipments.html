@@ -1,0 +1,20 @@
+<h1 class="page-header">Equipment List</h1>
+
+<div ng-app="my-app">
+    <table id="table" class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Room</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#equipment of equipments">
+            <td> {{equipment.eid}} </td>
+            <td> {{equipment.type}} </td>
+            <td> {{equipment.room}} </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
