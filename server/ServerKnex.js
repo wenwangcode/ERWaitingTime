@@ -25,6 +25,7 @@ app.use(function(req,res,next){
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+app.get('/visitpatient', function(req,res){visit_patient(req,res)})
 
 app.get('/equipment', function(req,res){getAllFromTable(req,res,'equipment');});
 app.get('/patient', function(req,res){getAllFromTable(req,res,'patient');});
@@ -49,6 +50,18 @@ function postData(req,res,table){
         .catch(this.errorHandler)
         .return({success:true}); 
 }
+
+function visit_patient(req,res){
+    knex.from('visit').innerJoin('patient', 'visit.pid', 'patient.pid')
+    .select('patient.p_lname',
+            'patient.p_fname',
+            'patient.pid',
+            'visit.room',
+            'visit.visit_date',
+            'visit.sid')
+    .catch(this.errorHandler).then(rows => res.send(rows));
+}
+
 function errorHandler(error){
     console.error(error);
 }

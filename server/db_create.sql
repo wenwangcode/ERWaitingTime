@@ -9,12 +9,12 @@ create table staff(
 	s_fname varchar(20),
 	specialization varchar(50),
 	experience_in_years int,
-	sid int,
+	sid int auto_increment,
 	isDoctor BIT(1),
 	constraint pk_staff primary key (sid));
 
 create table equipment(
-	eid int,
+	eid int auto_increment,
 	type varchar(20),
 	room int,
 	constraint pk_equipment primary key (eid));
@@ -22,7 +22,7 @@ create table equipment(
 create table patient(
 	p_lname varchar(20),
 	p_fname varchar(20),
-	pid int,
+	pid int auto_increment,
 	is_male BIT(1),
 	dob date,
 	constraint pk_patient primary key (pid));
@@ -33,18 +33,19 @@ create table vital(
 	blood_pressure smallint,
 	pulse int,
 	respiration int,
-	vid int,
+	vid int auto_increment,
 	constraint pk_vital primary key (vid));
 
 create table report(
-	rid int,
+	rid int auto_increment,
 	diagnosis varchar(300),
 	report_date date,
 	vid int,
 	pid int,
 	constraint pk_report primary key (rid),
 	constraint fk_report_vital foreign key (vid) references vital (vid),
-	constraint fk_report_patient foreign key (pid) references patient (pid)
+	constraint fk_report_patient foreign key (pid) references patient (pid) 
+    on delete cascade
 	);
 
 create table prescription(
@@ -78,15 +79,18 @@ create table utilize(
 	pid int,
 	eid int,
 	constraint pk_utilize primary key (eid),
-	constraint fk_utilize_patient foreign key (pid) references Patient (pid),
+	constraint fk_utilize_patient foreign key (pid) references Patient (pid)
+    on delete cascade,
 	constraint fk_utilize_equipment foreign key (eid) references Equipment (eid));
 
 create table visit(
+	visitId int auto_increment,
 	pid int,
 	sid int,
 	room int,
 	visit_date datetime,
-	constraint pk_visit primary key (pid,sid),
-	constraint fk_visit_patient foreign key (pid) references patient (pid),
+	constraint pk_visit primary key (visitId),
+	constraint fk_visit_patient foreign key (pid) references patient (pid)
+    on delete cascade,
 	constraint fk_visit_staff foreign key (sid) references staff (sid));
 
