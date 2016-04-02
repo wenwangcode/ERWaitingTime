@@ -4,7 +4,6 @@
 
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {Headers} from 'angular2/http';
 import {HTTPService} from "./http.service";
 import {Patient} from "./patient";
 
@@ -33,7 +32,7 @@ export class PatientRegisterComponent {
     
     preprocessPatientForm() {
         this._httpService.getPQuery().subscribe(
-            data => this.parsePatientPreprocess(data),
+            data => this.getPatientNextId(data),
             err => alert(err),
             () => console.log("GET patient data preprocessing complete")
         );
@@ -58,13 +57,10 @@ export class PatientRegisterComponent {
             err => alert(err),
             () => console.log("complete")
         );
-        let headers = new Headers();
-        console.log(headers.getAll());
-        this._router.navigate(['Dashboard']);
     }
 
     // assigns a unique new patient id (called the pid in the data model)
-    parsePatientPreprocess(json){
+    getPatientNextId(json){
         let patient_ids: number[] = [];
         let next_id: number = 0;
         json.forEach( item => {
