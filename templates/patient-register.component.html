@@ -213,11 +213,11 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-sm-2 radio-label">Gender</div>
+		<div class="col-sm-2 radio-label">Sex</div>
 		<div class="col-sm-10">
-			<ul class="radio-options">
-				<li><input type="radio" name="gender" id="gender-m" value="1"><label for="gender-m" #is_male>Male</label>
-				<li><input type="radio" name="gender" id="gender-f" value="0"><label for="gender-f" #is_male>Female</label>
+			<ul class="radio-options" #is_male>
+				<li><input (click)="sex=1" [(ngModel)]="sex" type="radio" name="gender" id="gender-m" value="1"><label for="gender-m">Male</label>
+				<li><input (click)="sex=0" [(ngModel)]="sex" type="radio" name="gender" id="gender-f" value="0"><label for="gender-f">Female</label>
 			</ul>
 		</div>
 	</div>
@@ -238,25 +238,28 @@
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 
-			<button (click)="postPatientTest(p_lname.value, p_fname.value, year.value, month.value, day.value, is_male.value)" class="btn btn-primary"> Submit </button>
+			<button (click)="postPatient(p_lname.value, p_fname.value, year.value, month.value, day.value)" class="btn btn-primary"> Submit </button>
+
 		</div>
 
 	</div>
 </form>
 
-<table *ngIf="patients" class="table table-striped" id="patient-list">
+<table *ngIf="patientIds" class="table table-striped" id="patient-list">
 	<tr>
 		<th>Last Name</th>
 		<th>First Name</th>
 		<th>Sex</th>
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
+		<th>Status</th>
 	</tr>
-	<tr *ngFor="#patient of patients">
+	<tr *ngFor="#patient of patientIds">
 		<td>{{patient.p_lname}}</td>
 		<td>{{patient.p_fname}}</td>
-		<td>{{patient.is_male == '1' ? 'male' : 'female'}}</td>
+		<td>{{patient.is_male == '1' ? 'Male' : 'Female'}}</td>
 		<td>{{patient.dob.slice(0,10)}}</td>
 		<td>{{patient.pid}}</td>
+		<td>Successfully Registered</td>
 	</tr>
 </table>
