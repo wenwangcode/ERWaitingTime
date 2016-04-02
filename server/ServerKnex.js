@@ -90,6 +90,7 @@ function postData(req,res,table){
 }
 function errorHandler(error){
     console.error(error);
+    console.log(error);
 }
 
 app.listen(3002);

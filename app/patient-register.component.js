@@ -47,7 +47,6 @@ System.register(['angular2/core', 'angular2/router', "./http.service", "./patien
                     this._httpService.post({
                         p_lname: p_lname,
                         p_fname: p_fname,
-                        pid: this.next_id,
                         is_male: this.sex,
                         dob: dob
                     }, 'patient').subscribe(function (data) { return console.log(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
