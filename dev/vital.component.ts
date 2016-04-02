@@ -31,8 +31,7 @@ export class VitalComponent {
                 temperature: temperature,
                 blood_pressure: blood_pressure,
                 pulse: pulse,
-                respiration: respiration,
-                vid: this.next_id
+                respiration: respiration
             },
             'vital'
         ).subscribe(

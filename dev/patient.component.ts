@@ -50,7 +50,6 @@ export class PatientComponent{
             {
                 p_lname: p_lname,
                 p_fname: p_fname,
-                pid: pid,
                 is_male: is_male,
                 dob: dob
             },

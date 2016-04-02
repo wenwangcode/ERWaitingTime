@@ -23,7 +23,6 @@ export class StaffRegisterComponent{
     testSsPost(s_lname,s_fname,specialization,experience_in_years){
         this.httpService.post(
             {
-                sid:this.nexts_id,
                 s_lname:s_lname,
                 s_fname:s_fname,
                 specialization:specialization,

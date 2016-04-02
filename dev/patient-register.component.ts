@@ -47,10 +47,7 @@ export class PatientRegisterComponent {
             {
                 p_lname: p_lname,
                 p_fname: p_fname,
-                pid: this.next_id,
-
                 is_male: this.sex,
-
                 dob: dob
             },
             'patient'

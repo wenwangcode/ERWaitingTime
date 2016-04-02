@@ -6,7 +6,7 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
-         password : '639288',
+         password : '19930821',
          database : 'emergency'
     },
     pool:{
@@ -90,6 +90,7 @@ function postData(req,res,table){
 }
 function errorHandler(error){
     console.error(error);
+    console.log(error);
 }
 
 app.listen(3002);

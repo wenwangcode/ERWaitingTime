@@ -4,7 +4,6 @@
 import {Component} from 'angular2/core';
 import {Equipment} from './Equipment';
 import {HTTPService} from './http.service';
-import {isLoggedin} from "./is-loggedin";
 import {CanActivate} from "angular2/router";
 import {RouterLink} from "angular2/router";
 
