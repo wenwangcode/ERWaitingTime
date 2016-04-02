@@ -34,7 +34,7 @@ app.get('/visit', function(req,res){getAllFromTable(req,res,'visit');});
 app.get('/report', function(req,res){getAllFromTable(req,res,'report');});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
-app.post('/patientIds/register',function (req,res){postData(req,res,'patient')});
+app.post('/patients/register',function (req,res){postData(req,res,'patient')});
 app.post('/equipment',function(req,res){postData(req,res,'equipment')});
 app.post('/vital',function(req,res){postData(req,res,'vital')});
 app.post('/report',function(req,res){postData(req,res,'report')});

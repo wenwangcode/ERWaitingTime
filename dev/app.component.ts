@@ -14,6 +14,7 @@ import {StaffComponent} from "./staff.component";
 import {StaffRegisterComponent} from "./staff-register.component";
 import {ReportComponent} from "./report.component";
 import {ReportAddComponent} from "./report-add.component";
+import {VitalComponent} from "./vital.component";
 
 @Component({
     selector: 'my-app',
@@ -72,6 +73,11 @@ import {ReportAddComponent} from "./report-add.component";
         path: '/report/add',
         name: 'Add Report',
         component: ReportAddComponent,
+    },
+    {
+        path: '/vitals',
+        name: 'Vitals',
+        component: VitalComponent,
     },
 ])
 
