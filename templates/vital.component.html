@@ -40,7 +40,7 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button (click)="postVitals(o2.value, temp.value, bp.value, bpm.value, resp.value); getVitals()" type="submit" class="btn btn-primary">Log Vitals</button>
+			<button (click)="postVitals(o2.value, temp.value, bp.value, bpm.value, resp.value)" type="submit" class="btn btn-primary">Log Vitals</button>
 		</div>
 	</div>
 
@@ -55,6 +55,7 @@
 		<th>Respiration</th>
 	</tr>
 	<tr *ngFor="#vital of vitals">
+		<td>{{vital.vid}}</td>
 		<td>{{vital.oxygen_saturation}}</td>
 		<td>{{vital.temperature}}</td>
 		<td>{{vital.blood_pressure}}</td>

@@ -53,7 +53,6 @@ export class ReportAddComponent{
         let report_date = year + '-' + month + '-' + day;
         this.httpService.post(
             {
-                rid: this.nextr_id,
                 diagnosis: diagnosis,
                 report_date: report_date,
                 vid: vid,

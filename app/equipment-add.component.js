@@ -43,7 +43,7 @@ System.register(['angular2/core', './Equipment', './http.service', "./is-loggedi
                     //);
                 }
                 EquipmentAddComponent.prototype.postEquipment = function (type, room) {
-                    this.httpService.post({ eid: this.next_id,
+                    this.httpService.post({
                         type: type,
                         room: room }, 'equipment').subscribe(function (data) { return console.log(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
                 };

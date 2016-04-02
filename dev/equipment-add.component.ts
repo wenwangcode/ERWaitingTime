@@ -31,7 +31,7 @@ export class EquipmentAddComponent{
     }
     postEquipment(type,room){
         this.httpService.post(
-            {eid:this.next_id,
+            {
              type:type,
             room:room},
             'equipment'
