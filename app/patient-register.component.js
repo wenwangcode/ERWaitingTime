@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/router', "./http.service", "./patien
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_service_1, patient_1;
+    var core_1, router_1, http_service_1, patient_1, router_2;
     var PatientRegisterComponent;
     return {
         setters:[
@@ -22,6 +22,7 @@ System.register(['angular2/core', 'angular2/router', "./http.service", "./patien
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+                router_2 = router_1_1;
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
@@ -90,7 +91,8 @@ System.register(['angular2/core', 'angular2/router', "./http.service", "./patien
                     core_1.Component({
                         selector: 'patient-register',
                         templateUrl: 'templates/patient-register.component.html',
-                        providers: [http_service_1.HTTPService,],
+                        providers: [http_service_1.HTTPService, router_2.RouterLink],
+                        directives: [router_2.RouterLink],
                     }), 
                     __metadata('design:paramtypes', [http_service_1.HTTPService, router_1.Router])
                 ], PatientRegisterComponent);

@@ -4,11 +4,13 @@
 import {Component} from 'angular2/core';
 import {Staff} from './Staff';
 import {HTTPService} from './http.service';
+import {RouterLink} from "angular2/router";
 
 @Component({
     selector:'staff',
     templateUrl:'/templates/staff-regisiter.component.html',
-    providers:[HTTPService]
+    providers: [HTTPService,RouterLink],
+    directives: [RouterLink]
 })
 export class StaffRegisterComponent{
     staffs:Array<Staff>;
@@ -63,6 +65,7 @@ export class StaffRegisterComponent{
         let staff = new Staff(s_id,s_lname,s_fname,specialization,isDoctor,experience_in_years);
         this.staffs.push(staff);
     }
+
     parseStaffPreprocess(json){
         let staff_ids: number[] = [];
         let next_id: number = 0;

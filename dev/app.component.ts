@@ -5,6 +5,7 @@ import {isLoggedin} from "./is-loggedin";
 import {Authentication} from "./authentication";
 import {DashboardComponent} from "./dashboard.component";
 import {Login} from "./login";
+import {EquipmentAddComponent} from "./equipment-add.component";
 import {EquipmentComponent} from "./equipment.component";
 import {PatientComponent} from "./patient.component";
 import {VisitComponent} from "./visit.component";
@@ -16,6 +17,7 @@ import {ReportComponent} from "./report.component";
 import {ReportAddComponent} from "./report-add.component";
 import {PrescriptionComponent} from "./prescription.component";
 import {PrescriptionAddComponent} from "./prescription-add.component";
+import {VitalComponent} from "./vital.component";
 
 @Component({
     selector: 'my-app',
@@ -57,8 +59,13 @@ import {PrescriptionAddComponent} from "./prescription-add.component";
     },
     {
         path: '/equipment/list',
-        name: 'Equipment',
+        name: 'Equipments',
         component: EquipmentComponent,
+    },
+    {
+        path: '/equipment/add',
+        name: 'Add Equipment',
+        component: EquipmentAddComponent,
     },
     {
         path: '/staff',
@@ -74,6 +81,11 @@ import {PrescriptionAddComponent} from "./prescription-add.component";
         path: '/report/add',
         name: 'Add Report',
         component: ReportAddComponent,
+    },
+    {
+        path: '/vitals',
+        name: 'Vitals',
+        component: VitalComponent,
     },
     {
         path: '/prescription',

@@ -11,31 +11,6 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Patients<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a [routerLink]="['Patients']">List</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a [routerLink]="['Patient Registration']">Register</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a [routerLink]="['Report']">List</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a [routerLink]="['Add Report']">Register</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Equipment<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../views/visit.html">List</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="../views/visit.html">Add</a></li>
-                    </ul>
-                </li>
                 <li><a class="logout" href="#" (click)="onLogout()">Logout</a></li>
             </ul>
         </div>
@@ -64,18 +39,22 @@
                 <li><a [routerLink]="['Add Report']">Add Report</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a [routerLink]="['Staff']">List Staff</a></li>
+                <li><a [routerLink]="['Staff']">List Staffs</a></li>
                 <li><a [routerLink]="['Staff Registration']">Register Staff</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a [routerLink]="['Prescription']">List Prescription</a></li>
+                <li><a [routerLink]="['Prescription']">List Prescriptions</a></li>
                 <li><a [routerLink]="['Add Prescription']">Add Prescription</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a [routerLink]="['Vitals']">Vitals</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a [routerLink]="['Visit']">Visits</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a [routerLink]="['Equipment']">Equipment</a></li>
+                <li><a [routerLink]="['Equipments']">List Equipments</a></li>
+                <li><a [routerLink]="['Add Equipment']">Add Equipment</a></li>
             </ul>
         </div>
 

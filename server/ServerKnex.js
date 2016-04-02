@@ -6,7 +6,7 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
-         password : '19930821',
+         password : '639288',
          database : 'emergency'
     },
     pool:{
@@ -35,7 +35,7 @@ app.get('/report', function(req,res){getAllFromTable(req,res,'report');});
 app.get('/prescription',function(req,res){getAllFromTable(req,res,'prescription')});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
-app.post('/patientIds/register',function (req,res){postData(req,res,'patient')});
+app.post('/patients/register',function (req,res){postData(req,res,'patient')});
 app.post('/equipment',function(req,res){postData(req,res,'equipment')});
 app.post('/vital',function(req,res){postData(req,res,'vital')});
 app.post('/report',function(req,res){postData(req,res,'report')});

@@ -2,15 +2,17 @@
  * Created by joshua on 2016-03-31.
  */
 
-import {Component, OnInit} from 'angular2/core';
+import {Component OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {HTTPService} from "./http.service";
 import {Patient} from "./patient";
+import {RouterLink} from "angular2/router";
 
 @Component({
     selector: 'patient-register',
     templateUrl: 'templates/patient-register.component.html',
-    providers: [HTTPService,],
+    providers: [HTTPService,RouterLink],
+    directives: [RouterLink],
 
 })
 
