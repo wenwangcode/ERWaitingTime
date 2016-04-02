@@ -58,9 +58,6 @@ export class PatientRegisterComponent {
             err => alert(err),
             () => console.log("complete")
         );
-        let headers = new Headers();
-        console.log(headers.getAll());
-        this._router.navigate(['Dashboard']);
     }
 
     // assigns a unique new patient id (called the pid in the data model)

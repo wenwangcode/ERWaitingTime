@@ -12,7 +12,7 @@
         <tr *ngFor="#report of reports">
             <td> {{report.rid}} </td>
             <td> {{report.diagnosis}} </td>
-            <td> {{report.report_date}} </td>
+            <td> {{report.report_date.slice(0,10)}} </td>
             <td> {{report.vid}} </td>
             <td> {{report.pid}} </td>
         </tr>
