@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "./dashboard.component", "./login", "./equipment.component", "./patient.component", "./visit.component", "./patient-register.component"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "./dashboard.component", "./login", "./equipment.component", "./patient.component", "./visit.component", "./patient-register.component", "./staff.component", "./staff-register.component", "./report.component", "./report-add.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', "./dashboard.component", ".
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, dashboard_component_1, login_1, equipment_component_1, patient_component_1, visit_component_1, patient_register_component_1;
+    var core_1, router_1, dashboard_component_1, login_1, equipment_component_1, patient_component_1, visit_component_1, patient_register_component_1, staff_component_1, staff_register_component_1, report_component_1, report_add_component_1;
     var AppComponent;
     return {
         setters:[
@@ -37,6 +37,18 @@ System.register(['angular2/core', 'angular2/router', "./dashboard.component", ".
             },
             function (patient_register_component_1_1) {
                 patient_register_component_1 = patient_register_component_1_1;
+            },
+            function (staff_component_1_1) {
+                staff_component_1 = staff_component_1_1;
+            },
+            function (staff_register_component_1_1) {
+                staff_register_component_1 = staff_register_component_1_1;
+            },
+            function (report_component_1_1) {
+                report_component_1 = report_component_1_1;
+            },
+            function (report_add_component_1_1) {
+                report_add_component_1 = report_add_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -71,6 +83,11 @@ System.register(['angular2/core', 'angular2/router', "./dashboard.component", ".
                             component: patient_register_component_1.PatientRegisterComponent,
                         },
                         {
+                            path: '/staff/register',
+                            name: 'Staff Registration',
+                            component: staff_register_component_1.StaffRegisterComponent,
+                        },
+                        {
                             path: '/patients/visit',
                             name: 'Visit',
                             component: visit_component_1.VisitComponent,
@@ -79,6 +96,21 @@ System.register(['angular2/core', 'angular2/router', "./dashboard.component", ".
                             path: '/equipment/list',
                             name: 'Equipment',
                             component: equipment_component_1.EquipmentComponent,
+                        },
+                        {
+                            path: '/staff',
+                            name: 'Staff',
+                            component: staff_component_1.StaffComponent,
+                        },
+                        {
+                            path: '/report',
+                            name: 'Report',
+                            component: report_component_1.ReportComponent,
+                        },
+                        {
+                            path: '/report/add',
+                            name: 'Add Report',
+                            component: report_add_component_1.ReportAddComponent,
                         },
                     ]), 
                     __metadata('design:paramtypes', [])

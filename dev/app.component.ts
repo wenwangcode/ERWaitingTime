@@ -10,6 +10,10 @@ import {PatientComponent} from "./patient.component";
 import {VisitComponent} from "./visit.component";
 import {PatientRegisterComponent} from "./patient-register.component";
 import {routerOnActivate} from "angular2/src/router/lifecycle_annotations_impl";
+import {StaffComponent} from "./staff.component";
+import {StaffRegisterComponent} from "./staff-register.component";
+import {ReportComponent} from "./report.component";
+import {ReportAddComponent} from "./report-add.component";
 
 @Component({
     selector: 'my-app',
@@ -40,6 +44,11 @@ import {routerOnActivate} from "angular2/src/router/lifecycle_annotations_impl";
         component: PatientRegisterComponent,
     },
     {
+        path: '/staff/register',
+        name: 'Staff Registration',
+        component: StaffRegisterComponent,
+    },
+    {
         path: '/patients/visit',
         name: 'Visit',
         component: VisitComponent,
@@ -48,6 +57,21 @@ import {routerOnActivate} from "angular2/src/router/lifecycle_annotations_impl";
         path: '/equipment/list',
         name: 'Equipment',
         component: EquipmentComponent,
+    },
+    {
+        path: '/staff',
+        name: 'Staff',
+        component: StaffComponent,
+    },
+    {
+        path: '/report',
+        name: 'Report',
+        component: ReportComponent,
+    },
+    {
+        path: '/report/add',
+        name: 'Add Report',
+        component: ReportAddComponent,
     },
 ])
 

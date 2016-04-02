@@ -1,0 +1,22 @@
+<h1 class="page-header">Staff List</h1>
+
+<div ng-app="my-app">
+    <table id="table" class="table table-striped">
+        <tr>
+            <th> ID </th>
+            <th> Last Name </th>
+            <th> First Name </th>
+            <th> Specialization </th>
+            <th> IsDoctor?</th>
+            <th> Experience Years </th>
+        </tr>
+        <tr *ngFor="#staff of staffs">
+            <td> {{staff.s_id}} </td>
+            <td> {{staff.s_lname}} </td>
+            <td> {{staff.s_fname}} </td>
+            <td> {{staff.specialization}} </td>
+            <td> {{staff.isDoctor == '1' ? 'Doctor' : 'Nurse'}} </td>
+            <td> {{staff.experience_in_years}} </td>
+        </tr>
+    </table>
+    </div>

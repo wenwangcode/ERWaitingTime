@@ -31,7 +31,7 @@ app.get('/patient', function(req,res){getAllFromTable(req,res,'patient');});
 app.get('/staff', function(req,res){getAllFromTable(req,res,'staff');});
 app.get('/vital', function(req,res){getAllFromTable(req,res,'vital');});
 app.get('/visit', function(req,res){getAllFromTable(req,res,'visit');});
-app.get('/user', function(req,res){getAllFromTable(req,res,'user');});
+app.get('/report', function(req,res){getAllFromTable(req,res,'report');});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
 app.post('/equipment',function(req,res){postData(req,res,'equipment')});
@@ -40,7 +40,6 @@ app.post('/report',function(req,res){postData(req,res,'report')});
 app.post('/visit',function(req,res){postData(req,res,'visit')});
 app.post('/staff',function(req,res){postData(req,res,'staff')});
 app.post('/prescription',function(req,res){postData(req,res,'prescription')});
-app.post('/user',function(req,res){postData(req,res,'user')});
 /*
 function login (username, password, callback) {
 
