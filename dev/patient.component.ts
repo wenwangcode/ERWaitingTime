@@ -10,11 +10,11 @@ import {HTTPService} from './http.service';
     templateUrl: 'templates/patients.component.html',
     providers:[HTTPService]
 })
-export class PatientComponent{
-    
-    patients: Patient[] = [];
+export class PatientComponent {
 
-    constructor(private _httpService: HTTPService){
+    patients:Patient[] = [];
+
+    constructor(private _httpService:HTTPService) {
     }
 
     ngOnInit() {
@@ -25,8 +25,8 @@ export class PatientComponent{
         );
     }
 
-    parsePatient(json){
-        json.forEach( item => {
+    parsePatient(json) {
+        json.forEach(item => {
             this.addPatient(item.p_lname,
                 item.p_fname,
                 item.pid,
@@ -35,17 +35,17 @@ export class PatientComponent{
         })
     }
 
-    addPatient(p_lname: string, p_fname: string, pid:number, is_male:string, dob:Date){
-        let patient = new Patient(p_lname,p_fname,pid,is_male,dob);
+    addPatient(p_lname:string, p_fname:string, pid:number, is_male:string, dob:Date) {
+        let patient = new Patient(p_lname, p_fname, pid, is_male, dob);
         this.patients.push(patient);
     }
 
-    removePatient(patient:Patient){
+    removePatient(patient:Patient) {
         var index = this.patients.indexOf(patient);
-        this.patients.splice(index,1);
+        this.patients.splice(index, 1);
     }
 
-    postPatient(p_lname, p_fname, pid, is_male, dob){
+    postPatient(p_lname, p_fname, pid, is_male, dob) {
         this._httpService.post(
             {
                 p_lname: p_lname,
@@ -60,24 +60,4 @@ export class PatientComponent{
             () => console.log("complete")
         );
     }
-    deleteRow(tableID) {
-    try {
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-
-        for(var i=0; i<rowCount; i++) {
-            var row = table.rows[i];
-            var chkbox = row.cells[0].childNodes[0];
-            if(null != chkbox && true == chkbox.checked) {
-                table.deleteRow(i);
-                rowCount--;
-                i--;
-            }
-
-
-        }
-    }catch(e) {
-        alert(e);
-    }
-}
 }
