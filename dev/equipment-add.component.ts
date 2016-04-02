@@ -16,18 +16,17 @@ import {RouterLink} from "angular2/router";
 
 export class EquipmentAddComponent{
     equipments:Array<Equipment>;
-    nexte_id: number;
 
     constructor(private httpService: HTTPService){
-        this.preprocessEquipmentForm();
+        // this.preprocessEquipmentForm();
     }
 
     postEquipment(type,room){
-       var random = Math.floor((Math.random() * 10000) + 1);
         this.httpService.post(
-            {eid:random,
+            {
              type:type,
-            room:room},
+            room:room
+            },
             'equipment'
         ).subscribe(
             data => console.log(data),
@@ -55,26 +54,26 @@ export class EquipmentAddComponent{
         this.equipments.splice(index,1);
     }
 
-    preprocessEquipmentForm() {
-        this.httpService.getSQuery().subscribe(
-            data => this.parseEquipmentPreprocess(data),
-            err => alert(err),
-            () => console.log("GET patient data preprocessing complete")
-        );
-    }
+    // preprocessEquipmentForm() {
+    //     this.httpService.getSQuery().subscribe(
+    //         data => this.parseEquipmentPreprocess(data),
+    //         err => alert(err),
+    //         () => console.log("GET patient data preprocessing complete")
+    //     );
+    // }
 
-    parseEquipmentPreprocess(json){
-        let equipment_ids: number[] = [];
-        let next_id: number = 0;
-        json.forEach( item => {
-            equipment_ids.push(item.eid);
-        });
-        for (let i = 0; i < equipment_ids.length; i++) {
-            if (equipment_ids[i] > next_id) {
-                next_id = equipment_ids[i]
-            }
-        }
-        this.nexte_id = next_id + 1;
-    }
+    // parseEquipmentPreprocess(json){
+    //     let equipment_ids: number[] = [];
+    //     let next_id: number = 0;
+    //     json.forEach( item => {
+    //         equipment_ids.push(item.eid);
+    //     });
+    //     for (let i = 0; i < equipment_ids.length; i++) {
+    //         if (equipment_ids[i] > next_id) {
+    //             next_id = equipment_ids[i]
+    //         }
+    //     }
+    //     this.nexte_id = next_id + 1;
+    // }
 
 }

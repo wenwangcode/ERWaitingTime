@@ -6,7 +6,7 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
-         password : '639288',
+         password : 'thematrix',
          database : 'emergency'
     },
     pool:{
