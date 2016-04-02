@@ -25,12 +25,14 @@ System.register(['angular2/core', './visit', './http.service'], function(exports
             }],
         execute: function() {
             VisitComponent = (function () {
-                function VisitComponent(httpService) {
-                    var _this = this;
-                    this.httpService = httpService;
-                    this.visits = [];
-                    this.httpService.getQuery().subscribe(function (data) { return _this.parseVisit(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                function VisitComponent(_httpService) {
+                    this._httpService = _httpService;
                 }
+                VisitComponent.prototype.ngOnInit = function () {
+                    this.getVisits();
+                    this.getPatientIds();
+                    this.getStaffIds();
+                };
                 VisitComponent.prototype.parseVisit = function (json) {
                     var _this = this;
                     json.forEach(function (item) {
@@ -41,6 +43,33 @@ System.register(['angular2/core', './visit', './http.service'], function(exports
                     var visit = new visit_1.Visit(pid, sid, room, date);
                     this.visits.push(visit);
                 };
+                VisitComponent.prototype.postVisit = function (pid, sid, room, visit_date) {
+                    this._httpService.post({ pid: pid, sid: sid, room: room, visit_date: visit_date }, 'visit')
+                        .subscribe(function (data) { return console.log(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                };
+                VisitComponent.prototype.getVisits = function () {
+                    var _this = this;
+                    this.visits = [];
+                    this._httpService.getVQuery().subscribe(function (data) { return _this.parseVisit(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                };
+                VisitComponent.prototype.getPatientIds = function () {
+                    var _this = this;
+                    this.patientIds = [];
+                    this._httpService.getPQuery().subscribe(function (data) { return _this.parsePatientIds(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                };
+                VisitComponent.prototype.parsePatientIds = function (json) {
+                    var _this = this;
+                    json.forEach(function (item) { _this.patientIds.push(item.pid); });
+                };
+                VisitComponent.prototype.getStaffIds = function () {
+                    var _this = this;
+                    this.staffIds = [];
+                    this._httpService.getSQuery().subscribe(function (data) { return _this.parseStaffIds(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                };
+                VisitComponent.prototype.parseStaffIds = function (json) {
+                    var _this = this;
+                    json.forEach(function (item) { _this.staffIds.push(item.sid); });
+                };
                 VisitComponent.prototype.removeVisit = function (visit) {
                     var index = this.visits.indexOf(visit);
                     this.visits.splice(index, 1);
@@ -48,7 +77,7 @@ System.register(['angular2/core', './visit', './http.service'], function(exports
                 VisitComponent = __decorate([
                     core_1.Component({
                         selector: 'visit',
-                        template: "\n        <table>\n            <tr>\n                <th> patient_id </th>\n                <th> staff_id</th>\n                <th> room number</th>\n                <th> date of visit</th>\n            </tr>\n            <tr *ngFor=\"#visit of visits\"> \n                <td> {{visit.patient_id}} </td>\n                <td> {{visit.staff_id}} </td>\n                <td> {{visit.room}} </td>\n                <td> {{visit.date}} </td>\n            </tr>\n        </table>\n        \n        <br/><br/>\n        <input type=\"number\" min=\"5000\" max=\"10000\" #pid>\n        <input type=\"number\" min=\"0000\" max=\"4999\" #sid>\n        <input type=\"number\" min=\"0000\" max=\"10000\" #room>\n        <input type=\"Date\" #date>\n        <input type=\"submit\" (click)=\"\n            addVisit(pid.value, sid.value, room.value, date.value)\">\n            \n",
+                        templateUrl: 'templates/visit.component.html',
                         providers: [http_service_1.HTTPService]
                     }), 
                     __metadata('design:paramtypes', [http_service_1.HTTPService])
