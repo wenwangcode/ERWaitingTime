@@ -14,6 +14,8 @@ import {StaffComponent} from "./staff.component";
 import {StaffRegisterComponent} from "./staff-register.component";
 import {ReportComponent} from "./report.component";
 import {ReportAddComponent} from "./report-add.component";
+import {PrescriptionComponent} from "./prescription.component";
+import {PrescriptionAddComponent} from "./prescription-add.component";
 import {VitalComponent} from "./vital.component";
 
 @Component({
@@ -78,6 +80,16 @@ import {VitalComponent} from "./vital.component";
         path: '/vitals',
         name: 'Vitals',
         component: VitalComponent,
+    },
+    {
+        path: '/prescription',
+        name: 'Prescription',
+        component: PrescriptionComponent,
+    },
+    {
+        path: '/prescription/add',
+        name: 'Add Prescription',
+        component: PrescriptionAddComponent,
     },
 ])
 

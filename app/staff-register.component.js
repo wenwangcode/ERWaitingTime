@@ -26,19 +26,22 @@ System.register(['angular2/core', './Staff', './http.service'], function(exports
         execute: function() {
             StaffRegisterComponent = (function () {
                 function StaffRegisterComponent(httpService) {
-                    var _this = this;
                     this.httpService = httpService;
-                    this.staffs = [];
-                    this.httpService.getSQuery().subscribe(function (data) { return _this.parseStaff(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                    this.preprocessStaffForm();
                 }
-                StaffRegisterComponent.prototype.testSsPost = function (s_id, s_lname, s_fname, specialization, isDoctor, experience_in_years) {
-                    this.httpService.post({ sid: s_id,
+                StaffRegisterComponent.prototype.testSsPost = function (s_lname, s_fname, specialization, experience_in_years) {
+                    this.httpService.post({
+                        sid: this.nexts_id,
                         s_lname: s_lname,
                         s_fname: s_fname,
                         specialization: specialization,
-                        isDoctor: isDoctor,
+                        isDoctor: this.isD,
                         experience_in_years: experience_in_years
                     }, 'staff').subscribe(function (data) { return console.log(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                };
+                StaffRegisterComponent.prototype.preprocessStaffForm = function () {
+                    var _this = this;
+                    this.httpService.getSQuery().subscribe(function (data) { return _this.parseStaffPreprocess(data); }, function (err) { return alert(err); }, function () { return console.log("GET patient data preprocessing complete"); });
                 };
                 StaffRegisterComponent.prototype.parseStaff = function (json) {
                     var _this = this;
@@ -49,6 +52,19 @@ System.register(['angular2/core', './Staff', './http.service'], function(exports
                 StaffRegisterComponent.prototype.addStaff = function (s_id, s_lname, s_fname, specialization, isDoctor, experience_in_years) {
                     var staff = new Staff_1.Staff(s_id, s_lname, s_fname, specialization, isDoctor, experience_in_years);
                     this.staffs.push(staff);
+                };
+                StaffRegisterComponent.prototype.parseStaffPreprocess = function (json) {
+                    var staff_ids = [];
+                    var next_id = 0;
+                    json.forEach(function (item) {
+                        staff_ids.push(item.sid);
+                    });
+                    for (var i = 0; i < staff_ids.length; i += 1) {
+                        if (staff_ids[i] > next_id)
+                            next_id = staff_ids[i];
+                    }
+                    console.log(next_id + 1);
+                    this.nexts_id = next_id + 1;
                 };
                 StaffRegisterComponent.prototype.removeStaff = function (staff) {
                     var index = this.staffs.indexOf(staff);

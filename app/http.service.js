@@ -45,6 +45,9 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map', 'rxj
                 HTTPService.prototype.getVIQuery = function () {
                     return this.http.get("http://localhost:3002/vital").map(function (res) { return res.json(); });
                 };
+                HTTPService.prototype.getPRQuery = function () {
+                    return this.http.get("http://localhost:3002/prescription").map(function (res) { return res.json(); });
+                };
                 HTTPService.prototype.post = function (jstring, table) {
                     var json = JSON.stringify(jstring);
                     var key = "json=";

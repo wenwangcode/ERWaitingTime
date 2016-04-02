@@ -32,6 +32,7 @@ app.get('/staff', function(req,res){getAllFromTable(req,res,'staff');});
 app.get('/vital', function(req,res){getAllFromTable(req,res,'vital');});
 app.get('/visit', function(req,res){getAllFromTable(req,res,'visit');});
 app.get('/report', function(req,res){getAllFromTable(req,res,'report');});
+app.get('/prescription',function(req,res){getAllFromTable(req,res,'prescription')});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
 app.post('/patients/register',function (req,res){postData(req,res,'patient')});
