@@ -18,18 +18,20 @@ import {RouterLink} from "angular2/router";
 @CanActivate(() => isLoggedin())
 export class EquipmentAddComponent{
     equipments:Array<Equipment>;
+    next_id: number;
 
     constructor(private httpService: HTTPService){
-        this.equipments = [];
-        this.httpService.getEQuery().subscribe(
-            data => this.parseEquipment(data),
-            err => alert(err),
-            () => console.log("complete")
-        );
+        this.preprocessEquipmentForm();
+        //this.equipments = [];
+        //this.httpService.getEQuery().subscribe(
+        //    data => this.parseEquipment(data),
+        //    err => alert(err),
+        //    () => console.log("complete")
+        //);
     }
-    postEquipment(eid,type,room){
+    postEquipment(type,room){
         this.httpService.post(
-            {eid:eid,
+            {eid:this.next_id,
              type:type,
             room:room},
             'equipment'
@@ -59,4 +61,24 @@ export class EquipmentAddComponent{
         this.equipments.splice(index,1);
     }
 
+    preprocessEquipmentForm() {
+        this.httpService.getSQuery().subscribe(
+            data => this.parseEquipmentPreprocess(data),
+            err => alert(err),
+            () => console.log("GET patient data preprocessing complete")
+        );
+    }
+
+    parseEquipmentPreprocess(json){
+        let equipment_ids: number[] = [];
+        let next_id: number = 0;
+        json.forEach( item => {
+            equipment_ids.push(item.eid);
+        });
+        for (let i = 0; i < equipment_ids.length; i += 1) {
+            if (equipment_ids[i] > next_id) next_id = equipment_ids[i]
+        }
+        console.log(next_id + 1);
+        this.next_id = next_id + 1;
+    }
 }

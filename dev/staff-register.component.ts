@@ -65,6 +65,7 @@ export class StaffRegisterComponent{
         let staff = new Staff(s_id,s_lname,s_fname,specialization,isDoctor,experience_in_years);
         this.staffs.push(staff);
     }
+
     parseStaffPreprocess(json){
         let staff_ids: number[] = [];
         let next_id: number = 0;
