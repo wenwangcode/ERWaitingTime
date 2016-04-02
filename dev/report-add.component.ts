@@ -5,11 +5,13 @@ import {Component, OnInit} from 'angular2/core';
 import {Patient} from './Patient';
 import {HTTPService} from './http.service';
 import {Report} from "./report";
+import {RouterLink} from "angular2/router";
 
 @Component({
     selector:'report',
     templateUrl: 'templates/report.component.html',
-    providers:[HTTPService]
+    providers: [HTTPService,RouterLink],
+    directives: [RouterLink],
 })
 export class ReportAddComponent{
 

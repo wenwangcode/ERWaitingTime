@@ -224,7 +224,7 @@
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 
-			<button (click)="postPatient(p_lname.value, p_fname.value, year.value, month.value, day.value)" class="btn btn-primary"> Submit </button>
+			<a [routerLink]="['Patients']" (click)="postPatient(p_lname.value, p_fname.value, year.value, month.value, day.value)" class="btn btn-primary"> Submit </a>
 
 		</div>
 

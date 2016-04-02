@@ -44,7 +44,7 @@
             <input class="form-control" type="text" name="experience_in_years" id="experience_in_years" #experience_in_years>
         </div>
     </div>
-    <button (click)="testSsPost(s_lname.value,s_fname.value,specialization.value,experience_in_years.value)" class="btn btn-primary"> Submit </button>
+    <button a [routerLink]="['Staff']" (click)="testSsPost(s_lname.value,s_fname.value,specialization.value,experience_in_years.value)" class="btn btn-primary"> Submit </button>
 </form>
 
 <div ng-app="my-app">
