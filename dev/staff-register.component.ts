@@ -12,22 +12,20 @@ import {HTTPService} from './http.service';
 })
 export class StaffRegisterComponent{
     staffs:Array<Staff>;
+    nexts_id: number;
+    isD: number;
 
     constructor(private httpService: HTTPService){
-        this.staffs = [];
-        this.httpService.getSQuery().subscribe(
-            data => this.parseStaff(data),
-            err => alert(err),
-            () => console.log("complete")
-        );
+        this.preprocessStaffForm();
     }
-    testSsPost(s_id,s_lname,s_fname,specialization,isDoctor,experience_in_years){
+    testSsPost(s_lname,s_fname,specialization,experience_in_years){
         this.httpService.post(
-            {sid:s_id,
+            {
+                sid:this.nexts_id,
                 s_lname:s_lname,
                 s_fname:s_fname,
                 specialization:specialization,
-                isDoctor:isDoctor,
+                isDoctor:this.isD,
                 experience_in_years:experience_in_years
             },
             'staff'
@@ -35,6 +33,13 @@ export class StaffRegisterComponent{
             data => console.log(data),
             err => alert(err),
             () => console.log("complete")
+        );
+    }
+    preprocessStaffForm() {
+        this.httpService.getSQuery().subscribe(
+            data => this.parseStaffPreprocess(data),
+            err => alert(err),
+            () => console.log("GET patient data preprocessing complete")
         );
     }
 
@@ -57,6 +62,18 @@ export class StaffRegisterComponent{
              experience_in_years: number){
         let staff = new Staff(s_id,s_lname,s_fname,specialization,isDoctor,experience_in_years);
         this.staffs.push(staff);
+    }
+    parseStaffPreprocess(json){
+        let staff_ids: number[] = [];
+        let next_id: number = 0;
+        json.forEach( item => {
+            staff_ids.push(item.sid);
+        });
+        for (let i = 0; i < staff_ids.length; i += 1) {
+            if (staff_ids[i] > next_id) next_id = staff_ids[i]
+        }
+        console.log(next_id + 1);
+        this.nexts_id = next_id + 1;
     }
 
 

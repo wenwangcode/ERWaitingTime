@@ -25,6 +25,9 @@ export class HTTPService{
 	getVIQuery(){
 		return this.http.get("http://localhost:3002/vital").map(res => res.json());
 	}
+	getPRQuery(){
+		return this.http.get("http://localhost:3002/prescription").map(res => res.json());
+	}
 
 	post(jstring,table){
 		var json = JSON.stringify(jstring);

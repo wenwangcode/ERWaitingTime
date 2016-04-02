@@ -1,0 +1,15 @@
+<h1 class="page-header">Prescription List</h1>
+
+<div ng-app="my-app">
+    <table id="table" class="table table-striped">
+        <tr>
+            <th> Prescription Name </th>
+            <th> Amount </th>
+            <th> Report ID </th>
+        </tr>
+        <tr *ngFor="#prescription of prescriptions">
+            <td> {{prescription.pname}} </td>
+            <td> {{prescription.amount}} </td>
+            <td> {{prescription.rid}} </td>
+    </table>
+</div>
