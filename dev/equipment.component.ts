@@ -10,39 +10,6 @@ import {CanActivate} from "angular2/router";
 @Component({
     selector:'equipment',
     templateUrl: 'templates/equipment.component.html',
-//     template: `
-// <html>
-// <body>
-// <div align="left" style="margin-top: 100px" class="container">
-//     <h1>Please register the equipment info below.</h1>
-//
-//     <div class="form-group">
-//          <div class="container" ng-app="my-app">
-//         Equipment ID: <input type="number" class="form-control" #eid>
-//         Equipment Type: <input type="text"  class="form-control" #type>
-//         Equipment Room: <input type="number" class="form-control" #room>
-//
-//         <table  class="table table-striped">
-//             <tr>
-//                 <th> equipment_id </th>
-//                 <th> equipment_type</th>
-//                 <th> room number</th>
-//             </tr>
-//             <tr *ngFor="#equipment of equipments">
-//                 <td> {{equipment.eid}} </td>
-//                 <td> {{equipment.type}} </td>
-//                 <td> {{equipment.room}} </td>
-//             </tr>
-//         </table>
-//
-//         <br/><br/>
-//
-//             <button (click)="testPost(eid.value, type.value, room.value)" class="btn btn-primary"> Submit </button>
-//     </div>
-//     </div>
-//     </div>
-//
-// `,
     providers:[HTTPService]
 })
 
