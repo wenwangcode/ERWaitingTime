@@ -1,4 +1,5 @@
 <h1 class="page-header">Patient List</h1>
+
 <table class="table table-striped" id="patient-list">
 	<tr>
 		<th>Last Name</th>
@@ -6,6 +7,7 @@
 		<th>Sex</th>
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
+		<th>Select</th>
 	</tr>
 	<tr *ngFor="#patient of patients">
 		<td>{{patient.p_lname}}</td>
@@ -13,5 +15,7 @@
 		<td>{{patient.is_male.data == '1' ? 'Male' : 'Female'}}</td>
 		<td>{{patient.dob.slice(0,10)}}</td>
 		<td>{{patient.pid}}</td>
+		<td><INPUT type="checkbox" name="chk"/></td>
 	</tr>
 </table>
+<INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
