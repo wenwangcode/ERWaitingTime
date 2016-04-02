@@ -22,6 +22,9 @@ export class HTTPService{
 	getRQuery(){
 		return this.http.get("http://localhost:3002/report").map(res => res.json());
 	}
+	getVIQuery(){
+		return this.http.get("http://localhost:3002/vital").map(res => res.json());
+	}
 
 	post(jstring,table){
 		var json = JSON.stringify(jstring);
