@@ -12,13 +12,14 @@ import {Patient} from "./patient";
     selector: 'patient-register',
     templateUrl: 'templates/patient-register.component.html',
     providers: [HTTPService,],
-    
+
 })
 
 export class PatientRegisterComponent {
-    
-    patients: Patient[] = [];
+
+    patients:Array<Patient>;
     next_id: number;
+
     sex: number;
     
     constructor(
@@ -40,12 +41,15 @@ export class PatientRegisterComponent {
 
     postPatient(p_lname: string, p_fname: string, year: string, month: string, day: string){
         let dob = year + '-' + month + '-' + day;
+
         this._httpService.post(
             {
                 p_lname: p_lname,
                 p_fname: p_fname,
                 pid: this.next_id,
+
                 is_male: this.sex,
+
                 dob: dob
             },
             'patient'

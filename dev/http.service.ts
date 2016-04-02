@@ -19,8 +19,8 @@ export class HTTPService{
 	getSQuery(){
 		return this.http.get("http://localhost:3002/staff").map(res => res.json());
 	}
-	getUQuery(){
-		return this.http.get("http://localhost:3002/user").map(res => res.json());
+	getRQuery(){
+		return this.http.get("http://localhost:3002/report").map(res => res.json());
 	}
 
 	post(jstring,table){

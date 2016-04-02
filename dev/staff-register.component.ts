@@ -1,5 +1,5 @@
 /**
- * Created by Joy on 2016-03-28.
+ * Created by Joy on 2016-04-01.
  */
 import {Component} from 'angular2/core';
 import {Staff} from './Staff';
@@ -7,10 +7,10 @@ import {HTTPService} from './http.service';
 
 @Component({
     selector:'staff',
-    templateUrl:'/templates/staff.html',
+    templateUrl:'/templates/staff-regisiter.component.html',
     providers:[HTTPService]
 })
-export class StaffComponent{
+export class StaffRegisterComponent{
     staffs:Array<Staff>;
 
     constructor(private httpService: HTTPService){
@@ -29,7 +29,7 @@ export class StaffComponent{
                 specialization:specialization,
                 isDoctor:isDoctor,
                 experience_in_years:experience_in_years
-                },
+            },
             'staff'
         ).subscribe(
             data => console.log(data),

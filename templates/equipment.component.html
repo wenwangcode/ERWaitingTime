@@ -19,37 +19,9 @@
 			<input class="form-control" type="text" name="room-number" id="room-number" #room>
 		</div>
 	</div>
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<button type="button" class="btn btn-primary" (click)="addEquipments(eid.value, type.value, room.value)" onclick="addRow()" id="add">Add Equipment +</button>
-		</div>
-	</div>
 	<button (click)="testPost(eid.value, type.value, room.value)" class="btn btn-primary"> Submit </button>
 </form>
 
-<script>
-	function addRow() {
-		"use strict";
-
-		var table = document.getElementById("table");
-
-		var row= document.createElement("tr");
-		console.log(row);
-		var td1 = document.createElement("td");
-		var td2 = document.createElement("td");
-		var td3 = document.createElement("td");
-
-		td1.innerHTML = document.getElementById("equipment-id").value;
-		td2.innerHTML  = document.getElementById("equipment-type").value;
-		td3.innerHTML  = document.getElementById("room-number").value;
-
-		row.appendChild(td1);
-		row.appendChild(td2);
-		row.appendChild(td3);
-
-		table.children[0].appendChild(row);
-	};
-</script>
 
 <div ng-app="my-app">
 	<table id="table" class="table table-striped">

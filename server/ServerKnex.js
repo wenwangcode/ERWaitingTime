@@ -6,7 +6,7 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
-         password : 'thematrix',
+         password : '19930821',
          database : 'emergency'
     },
     pool:{
@@ -31,7 +31,7 @@ app.get('/patient', function(req,res){getAllFromTable(req,res,'patient');});
 app.get('/staff', function(req,res){getAllFromTable(req,res,'staff');});
 app.get('/vital', function(req,res){getAllFromTable(req,res,'vital');});
 app.get('/visit', function(req,res){getAllFromTable(req,res,'visit');});
-app.get('/user', function(req,res){getAllFromTable(req,res,'user');});
+app.get('/report', function(req,res){getAllFromTable(req,res,'report');});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
 app.post('/patientIds/register',function (req,res){postData(req,res,'patient')});
@@ -41,8 +41,7 @@ app.post('/report',function(req,res){postData(req,res,'report')});
 app.post('/visit',function(req,res){postData(req,res,'visit')});
 app.post('/staff',function(req,res){postData(req,res,'staff')});
 app.post('/prescription',function(req,res){postData(req,res,'prescription')});
-app.post('/user',function(req,res){postData(req,res,'user')});
-
+/*
 function login (username, password, callback) {
 
     var query = "SELECT username, password " +
@@ -64,11 +63,22 @@ function login (username, password, callback) {
     });
 
 }
-
+*/
 
 function getAllFromTable(req,res,table){
 	knex.select().from(table).catch(this.errorHandler).then(rows => res.send(rows));
 }
+/*
+function deleteFromTable(req,res,table){
+    knex(table)
+        .where('activated', false)
+        .del()
+}
+
+function updateTable(req,res,table){
+
+}
+*/
 
 function postData(req,res,table){
     console.log(req.body.json);

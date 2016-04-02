@@ -4,6 +4,8 @@
 import {Component} from 'angular2/core';
 import {Equipment} from './Equipment';
 import {HTTPService} from './http.service';
+import {isLoggedin} from "./is-loggedin";
+import {CanActivate} from "angular2/router";
 
 @Component({
     selector:'equipment',
@@ -43,6 +45,8 @@ import {HTTPService} from './http.service';
 // `,
     providers:[HTTPService]
 })
+
+@CanActivate(() => isLoggedin())
 export class EquipmentComponent{
     equipments:Array<Equipment>;
 

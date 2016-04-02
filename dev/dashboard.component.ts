@@ -3,18 +3,17 @@
  */
 import {Component} from 'angular2/core';
 import {Router, CanActivate, RouteConfig, ROUTER_DIRECTIVES, RouterOutlet, RouterLink} from 'angular2/router';
-import {EquipmentComponent} from "./equipment.component";
-import {PatientComponent} from "./patient.component";
-import {VisitComponent} from "./visit.component";
 import {isLoggedin} from "./is-loggedin";
 import {Authentication} from "./authentication";
 
 @Component({
     selector: 'dashboard',
     templateUrl: 'templates/dashboard.html',
-    directives: [RouterLink],
+    directives: [RouterLink, ROUTER_DIRECTIVES],
 })
 
+
+@CanActivate(() => isLoggedin())
 export class DashboardComponent {
     constructor(public auth: Authentication, public router: Router) {}
 

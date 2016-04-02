@@ -1,0 +1,20 @@
+<h1 class="page-header">Report List</h1>
+
+<div ng-app="my-app">
+    <table id="table" class="table table-striped">
+        <tr>
+            <th> ID </th>
+            <th> Diagnosis </th>
+            <th> Report Date </th>
+            <th> Vital ID </th>
+            <th> Patient ID </th>
+        </tr>
+        <tr *ngFor="#report of reports">
+            <td> {{report.rid}} </td>
+            <td> {{report.diagnosis}} </td>
+            <td> {{report.report_date}} </td>
+            <td> {{report.vid}} </td>
+            <td> {{report.pid}} </td>
+        </tr>
+    </table>
+</div>
