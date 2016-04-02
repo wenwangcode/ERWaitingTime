@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/router', "./is-loggedin", "./authent
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, router_1, is_loggedin_1, authentication_1;
-    var Home;
+    var DashboardComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -27,28 +27,28 @@ System.register(['angular2/core', 'angular2/router', "./is-loggedin", "./authent
                 authentication_1 = authentication_1_1;
             }],
         execute: function() {
-            Home = (function () {
-                function Home(auth, router) {
+            DashboardComponent = (function () {
+                function DashboardComponent(auth, router) {
                     this.auth = auth;
                     this.router = router;
                 }
-                Home.prototype.onLogout = function () {
+                DashboardComponent.prototype.onLogout = function () {
                     var _this = this;
                     this.auth.logout()
                         .subscribe(function () { return _this.router.navigate(['../Login']); });
                 };
-                Home = __decorate([
+                DashboardComponent = __decorate([
                     core_1.Component({
                         selector: 'home',
                         directives: [],
-                        template: "\n        <html>\n<head>\n    <title>Dashboard</title>\n    <link href=\"//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css\" rel=\"stylesheet\"/>\n</head>\n<body>\n<nav class=\"navbar navbar-inverse navbar-fixed-top\">\n    <div class=\"container\">\n        <a class=\"navbar-brand\" href=\"../home\">ERWaitingTime</a>\n        <div class=\"container\" align=\"right\">\n        <button a href=\"#\" class=\"btn btn-link\" (click)=\"onLogout()\">Logout</button>\n            </div>\n\n    </div>\n</nav>\n<br>\n<br>\n<br>\n<div align=\"center\">\n    <h2>Welcome, you are successfully logged in.</h2>\n</div>\n    <a href=\"../views/patients.component.html\" class=\"btn btn-link\" align=\"right\">Equipment Register</a>\n    <a href=\"../views/patients.component.html\" class=\"btn btn-link\" align=\"right\">View Patients</a><br>\n    <a href=\"../views/visit.html\" class=\"btn btn-link\" align=\"right\">Visit Page</a><br>\n    <a href=\"../views/visit.html\" class=\"btn btn-link\" align=\"right\">View Patients</a><br>\n\n\n</body>\n</html>\n            \n",
+                        template: "\n        <html>\n<head>\n    <title>Dashboard</title>\n    <link href=\"//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css\" rel=\"stylesheet\"/>\n</head>\n<body>\n<nav class=\"navbar navbar-inverse navbar-fixed-top\">\n    <div class=\"container\">\n        <a class=\"navbar-brand\" href=\"../home\">ERWaitingTime</a>\n        <div class=\"container\" align=\"right\">\n        <button a href=\"#\" class=\"btn btn-link\" (click)=\"onLogout()\">Logout</button>\n            </div>\n\n    </div>\n</nav>\n<br>\n<br>\n<br>\n<div align=\"center\">\n    <h2>Welcome, you are successfully logged in.</h2>\n</div>\n    <a href=\"../views/patientIds.component.html\" class=\"btn btn-link\" align=\"right\">Equipment Register</a>\n    <a href=\"../views/patientIds.component.html\" class=\"btn btn-link\" align=\"right\">View Patients</a><br>\n    <a href=\"../views/visit.html\" class=\"btn btn-link\" align=\"right\">Visit Page</a><br>\n    <a href=\"../views/visit.html\" class=\"btn btn-link\" align=\"right\">View Patients</a><br>\n\n\n</body>\n</html>\n            \n",
                     }),
                     router_1.CanActivate(function () { return is_loggedin_1.isLoggedin(); }), 
                     __metadata('design:paramtypes', [authentication_1.Authentication, router_1.Router])
-                ], Home);
-                return Home;
+                ], DashboardComponent);
+                return DashboardComponent;
             }());
-            exports_1("Home", Home);
+            exports_1("DashboardComponent", DashboardComponent);
         }
     }
 });

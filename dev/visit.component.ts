@@ -44,7 +44,7 @@ export class VisitComponent{
             .subscribe(
                 data => console.log(data),
                 err => alert(err),
-                () => this.getVisits()
+                () => console.log("complete")
             );
 
     }

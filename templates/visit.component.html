@@ -21,7 +21,7 @@
 		<label for="date">Date</label>
 		<input type="date" class="form-control" id="date" placeholder="yyyy-mm-dd" #date>
 	</div>
-	<input type="submit" class="btn btn-primary" (click)="postVisit(pid.value, sid.value, room.value, date.value)">
+	<input type="submit" class="btn btn-primary" (click)="postVisit(pid.value, sid.value, room.value, date.value); getVisits()">
 </form>
 
 <table class="table table-striped">
