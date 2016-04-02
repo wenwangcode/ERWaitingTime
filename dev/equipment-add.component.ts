@@ -23,8 +23,9 @@ export class EquipmentAddComponent{
     }
 
     postEquipment(type,room){
+       var random = Math.floor((Math.random() * 10000) + 1);
         this.httpService.post(
-            {eid:this.nexte_id,
+            {eid:random,
              type:type,
             room:room},
             'equipment'
