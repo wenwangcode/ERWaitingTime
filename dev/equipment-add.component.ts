@@ -15,23 +15,17 @@ import {RouterLink} from "angular2/router";
     directives: [RouterLink],
 })
 
-@CanActivate(() => isLoggedin())
 export class EquipmentAddComponent{
     equipments:Array<Equipment>;
-    next_id: number;
+    nexte_id: number;
 
     constructor(private httpService: HTTPService){
         this.preprocessEquipmentForm();
-        //this.equipments = [];
-        //this.httpService.getEQuery().subscribe(
-        //    data => this.parseEquipment(data),
-        //    err => alert(err),
-        //    () => console.log("complete")
-        //);
     }
+
     postEquipment(type,room){
         this.httpService.post(
-            {eid:this.next_id,
+            {eid:this.nexte_id,
              type:type,
             room:room},
             'equipment'
@@ -75,10 +69,12 @@ export class EquipmentAddComponent{
         json.forEach( item => {
             equipment_ids.push(item.eid);
         });
-        for (let i = 0; i < equipment_ids.length; i += 1) {
-            if (equipment_ids[i] > next_id) next_id = equipment_ids[i]
+        for (let i = 0; i < equipment_ids.length; i++) {
+            if (equipment_ids[i] > next_id) {
+                next_id = equipment_ids[i]
+            }
         }
-        console.log(next_id + 1);
-        this.next_id = next_id + 1;
+        this.nexte_id = next_id + 1;
     }
+
 }
