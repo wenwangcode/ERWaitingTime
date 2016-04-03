@@ -4,6 +4,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {Vital} from "./vital";
 import {HTTPService} from "./http.service";
+import {Vital_Patient_Max} from "./vital_patient_max";
 
 @Component({
     selector: 'vitals',
@@ -15,12 +16,14 @@ export class VitalComponent {
 
     vitals: Vital[];
     next_vid: number;
+    vp_maxs: Vital_Patient_Max[] = [];
 
     constructor(private _httpService: HTTPService) {}
 
     ngOnInit() {
         this.getVitals();
         this.generateNextId();
+        this.getMax();
     }
 
     postVitals(oxygen_saturation, temperature, blood_pressure, pulse, respiration){
@@ -99,5 +102,37 @@ export class VitalComponent {
     ) {
         let vital = new Vital(oxygen_saturation, temperature, blood_pressure, pulse, respiration, vid);
         this.vitals.push(vital);
+    }
+
+    /*
+    ** handle max blood_pressure
+     */
+
+    addVP(pid: number, blood_pressure: number){
+        let vp_max = new Vital_Patient_Max(pid, blood_pressure);
+        console.log("vp_max's pid " + vp_max.pid);
+        console.log("vp_max's blood_pressure " + vp_max.blood_pressure);
+        if (this.vp_maxs.length==0){
+            this.vp_maxs.push(vp_max);
+        }
+        else {
+            if (vp_max.blood_pressure == this.vp_maxs[0].blood_pressure){
+                this.vp_maxs.push(vp_max);
+            }
+        }
+    }
+
+    parseMax(json) {
+        json.forEach(item => {
+            this.addVP(item.pid, item.blood_pressure);
+        });
+    }
+
+    getMax(){
+        return this._httpService.getMaxVital().subscribe(
+            data => this.parseMax(data),
+            err => alert(err),
+            () => console.log("complete max vital")
+        )
     }
 }

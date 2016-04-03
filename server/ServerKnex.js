@@ -44,7 +44,7 @@ app.post('/report',function(req,res){postData(req,res,'report')});
 app.post('/visit',function(req,res){postData(req,res,'visit')});
 app.post('/staff',function(req,res){postData(req,res,'staff')});
 app.post('/prescription',function(req,res){postData(req,res,'prescription')});
-
+app.post('/patient/update/:pid',function(req,res){updatePatient(req,res)});
 var selectAllTablesOptions = ['equipment','patient','visit'];
 var postTablesOptions = ['patient', 'equipment', 'vital', 'report', 'visit', 'staff',
     'prescription'];
@@ -91,7 +91,7 @@ function postData(req,res,table){
     var post = JSON.parse(req.body.json);
     knex(table).insert(post)
         .catch(this.errorHandler)
-        .return({success:true});
+        .then(res.send(JSON.stringify({success:true})));
 }
 
 
@@ -138,13 +138,21 @@ function utilizeAllEquipment(req,res,eids){
 
 
 function maxPressure(req,res) {
-    knex("vital")
+    knex('vital')
         .innerJoin('report', 'vital.vid', 'report.vid')
         .orderBy('blood_pressure', 'desc')
         .select('report.pid', 'vital.blood_pressure')
         .catch(this.errorHandler)
-        .then(rows = > res.send(rows))
+        .then(rows => res.send(rows))
 }
+
+function updatePatient(req,res){
+    knex('patient')
+        .where('pid', req.params.pid)
+        .update(JSON.parse(req.params.json))
+        .catch(this.errorHandler)
+        .then(res.send(JSON.stringify({status: 'success'})));
+    }
 
 function errorHandler(error){
     console.error(error);

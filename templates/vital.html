@@ -1,4 +1,19 @@
 <h1 class="page-header">Vital List</h1>
+<div>ER Waiting patient in Danger</div>
+<table class="table">
+    <tr>
+        <th>Patient ID</th>
+        <th>Highest Blood Pressure</th>
+    </tr>
+    <tr *ngFor="#vp_max of vp_maxs">
+        <td>{{vp_max.pid}}</td>
+        <td>{{vp_max.blood_pressure}}</td>
+    </tr>
+</table>
+
+<button (click)="getMax()" class="btn btn-primary">Show Max</button>
+
+
 <table class="table table-striped" id="patient-list">
     <tr>
         <th>Vital ID</th>
