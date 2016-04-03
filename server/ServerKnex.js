@@ -6,7 +6,7 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
-         password : 'thematrix',
+         password : '639288',
          database : 'emergency'
     },
     pool:{
@@ -15,10 +15,11 @@ var knex = require('knex')({
     }
 });
 var app = express();
+var inp = 232;
 
 app.use(function(req,res,next){
     res.header('Access-Control-Allow-Origin', "*");
-    res.header('Access-Control-Allow-Methods', 'GET, POST');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
@@ -33,6 +34,7 @@ app.get('/vital', function(req,res){getAllFromTable(req,res,'vital');});
 app.get('/visit', function(req,res){getAllFromTable(req,res,'visit');});
 app.get('/report', function(req,res){getAllFromTable(req,res,'report');});
 app.get('/prescription',function(req,res){getAllFromTable(req,res,'prescription')});
+app.get('/vital/max', function(req,res){maxPressure(req,res)});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
 app.post('/patients/register',function (req,res){postData(req,res,'patient')});
@@ -42,44 +44,47 @@ app.post('/report',function(req,res){postData(req,res,'report')});
 app.post('/visit',function(req,res){postData(req,res,'visit')});
 app.post('/staff',function(req,res){postData(req,res,'staff')});
 app.post('/prescription',function(req,res){postData(req,res,'prescription')});
-/*
-function login (username, password, callback) {
 
-    var query = "SELECT username, password " +
-        "FROM user WHERE username = ?";
+var selectAllTablesOptions = ['equipment','patient','visit'];
+var postTablesOptions = ['patient', 'equipment', 'vital', 'report', 'visit', 'staff',
+    'prescription'];
 
-    connection.query(query, [username], function (err, results) {
-        if (err) return callback(err);
-        if (results.length === 0) return callback();
-        var user = results[0];
+// Join Visit and Patient table
+app.get('/patient_visit', function(req,res){visit_patient(req,res)})
 
-        if (!bcrypt.compareSync(password, user.password)) {
-            return true;
-        }
+// Join Visit and Report table
+app.get('/patient_report', function(req,res){patient_report(req,res)})
 
-        callback(null,   {
-            username:    user.username.toString()
-        });
+// Select experienced staff
+app.get('/staff/:year', function(req,res){selectExperiencedStaff(req,res,req.params.year)});
 
-    });
+// Get All from table
+app.get('/:table', function(req,res){processQuery(req,res, selectAllTablesOptions, getAllFromTable)});
 
+// Post to table
+app.post('/:table', function(req,res){processQuery(req,res,postTablesOptions, postData)});
+
+// Utilize all equipment
+app.get('/utilize_equip/:eidList', function(req,res){
+    var eids = req.params.eidList.split(',');
+    utilizeAllEquipment(req,res, eids);
+});
+
+// Delete patient based on pid
+app.get('/patient/delete/:id', function(req,res){deleteFromPatient(req,res)});
+
+function processQuery(req,res,options,handler){
+    if((options.indexOf(req.params.table)) > -1){
+        handler(req,res,req.params.table);
+    } else {
+        res.end(JSON.stringify({error: 'invalid table name'}));
+    }
 }
-*/
 
 function getAllFromTable(req,res,table){
 	knex.select().from(table).catch(this.errorHandler).then(rows => res.send(rows));
 }
-/*
-function deleteFromTable(req,res,table){
-    knex(table)
-        .where('activated', false)
-        .del()
-}
 
-function updateTable(req,res,table){
-
-}
-*/
 
 function postData(req,res,table){
     console.log(req.body.json);
@@ -88,9 +93,65 @@ function postData(req,res,table){
         .catch(this.errorHandler)
         .return({success:true});
 }
+
+
+function deleteFromPatient(req,res){
+    console.log(req.params.id);
+    knex('patient')
+        .where('pid',req.params.id)
+        .del()
+        .catch(this.errorHandler)
+        .then(res.send(JSON.stringify({success:true})));
+}
+
+function visit_patient(req,res){
+    knex.from('patient').innerJoin('visit', 'visit.pid', 'patient.pid')
+        .select()
+        .catch(this.errorHandler).then(rows => res.send(rows));
+}
+
+function patient_report(req,res){
+    knex.from('patient').innerJoin('report', 'report.pid', 'patient.pid')
+        .select()
+        .catch(this.errorHandler).then(rows => res.send(rows));
+}
+
+function selectExperiencedStaff(req,res,year){
+    if(year >= 30 && year <= 50){
+        knex('staff').where('experience_in_years','>',year).select('s_lname','s_fname').catch(this.errorHandler).then(rows => res.send(rows));
+    } else {
+        invalidCondition(res,'year must be between 30 and 50 inclusively');
+    }
+}
+
+
+
+function utilizeAllEquipment(req,res,eids){
+    knex('utilize')
+        .whereIn('eid', eids)
+        .groupBy('pid')
+        .havingRaw('count(*) = ?', eids.length)
+        .select('pid')
+        .catch(this.errorHandler)
+        .then(rows => res.send(rows))
+}
+
+
+function maxPressure(req,res) {
+    knex("vital")
+        .innerJoin('report', 'vital.vid', 'report.vid')
+        .orderBy('blood_pressure', 'desc')
+        .select('report.pid', 'vital.blood_pressure')
+        .catch(this.errorHandler)
+        .then(rows = > res.send(rows))
+}
+
 function errorHandler(error){
     console.error(error);
-    console.log(error);
+}
+
+function invalidCondition(res,msg){
+    res.send(JSON.stringify({error: msg}));
 }
 
 app.listen(3002);

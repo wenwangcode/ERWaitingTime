@@ -18,6 +18,7 @@ import {ReportAddComponent} from "./report-add.component";
 import {PrescriptionComponent} from "./prescription.component";
 import {PrescriptionAddComponent} from "./prescription-add.component";
 import {VitalComponent} from "./vital.component";
+import {VitalAddComponent} from "./vital-add.component";
 
 @Component({
     selector: 'my-app',
@@ -86,6 +87,11 @@ import {VitalComponent} from "./vital.component";
         path: '/vitals',
         name: 'Vitals',
         component: VitalComponent,
+    },
+    {
+        path: '/vital/add',
+        name: 'Add Vital',
+        component: VitalAddComponent,
     },
     {
         path: '/prescription',

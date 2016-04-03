@@ -58,6 +58,7 @@ export class VisitComponent{
         );
     }
 
+
     getPatientIds() {
         this.patientIds = [];
         this._httpService.getPQuery().subscribe(

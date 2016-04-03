@@ -7,37 +7,21 @@
 		<th>Sex</th>
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
-		<th>Select</th>
+		<th>Delete Row</th>
+		<th>Update Row</th>
 	</tr>
 	<tr *ngFor="#patient of patients">
-		<td>{{patient.p_lname}}</td>
-		<td>{{patient.p_fname}}</td>
-		<td>{{patient.is_male.data == '1' ? 'Male' : 'Female'}}</td>
-		<td>{{patient.dob.slice(0,10)}}</td>
+		<td contenteditable='true'>{{patient.p_lname}}</td>
+		<td contenteditable='true'>{{patient.p_fname}}</td>
+		<td contenteditable='true'>{{patient.is_male.data == '1' ? 'Male' : 'Female'}}</td>
+		<td contenteditable='true'>{{patient.dob.slice(0,10)}}</td>
 		<td>{{patient.pid}}</td>
-		<td><INPUT type="checkbox" name="chk"/></td>
+		<td><button (click)="deletePatient(patient.pid)" class="btn btn-danger">DELETE</button></td>
+		<td><button type="button" class="btn btn-success">UPDATE</button></td>
+
 	</tr>
 </table>
-<INPUT type="button" value="Delete Row" onclick="deleteRow('patient-list')" />
-<script>
-	function deleteRow(tableID) {
-		try {
-			var table = document.getElementById(tableID);
-			var rowCount = table.rows.length;
-
-			for(var i=0; i<rowCount; i++) {
-				var row = table.rows[i];
-				var chkbox = row.cells[0].childNodes[0];
-				if(null != chkbox && true == chkbox.checked) {
-					table.deleteRow(i);
-					rowCount--;
-					i--;
-				}
 
 
-			}
-		}catch(e) {
-			alert(e);
-		}
-	}
-</script>
+
+
