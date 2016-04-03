@@ -14,8 +14,8 @@
 		<td contenteditable='true'>{{patient.p_fname}}</td>
 		<td contenteditable='true'>{{patient.is_male.data == '1' ? 'Male' : 'Female'}}</td>
 		<td contenteditable='true'>{{patient.dob.slice(0,10)}}</td>
-		<td contenteditable='true'>{{patient.pid}}</td>
-		<td contenteditable='true'><INPUT type="button" value="Delete Row" onclick="deleteRow('patient-list')" /></td>
+		<td>{{patient.pid}}</td>
+		<td><INPUT type="button" value="Delete Row" onclick="deleteRow('patient-list')" /></td>
 	</tr>
 </table>
 
