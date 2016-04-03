@@ -21,7 +21,6 @@ export class PatientRegisterComponent {
 
     patients:Array<Patient>;
     next_id: number;
-
     sex: number;
     
     constructor(
@@ -43,7 +42,6 @@ export class PatientRegisterComponent {
 
     postPatient(p_lname: string, p_fname: string, year: string, month: string, day: string){
         let dob = year + '-' + month + '-' + day;
-
         this._httpService.post(
             {
                 pid: this.next_id,

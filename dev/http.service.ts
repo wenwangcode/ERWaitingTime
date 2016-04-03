@@ -54,15 +54,25 @@ export class HTTPService{
 	getMaxVital(){
 		return this.http.get('http://localhost:3002/vital/max').map(res => res.json());
 	}
-
+	updatePatient_http(input, pid){
+		var json = JSON.stringify(input);
+		var key = "json=";
+		var param = key + input;
+		console.log(input);
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		return this.http.post('http://localhost:3002/patient/update/'+ pid, param, {headers: headers})
+			.map(res=>res.json());
+	}
+	//Object {pid: 8, p_lname: "werwer", p_fname: "werwer", is_male: 1, dob: "2011-03-04"}
 
 	post(jstring,table){
+		console.log(jstring);
 		var json = JSON.stringify(jstring);
 		var key = "json=";
 		var param = key + json;
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		console.log("sending post request");
 		return this.http.post('http://localhost:3002/'+table, param, {headers: headers})
 			.map(res=>res.json());
 	}

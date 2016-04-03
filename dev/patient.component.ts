@@ -13,22 +13,19 @@ import {PatientReport} from "./patient_report";
     providers:[HTTPService]
 })
 export class PatientComponent {
-
     patients:Patient[] = [];
     patientvisits:PatientVisit[] = [];
     patientreports:PatientReport[] = [];
+    sex: number;
+    constructor(private _httpService:HTTPService) {}
 
-    constructor(private _httpService:HTTPService) {
-    }
     joinpvs(){
-        console.log("I am here!!!");
         this._httpService.joinpv()
             .subscribe(
                 data => this.parsepv(data),
                 err => alert(err),
                 () => console.log("complete")
             );
-        console.log("I am there!!!");
     }
     joinprs(){
         this._httpService.joinpr()
@@ -116,7 +113,24 @@ export class PatientComponent {
                 () => console.log("complete")
             )
     }
-
+  //  dob: "1996-02-26T08:00:00.000Z"
+    updatePatient_ts(p_lname: string, p_fname: string, dob:string, gender: string, pid: number){
+        //let dob = year + '-' + month + '-' + day;
+        this._httpService.updatePatient_http (
+            {
+                pid: pid,
+                p_lname: p_lname,
+                p_fname: p_fname,
+                is_male: gender,
+                dob: dob.slice(0,10)
+            },
+            pid
+        ).subscribe(
+            data => console.log(data),
+            err => alert(err),
+            () => console.log("complete")
+        );
+    }
 
     addPatient(p_lname:string, p_fname:string, pid:number, is_male:string, dob:Date) {
         let patient = new Patient(p_lname, p_fname, pid, is_male, dob);

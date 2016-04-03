@@ -21,6 +21,7 @@ export class StaffComponent{
             () => console.log("complete")
         );
     }
+
     testSsPost(s_id,s_lname,s_fname,specialization,isDoctor,experience_in_years){
         this.httpService.post(
             {sid:s_id,
@@ -58,7 +59,6 @@ export class StaffComponent{
         let staff = new Staff(s_id,s_lname,s_fname,specialization,isDoctor,experience_in_years);
         this.staffs.push(staff);
     }
-
 
     removeStaff(staff:Staff){
         var index = this.staffs.indexOf(staff);
