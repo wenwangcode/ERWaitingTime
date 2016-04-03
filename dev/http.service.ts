@@ -28,6 +28,12 @@ export class HTTPService{
 	getPRQuery(){
 		return this.http.get("http://localhost:3002/prescription").map(res => res.json());
 	}
+	joinpv(){
+		return this.http.get("http://localhost:3002/patient_visit").map(res => res.json());
+	}
+	joinpr(){
+		return this.http.get("http://localhost:3002/patient_report").map(res => res.json());
+	}
 	
 	delete(input){
 		return this.http.get('http://localhost:3002/patient/delete/'+input).map(res => res.json());

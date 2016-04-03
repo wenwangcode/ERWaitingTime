@@ -1,4 +1,4 @@
-System.register(['angular2/core', './Patient', './http.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './Patient', './http.service', "./patient_visit", "./patient_report"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './Patient', './http.service'], function(expor
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, Patient_1, http_service_1;
+    var core_1, Patient_1, http_service_1, patient_visit_1, patient_report_1;
     var PatientComponent;
     return {
         setters:[
@@ -22,16 +22,59 @@ System.register(['angular2/core', './Patient', './http.service'], function(expor
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
+            },
+            function (patient_visit_1_1) {
+                patient_visit_1 = patient_visit_1_1;
+            },
+            function (patient_report_1_1) {
+                patient_report_1 = patient_report_1_1;
             }],
         execute: function() {
             PatientComponent = (function () {
                 function PatientComponent(_httpService) {
                     this._httpService = _httpService;
                     this.patients = [];
+                    this.patientvisits = [];
+                    this.patientreports = [];
                 }
+                PatientComponent.prototype.joinpvs = function () {
+                    var _this = this;
+                    console.log("I am here!!!");
+                    this._httpService.joinpv()
+                        .subscribe(function (data) { return _this.parsepv(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                    console.log("I am there!!!");
+                };
+                PatientComponent.prototype.joinprs = function () {
+                    var _this = this;
+                    this._httpService.joinpr()
+                        .subscribe(function (data) { return _this.parsepr(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                };
+                PatientComponent.prototype.parsepv = function (json) {
+                    var _this = this;
+                    json.forEach(function (item) {
+                        _this.addPv(item.p_lname, item.p_fname, item.pid, item.is_male, item.dob, item.visitId, item.sid, item.room, item.visit_date);
+                    });
+                };
+                PatientComponent.prototype.addPv = function (p_lname, p_fname, pid, is_male, dob, visitId, sid, room, visit_date) {
+                    var patientvisit = new patient_visit_1.PatientVisit(p_lname, p_fname, pid, is_male, dob, visitId, sid, room, visit_date);
+                    this.patientvisits.push(patientvisit);
+                };
+                PatientComponent.prototype.parsepr = function (json) {
+                    var _this = this;
+                    json.forEach(function (item) {
+                        _this.addPr(item.p_lname, item.p_fname, item.pid, item.is_male, item.dob, item.rid, item.diagnosis, item.report_date, item.vid);
+                    });
+                };
+                PatientComponent.prototype.addPr = function (p_lname, p_fname, pid, is_male, dob, rid, diagnosis, report_date, vid) {
+                    var patientreport = new patient_report_1.PatientReport(p_lname, p_fname, pid, is_male, dob, rid, diagnosis, report_date, vid);
+                    this.patientreports.push(patientreport);
+                };
                 PatientComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this._httpService.getPQuery().subscribe(function (data) { return _this.parsePatient(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                };
+                PatientComponent.prototype.printtest = function () {
+                    this._httpService.getPQuery().subscribe(function (data) { return console.log(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
                 };
                 PatientComponent.prototype.parsePatient = function (json) {
                     var _this = this;

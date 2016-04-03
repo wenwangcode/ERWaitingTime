@@ -7,6 +7,7 @@ import {Router} from 'angular2/router';
 import {HTTPService} from "./http.service";
 import {Patient} from "./patient";
 import {RouterLink} from "angular2/router";
+import {PatientVisit} from "./patient_visit";
 
 @Component({
     selector: 'patient-register',
@@ -58,6 +59,7 @@ export class PatientRegisterComponent {
             () => console.log("complete")
         );
     }
+    
 
     // assigns a unique new patient id (called the pid in the data model)
     getPatientNextId(json){
@@ -85,6 +87,7 @@ export class PatientRegisterComponent {
         })
     }
 
+
     addPatient(p_lname:string, p_fname:string, pid:number, is_male:string, dob:Date){
         let patient = new Patient(p_lname, p_fname, pid, is_male, dob);
         if (!this.findPatient(patient)) {
@@ -93,7 +96,8 @@ export class PatientRegisterComponent {
         }
         return false;
     }
-    
+
+
     findPatient(patient: Patient) {
         for (let i = 0; i < this.patients.length; i += 1) {
             if (patient.pid == this.patients[0].pid) return true;
