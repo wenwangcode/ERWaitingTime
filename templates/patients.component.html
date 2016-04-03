@@ -7,7 +7,8 @@
 		<th>Sex</th>
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
-		<th>Select</th>
+		<th>Delete Row</th>
+		<th>Update Row</th>
 	</tr>
 	<tr *ngFor="#patient of patients">
 		<td contenteditable='true'>{{patient.p_lname}}</td>
@@ -15,9 +16,11 @@
 		<td contenteditable='true'>{{patient.is_male.data == '1' ? 'Male' : 'Female'}}</td>
 		<td contenteditable='true'>{{patient.dob.slice(0,10)}}</td>
 		<td>{{patient.pid}}</td>
-		<td><INPUT type="button" value="Delete Row" onclick="deleteRow('patient-list')" /></td>
+		<td><INPUT type="button" value="Delete Row" /></td>
+		<td><INPUT type="button" class="btn btn-danger" value="Update Row" /></td>
 	</tr>
 </table>
 
-<button type="button" class="btn btn-danger">Edit</button>
+
 <button type="button" class="btn btn-success">Save</button>
+
