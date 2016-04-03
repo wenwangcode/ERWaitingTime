@@ -6,7 +6,7 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
-         password : '639288',
+         password : 'thematrix',
          database : 'emergency'
     },
     pool:{
@@ -143,7 +143,7 @@ function maxPressure(req,res) {
         .orderBy('blood_pressure', 'desc')
         .select('report.pid', 'vital.blood_pressure')
         .catch(this.errorHandler)
-        .then(rows = > res.send(rows))
+        .then(rows => res.send(rows))
 }
 
 function errorHandler(error){
