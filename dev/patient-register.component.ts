@@ -45,6 +45,7 @@ export class PatientRegisterComponent {
 
         this._httpService.post(
             {
+                pid: this.next_id,
                 p_lname: p_lname,
                 p_fname: p_fname,
                 is_male: this.sex,
