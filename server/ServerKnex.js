@@ -6,7 +6,7 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
-         password : 'thematrix',
+         password : '19930821',
          database : 'emergency'
     },
     pool:{
@@ -15,7 +15,6 @@ var knex = require('knex')({
     }
 });
 var app = express();
-var inp = 232;
 
 app.use(function(req,res,next){
     res.header('Access-Control-Allow-Origin', "*");
@@ -44,16 +43,24 @@ app.post('/report',function(req,res){postData(req,res,'report')});
 app.post('/visit',function(req,res){postData(req,res,'visit')});
 app.post('/staff',function(req,res){postData(req,res,'staff')});
 app.post('/prescription',function(req,res){postData(req,res,'prescription')});
-
+app.post('/patient/update/:pid',function(req,res){updatePatient(req,res)});
 var selectAllTablesOptions = ['equipment','patient','visit'];
 var postTablesOptions = ['patient', 'equipment', 'vital', 'report', 'visit', 'staff',
     'prescription'];
+
+// Update to patient
+app.post('/patient/update/:pid',function(req,res){updatePatient(req,res)});
 
 // Join Visit and Patient table
 app.get('/patient_visit', function(req,res){visit_patient(req,res)})
 
 // Join Visit and Report table
 app.get('/patient_report', function(req,res){patient_report(req,res)})
+//Aggregation
+app.get('/vital/max', function(req,res){maxPressure(req,res)});
+//Nest-Aggregation
+app.get('/staff/avg/min', function(req,res){poorSpecialization(req,res)});
+app.get('/staff/avg/max', function(req,res){experiencedSpecialization(req,res)});
 
 // Select experienced staff
 app.get('/staff/:year', function(req,res){selectExperiencedStaff(req,res,req.params.year)});
@@ -81,22 +88,19 @@ function processQuery(req,res,options,handler){
     }
 }
 
+
 function getAllFromTable(req,res,table){
-	knex.select().from(table).catch(this.errorHandler).then(rows => res.send(rows));
+    knex.select().from(table).catch(this.errorHandler).then(rows => res.send(rows));
 }
 
-
 function postData(req,res,table){
-    console.log(req.body.json);
     var post = JSON.parse(req.body.json);
     knex(table).insert(post)
         .catch(this.errorHandler)
-        .return({success:true});
+        .then(res.send(JSON.stringify({success:true})));
 }
 
-
 function deleteFromPatient(req,res){
-    console.log(req.params.id);
     knex('patient')
         .where('pid',req.params.id)
         .del()
@@ -136,12 +140,39 @@ function utilizeAllEquipment(req,res,eids){
         .then(rows => res.send(rows))
 }
 
-
-function maxPressure(req,res) {
+function maxPressure(req,res){
     knex("vital")
         .innerJoin('report', 'vital.vid', 'report.vid')
         .orderBy('blood_pressure', 'desc')
         .select('report.pid', 'vital.blood_pressure')
+        .catch(this.errorHandler)
+        .then(rows => res.send(rows))
+}
+
+function updatePatient(req,res){
+    console.log(req.params.pid);
+    console.log(req.body.json);
+    knex('patient')
+        .where('pid', req.params.pid)
+        .update(JSON.parse(req.body.json))
+        .catch(this.errorHandler)
+        .then(res.send(JSON.stringify({status: 'success'})));
+}
+
+function poorSpecialization(req,res){
+    knex.select('t1.specialization', 't1.avg_year').from(function(){
+        this.select('specialization', knex.raw('avg(experience_in_years) as avg_year')).from('staff').groupBy('specialization').as('t1')
+    }).as('ignore')
+        .where('t1.avg_year', knex.raw('(select min(avg_year) from (select specialization, avg(experience_in_years) as avg_year from staff group by specialization) as t2);'))
+        .catch(this.errorHandler)
+        .then(rows => res.send(rows))
+}
+
+function experiencedSpecialization(req,res){
+    knex.select('t1.specialization', 't1.avg_year').from(function(){
+        this.select('specialization', knex.raw('avg(experience_in_years) as avg_year')).from('staff').groupBy('specialization').as('t1')
+    }).as('ignore')
+        .where('t1.avg_year', knex.raw('(select max(avg_year) from (select specialization, avg(experience_in_years) as avg_year from staff group by specialization) as t2);'))
         .catch(this.errorHandler)
         .then(rows => res.send(rows))
 }
@@ -153,5 +184,6 @@ function errorHandler(error){
 function invalidCondition(res,msg){
     res.send(JSON.stringify({error: msg}));
 }
+
 
 app.listen(3002);

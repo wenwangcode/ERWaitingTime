@@ -41,13 +41,44 @@ export class HTTPService{
 	getPRQuery(){
 		return this.http.get("http://localhost:3002/prescription").map(res => res.json());
 	}
-	
+	joinpv(){
+		return this.http.get("http://localhost:3002/patient_visit").map(res => res.json());
+	}
+	joinpr(){
+		return this.http.get("http://localhost:3002/patient_report").map(res => res.json());
+	}
+	selectyear(year){
+		return this.http.get('http://localhost:3002/staff/'+year).map(res => res.json());
+	}
+	findpid(eidlist){
+		return this.http.get('http://localhost:3002/utilize_equip/'+eidlist).map(res => res.json());
+	}
 	delete(input){
 		return this.http.get('http://localhost:3002/patient/delete/'+input).map(res => res.json());
 	}
+	getsavg(input){
+		return this.http.get('http://localhost:3002/staff/avg/'+input).map(res => res.json());
+	}
+	getMaxVital(){
+		return this.http.get('http://localhost:3002/vital/max').map(res => res.json());
+	}
+	updatePatient_http(input, pid){
+		var json = JSON.stringify(input);
+		var key = "json=";
+		var param = key + json;
+		console.log(param);
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		return this.http.post('http://localhost:3002/patient/update/'+ pid, param, {headers: headers})
+			.map(res=>res.json());
+	}
+	//Object {pid: 8, p_lname: "werwer", p_fname: "werwer", is_male: 1, dob: "2011-03-04"}
+
 
 	post(jstring,table){
+		console.log(jstring);
 		var json = JSON.stringify(jstring);
+		console.log(json);
 		var key = "json=";
 		var param = key + json;
 		var headers = new Headers();

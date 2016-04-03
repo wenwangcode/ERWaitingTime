@@ -6,6 +6,7 @@ import {Router, RouterLink} from 'angular2/router';
 
 import {HTTPService} from "./http.service";
 import {Equipment} from "./equipment";
+import {PatientID} from "./patient_id";
 
 @Component({
     selector: 'equipment',
@@ -20,6 +21,7 @@ export class EquipmentComponent implements OnInit {
 
     equipments: Equipment[];
     errorMessage: string;
+    pides:PatientID[]=[];
 
     ngOnInit() {
         this.getEquipment();
@@ -32,6 +34,36 @@ export class EquipmentComponent implements OnInit {
                 error =>  this.errorMessage = <any>error
             );
     }
+
+    getpid(eidlist){
+        console.log(eidlist);
+        this._httpService.findpid(eidlist)
+            .subscribe(
+                data => this.parsepid(data),
+                err => alert(err),
+                () => console.log("complete")
+            );
+    }
+
+    addpid(pd:number){
+        console.log(pd);
+        let pide = new PatientID(pd);
+        console.log(pide);
+        this.pides.push(pide);
+    }
+
+    parsepid(json){
+        console.log(json);
+        json.forEach(item => {
+            this.addpid(
+                item.pid
+            );
+        })
+    }
+
+
+
+
 
     // parseEquipment(json){
     //     json.forEach( item => {
