@@ -47,9 +47,17 @@ export class HTTPService{
 	joinpr(){
 		return this.http.get("http://localhost:3002/patient_report").map(res => res.json());
 	}
-	
+	selectyear(year){
+		return this.http.get('http://localhost:3002/staff/'+year).map(res => res.json());
+	}
+	findpid(eidlist){
+		return this.http.get('http://localhost:3002/utilize_equip/'+eidlist).map(res => res.json());
+	}
 	delete(input){
 		return this.http.get('http://localhost:3002/patient/delete/'+input).map(res => res.json());
+	}
+	getsavg(input){
+		return this.http.get('http://localhost:3002/staff/avg/'+input).map(res => res.json());
 	}
 	getMaxVital(){
 		return this.http.get('http://localhost:3002/vital/max').map(res => res.json());
@@ -66,9 +74,11 @@ export class HTTPService{
 	}
 	//Object {pid: 8, p_lname: "werwer", p_fname: "werwer", is_male: 1, dob: "2011-03-04"}
 
+
 	post(jstring,table){
 		console.log(jstring);
 		var json = JSON.stringify(jstring);
+		console.log(json);
 		var key = "json=";
 		var param = key + json;
 		var headers = new Headers();

@@ -12,7 +12,7 @@ export class Vital {
     vid: number;
 
     constructor(
-        oxygen_saturatioin: number,
+                oxygen_saturatioin: number,
                 temperature: number,
                 blood_pressure:number,
                 pulse:number,

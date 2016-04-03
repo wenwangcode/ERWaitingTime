@@ -8,6 +8,7 @@
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
 
+
 	</tr>
 	<tr *ngFor="#patient of patients">
 		<td contenteditable='true' >{{patient.p_lname}}</td>
@@ -20,6 +21,7 @@
 		</td>
 	</tr>
 </table>
+
 
 <div>
 <button type="button" class="btn btn-success" (click)="joinpvs()">Join with Visit</button>
