@@ -35,6 +35,8 @@ app.get('/patient_visit', function(req,res){visit_patient(req,res)})
 // Join Visit and Report table
 app.get('/patient_report', function(req,res){patient_report(req,res)})
 
+app.get('/vital/max', function(req,res){maxPressure(req,res)});
+
 // Select experienced staff
 app.get('/staff/:year', function(req,res){selectExperiencedStaff(req,res,req.params.year)});
 
@@ -112,6 +114,16 @@ function utilizeAllEquipment(req,res,eids){
     .catch(this.errorHandler)
     .then(rows => res.send(rows))
 }
+
+function maxPressure(req,res){
+    knex("vital")
+    .innerJoin('report', 'vital.vid', 'report.vid')
+    .orderBy('blood_pressure', 'desc')
+    .select('report.pid', 'vital.blood_pressure')
+    .catch(this.errorHandler)
+    .then(rows => res.send(rows))
+}
+
 
 function errorHandler(error){
     console.error(error);
