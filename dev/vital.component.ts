@@ -1,14 +1,15 @@
 /**
- * Created by wendywang on 2016-04-02.
+ * Created by joshua on 2016-04-01.
  */
 import {Component, OnInit} from 'angular2/core';
+
 import {Vital} from "./vital";
 import {HTTPService} from "./http.service";
 import {Vital_Patient_Max} from "./vital_patient_max";
 
 @Component({
     selector: 'vitals',
-    templateUrl: 'templates/vital.html',
+    templateUrl: 'templates/vital.component.html',
     providers: [HTTPService],
 })
 
@@ -18,18 +19,18 @@ export class VitalComponent {
     next_vid: number;
     vp_maxs: Vital_Patient_Max[] = [];
 
-    constructor(private _httpService: HTTPService) {}
+    next_id: number;
 
+    constructor(private _httpService: HTTPService) {}
+    
     ngOnInit() {
         this.getVitals();
-        this.generateNextId();
         this.getMax();
     }
 
     postVitals(oxygen_saturation, temperature, blood_pressure, pulse, respiration){
         this._httpService.post(
             {
-                vid: this.next_vid,
                 oxygen_saturation: oxygen_saturation,
                 temperature: temperature,
                 blood_pressure: blood_pressure,
@@ -38,15 +39,15 @@ export class VitalComponent {
             },
             'vital'
         ).subscribe(
-            data => console.log(data),
-            err => alert(err),
-            () => {
-                this.getVitals();
-                this.next_vid++;
-            }
+            data => {
+                console.log(data);
+                console.log('POST success')
+            },
+            err => console.error(err),
+            () => {this.getVitals()}
         );
     }
-
+    
     getVitals() {
         this.vitals = [];
         this._httpService.getVIQuery().subscribe(
@@ -56,13 +57,14 @@ export class VitalComponent {
         );
     }
 
-    generateNextId() {
-        this._httpService.getVIQuery().subscribe(
-            data => this.parseVitalsForId(data),
-            err => alert(err),
-            () => console.log("generateNextId() complete")
-        );
-    }
+    // not needed at the moment
+    // generateNextId() {
+    //     this._httpService.getVIQuery().subscribe(
+    //         data => this.parseVitalsForId(data),
+    //         err => alert(err),
+    //         () => console.log("generateNextId() complete")
+    //     );
+    // }
 
     parseVitalsForId(json) {
         let vital_ids: number[] = [];
@@ -73,11 +75,9 @@ export class VitalComponent {
         for (let i = 0; i < vital_ids.length; i += 1) {
             if (vital_ids[i] > next_id) next_id = vital_ids[i]
         }
-        console.log("next id vital " + next_id);
-        this.next_vid = next_id + 1;
-        console.log("next vid vital " + this.next_vid);
+        console.log(next_id + 1);
+        this.next_id = next_id + 1;
     }
-
 
     parseVitals(json) {
         json.forEach( item => {
@@ -91,7 +91,7 @@ export class VitalComponent {
             )
         });
     }
-
+    
     addVital(
         oxygen_saturation: number,
         temperature: number,

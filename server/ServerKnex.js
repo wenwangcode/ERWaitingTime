@@ -6,7 +6,7 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
-         password : '639288',
+         password : '19930821',
          database : 'emergency'
     },
     pool:{
@@ -105,6 +105,7 @@ function deleteFromPatient(req,res){
 }
 
 function visit_patient(req,res){
+    console.log("I am here!!!");
     knex.from('patient').innerJoin('visit', 'visit.pid', 'patient.pid')
         .select()
         .catch(this.errorHandler).then(rows => res.send(rows));

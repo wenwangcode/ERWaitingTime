@@ -7,8 +7,11 @@
 		<th>Sex</th>
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
+<<<<<<< HEAD
+=======
 		<th>Delete Row</th>
 		<th>Update Row</th>
+>>>>>>> 96d2548147f9a095c62451507ce0259f53df7767
 	</tr>
 	<tr *ngFor="#patient of patients">
 		<td contenteditable='true'>{{patient.p_lname}}</td>
@@ -21,7 +24,66 @@
 
 	</tr>
 </table>
+<<<<<<< HEAD
+<div>
+<button type="button" class="btn btn-success" (click)="joinpvs()">Join with Visit</button>
+<br><br>
+<table class="table table-striped" id="patient-visit">
+	<tr>
+		<th>Last Name</th>
+		<th>First Name</th>
+		<th>Sex</th>
+		<th>Date of Birth</th>
+		<th>Patient ID</th>
+		<th>Visit ID</th>
+		<th>Staff ID</th>
+		<th>Room</th>
+		<th>Date of Visit</th>
+	</tr>
+	<tr *ngFor="#patientvisit of patientvisits">
+		<td>{{patientvisit.p_lname}}</td>
+		<td>{{patientvisit.p_fname}}</td>
+		<td>{{patientvisit.is_male.data == '1' ? 'Male' : 'Female'}}</td>
+		<td contenteditable='true'>{{patientvisit.dob.slice(0,10)}}</td>
+		<td>{{patientvisit.pid}}</td>
+		<td>{{patientvisit.visit_id}}</td>
+		<td>{{patientvisit.staff_id}}</td>
+		<td contenteditable='true'>{{patientvisit.room}}</td>
+		<td contenteditable='true'>{{patientvisit.date.slice(0,10)}}</td>
+	</tr>
+</table>
+	</div>
+<div>
+	<button type="button" class="btn btn-success" (click)="joinprs()">Join with Report</button>
+	<br><br>
+	<table class="table table-striped" id="patient-report">
+		<tr>
+			<th>Last Name</th>
+			<th>First Name</th>
+			<th>Sex</th>
+			<th>Date of Birth</th>
+			<th>Patient ID</th>
+			<th>Report ID</th>
+			<th>Diagnosis</th>
+			<th>Report Date</th>
+			<th>Vital ID</th>
+		</tr>
+		<tr *ngFor="#patientreport of patientreports">
+			<td contenteditable='true'>{{patientreport.p_lname}}</td>
+			<td contenteditable='true'>{{patientreport.p_fname}}</td>
+			<td contenteditable='true'>{{patientreport.is_male.data == '1' ? 'Male' : 'Female'}}</td>
+			<td contenteditable='true'>{{patientreport.dob.slice(0,10)}}</td>
+			<td>{{patientreport.pid}}</td>
+			<td contenteditable='true'>{{patientreport.rid}}</td>
+			<td contenteditable='true'>{{patientreport.diagnosis}}</td>
+			<td contenteditable='true'>{{patientreport.report_date.slice(0,10)}}</td>
+			<td contenteditable='true'>{{patientreport.vid}}</td>
+		</tr>
+	</table>
+</div>
+=======
 
 
 
 
+>>>>>>> 96d2548147f9a095c62451507ce0259f53df7767
