@@ -1,23 +1,24 @@
 /**
- * Created by wendywang on 2016-04-02.
+ * Created by joshua on 2016-04-01.
  */
 import {Component, OnInit} from 'angular2/core';
+
 import {Vital} from "./vital";
 import {HTTPService} from "./http.service";
 
 @Component({
     selector: 'vitals',
-    templateUrl: 'templates/vital.html',
+    templateUrl: 'templates/vital.component.html',
     providers: [HTTPService],
 })
 
-export class VitalComponent {
+export class VitalAddComponent {
 
     vitals: Vital[];
     next_vid: number;
-
+    
     constructor(private _httpService: HTTPService) {}
-
+    
     ngOnInit() {
         this.getVitals();
         this.generateNextId();
@@ -43,7 +44,7 @@ export class VitalComponent {
             }
         );
     }
-
+    
     getVitals() {
         this.vitals = [];
         this._httpService.getVIQuery().subscribe(
@@ -88,14 +89,14 @@ export class VitalComponent {
             )
         });
     }
-
+    
     addVital(
         oxygen_saturation: number,
         temperature: number,
         blood_pressure: number,
         pulse: number,
         respiration: number,
-        vid: number
+        vid: number 
     ) {
         let vital = new Vital(oxygen_saturation, temperature, blood_pressure, pulse, respiration, vid);
         this.vitals.push(vital);
