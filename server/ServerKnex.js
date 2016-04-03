@@ -148,6 +148,8 @@ function maxPressure(req,res) {
 }
 
 function updatePatient(req,res){
+    console.log("pid!!!!!!!!!!!!!!!!!!!!!!!!! " + req.params.pid);
+    console.log("backend json!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + req.params.json);
     knex('patient')
         .where('pid', req.params.pid)
         .update(JSON.parse(req.params.json))
