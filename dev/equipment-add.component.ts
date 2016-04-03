@@ -2,10 +2,11 @@
  * Created by Joy on 2016-03-28.
  */
 import {Component} from 'angular2/core';
-import {Equipment} from './Equipment';
-import {HTTPService} from './http.service';
 import {CanActivate} from "angular2/router";
 import {RouterLink} from "angular2/router";
+
+import {Equipment} from './Equipment';
+import {HTTPService} from './http.service';
 
 @Component({
     selector:'equipment',
@@ -15,6 +16,7 @@ import {RouterLink} from "angular2/router";
 })
 
 export class EquipmentAddComponent{
+
     equipments:Array<Equipment>;
 
     constructor(private httpService: HTTPService){
@@ -37,9 +39,11 @@ export class EquipmentAddComponent{
 
     parseEquipment(json){
         json.forEach( item => {
-            this.addEquipment(item.eid,
+            this.addEquipment(
+                item.eid,
                 item.type,
-                item.room);
+                item.room
+            );
         })
     }
 

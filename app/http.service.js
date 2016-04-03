@@ -27,6 +27,15 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map', 'rxj
                 function HTTPService(http) {
                     this.http = http;
                 }
+                HTTPService.prototype.getAllFromTable = function (table) {
+                    return this.http.get("http://localhost:3002/" + table)
+                        .map(function (response) { return response.json(); })
+                        .catch(this.handleError);
+                };
+                HTTPService.prototype.handleError = function (error) {
+                    console.error(error);
+                    return Observable.throw(error.json().error || 'Server error');
+                };
                 HTTPService.prototype.getVQuery = function () {
                     return this.http.get("http://localhost:3002/visit").map(function (res) { return res.json(); });
                 };
