@@ -84,8 +84,8 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map', 'rxj
                 HTTPService.prototype.updatePatient_http = function (input, pid) {
                     var json = JSON.stringify(input);
                     var key = "json=";
-                    var param = key + input;
-                    console.log(input);
+                    var param = key + json;
+                    console.log(param);
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/x-www-form-urlencoded');
                     return this.http.post('http://localhost:3002/patient/update/' + pid, param, { headers: headers })

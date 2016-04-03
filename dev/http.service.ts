@@ -65,8 +65,8 @@ export class HTTPService{
 	updatePatient_http(input, pid){
 		var json = JSON.stringify(input);
 		var key = "json=";
-		var param = key + input;
-		console.log(input);
+		var param = key + json;
+		console.log(param);
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 		return this.http.post('http://localhost:3002/patient/update/'+ pid, param, {headers: headers})
