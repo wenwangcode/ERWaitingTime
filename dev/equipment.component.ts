@@ -26,7 +26,7 @@ export class EquipmentComponent implements OnInit {
     }
 
     getEquipment() {
-        this._httpService.getAllFromTable('equipment')
+        this._httpService.getAllFromTable('equipme')
             .subscribe(
                 equipment => this.equipments = equipment,
                 error =>  this.errorMessage = <any>error

@@ -26,8 +26,8 @@ export class EquipmentAddComponent{
     postEquipment(type,room){
         this.httpService.post(
             {
-             type:type,
-            room:room
+                type:type,
+                room:room
             },
             'equipment'
         ).subscribe(

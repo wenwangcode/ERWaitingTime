@@ -1,4 +1,4 @@
-System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map', 'rxjs/Rx'], function(exports_1, context_1) {
+System.register(['angular2/http', 'angular2/core', 'rxjs/Observable'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map', 'rxj
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var http_1, core_1;
+    var http_1, core_1, Observable_1;
     var HTTPService;
     return {
         setters:[
@@ -20,9 +20,12 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map', 'rxj
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (_1) {},
-            function (_2) {}],
+            function (Observable_1_1) {
+                Observable_1 = Observable_1_1;
+            }],
         execute: function() {
+            // import 'rxjs/add/operator/map';
+            // import 'rxjs/Rx';
             HTTPService = (function () {
                 function HTTPService(http) {
                     this.http = http;
@@ -34,7 +37,7 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map', 'rxj
                 };
                 HTTPService.prototype.handleError = function (error) {
                     console.error(error);
-                    return Observable.throw(error.json().error || 'Server error');
+                    return Observable_1.Observable.throw(error.json().error || 'Server error');
                 };
                 HTTPService.prototype.getVQuery = function () {
                     return this.http.get("http://localhost:3002/visit").map(function (res) { return res.json(); });
