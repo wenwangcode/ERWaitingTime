@@ -29,6 +29,9 @@ var selectAllTablesOptions = ['equipment','patient','visit'];
 var postTablesOptions = ['patient', 'equipment', 'vital', 'report', 'visit', 'staff',
 'prescription'];
 
+// Update to patient
+app.post('/patient/update/:pid',function(req,res){updatePatient(req,res)});
+
 // Join Visit and Patient table
 app.get('/patient_visit', function(req,res){visit_patient(req,res)})
 
@@ -72,7 +75,7 @@ function postData(req,res,table){
     var post = JSON.parse(req.body.json);
     knex(table).insert(post)
         .catch(this.errorHandler)
-        .then({success:true}); 
+        .then(res.send(JSON.stringify({success:true}))); 
 }
 
 function deleteFromPatient(req,res){
@@ -122,6 +125,14 @@ function maxPressure(req,res){
     .select('report.pid', 'vital.blood_pressure')
     .catch(this.errorHandler)
     .then(rows => res.send(rows))
+}
+
+function updatePatient(req,res){
+    knex('patient')
+    .where('pid', req.params.pid)
+    .update(JSON.parse(req.params.json))
+    .catch(this.errorHandler)
+    .then(res.send(JSON.stringify({status: 'success'})));
 }
 
 
