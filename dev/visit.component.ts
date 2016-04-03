@@ -58,14 +58,6 @@ export class VisitComponent{
         );
     }
 
-    deleteVisits(staffId:number) {
-    return this._httpService.delete(staffId)
-        .subscribe(
-            data => console.log(data),
-            err => alert(err),
-            () => console.log("complete")
-        );
-};
 
     getPatientIds() {
         this.patientIds = [];

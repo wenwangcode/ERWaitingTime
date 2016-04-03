@@ -52,11 +52,6 @@ System.register(['angular2/core', './visit', './http.service'], function(exports
                     this.visits = [];
                     this._httpService.getVQuery().subscribe(function (data) { return _this.parseVisit(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
                 };
-                VisitComponent.prototype.deleteVisits = function (staffId) {
-                    return this._httpService.delete(staffId)
-                        .subscribe(function (data) { return console.log(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
-                };
-                ;
                 VisitComponent.prototype.getPatientIds = function () {
                     var _this = this;
                     this.patientIds = [];
