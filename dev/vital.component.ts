@@ -15,7 +15,7 @@ import {HTTPService} from "./http.service";
 export class VitalComponent {
 
     vitals: Vital[];
-    next_id: number;
+    next_vid: number;
     
     constructor(private _httpService: HTTPService) {}
     
@@ -27,6 +27,7 @@ export class VitalComponent {
     postVitals(oxygen_saturation, temperature, blood_pressure, pulse, respiration){
         this._httpService.post(
             {
+                vid: this.next_vid,
                 oxygen_saturation: oxygen_saturation,
                 temperature: temperature,
                 blood_pressure: blood_pressure,
@@ -39,7 +40,7 @@ export class VitalComponent {
             err => alert(err),
             () => {
                 this.getVitals();
-                this.next_id += 1;
+                this.next_vid++;
             }
         );
     }
@@ -70,9 +71,11 @@ export class VitalComponent {
         for (let i = 0; i < vital_ids.length; i += 1) {
             if (vital_ids[i] > next_id) next_id = vital_ids[i]
         }
-        console.log(next_id + 1);
-        this.next_id = next_id + 1;
+        console.log("next id vital " + next_id);
+        this.next_vid = next_id + 1;
+        console.log("next vid vital " + this.next_vid);
     }
+
 
     parseVitals(json) {
         json.forEach( item => {

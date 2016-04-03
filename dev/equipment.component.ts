@@ -1,7 +1,7 @@
 /**
  * Created by wendywang on 2016-04-01.
  */
-import {Component OnInit} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {HTTPService} from "./http.service";
 import {Equipment} from "./equipment";
