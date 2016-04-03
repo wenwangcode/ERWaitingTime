@@ -1,4 +1,15 @@
 <h1 class="page-header">Patient Vital Entry</h1>
+<div>ER Waiting patient in Danger</div>
+<table class="table">
+	<tr>
+		<th>Patient ID</th>
+		<th>Highest Blood Pressure</th>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>100</td>
+	</tr>
+</table>
 
 <form method="post" class="form-horizontal">
 	<input name="_csrf" type="hidden"/>
@@ -46,21 +57,4 @@
 
 </form>
 
-<table class="table table-striped" id="patient-list">
-	<tr>
-		<th>Vital ID</th>
-		<th>Oxygen Saturation</th>
-		<th>Temperature</th>
-		<th>Blood Pressure</th>
-		<th>Pulse</th>
-		<th>Respiration</th>
-	</tr>
-	<tr *ngFor="#vital of vitals">
-		<td>{{vital.vid}}</td>
-		<td>{{vital.oxygen_saturation}}</td>
-		<td>{{vital.temperature}}</td>
-		<td>{{vital.blood_pressure}}</td>
-		<td>{{vital.pulse}}</td>
-		<td>{{vital.respiration}}</td>
-	</tr>
-</table>
+

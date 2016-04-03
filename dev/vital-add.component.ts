@@ -12,22 +12,22 @@ import {HTTPService} from "./http.service";
     providers: [HTTPService],
 })
 
-export class VitalComponent {
+export class VitalAddComponent {
 
     vitals: Vital[];
-    next_id: number;
+    next_vid: number;
     
     constructor(private _httpService: HTTPService) {}
     
     ngOnInit() {
         this.getVitals();
-        // not needed at the moment
-        // this.generateNextId();
+        this.generateNextId();
     }
 
     postVitals(oxygen_saturation, temperature, blood_pressure, pulse, respiration){
         this._httpService.post(
             {
+                vid: this.next_vid,
                 oxygen_saturation: oxygen_saturation,
                 temperature: temperature,
                 blood_pressure: blood_pressure,
@@ -36,12 +36,12 @@ export class VitalComponent {
             },
             'vital'
         ).subscribe(
-            data => {
-                console.log(data);
-                console.log('POST success')
-            },
-            err => console.error(err),
-            () => {this.getVitals()}
+            data => console.log(data),
+            err => alert(err),
+            () => {
+                this.getVitals();
+                this.next_vid++;
+            }
         );
     }
     
@@ -54,14 +54,13 @@ export class VitalComponent {
         );
     }
 
-    // not needed at the moment
-    // generateNextId() {
-    //     this._httpService.getVIQuery().subscribe(
-    //         data => this.parseVitalsForId(data),
-    //         err => alert(err),
-    //         () => console.log("generateNextId() complete")
-    //     );
-    // }
+    generateNextId() {
+        this._httpService.getVIQuery().subscribe(
+            data => this.parseVitalsForId(data),
+            err => alert(err),
+            () => console.log("generateNextId() complete")
+        );
+    }
 
     parseVitalsForId(json) {
         let vital_ids: number[] = [];
@@ -72,9 +71,11 @@ export class VitalComponent {
         for (let i = 0; i < vital_ids.length; i += 1) {
             if (vital_ids[i] > next_id) next_id = vital_ids[i]
         }
-        console.log(next_id + 1);
-        this.next_id = next_id + 1;
+        console.log("next id vital " + next_id);
+        this.next_vid = next_id + 1;
+        console.log("next vid vital " + this.next_vid);
     }
+
 
     parseVitals(json) {
         json.forEach( item => {
@@ -95,7 +96,7 @@ export class VitalComponent {
         blood_pressure: number,
         pulse: number,
         respiration: number,
-        vid: number
+        vid: number 
     ) {
         let vital = new Vital(oxygen_saturation, temperature, blood_pressure, pulse, respiration, vid);
         this.vitals.push(vital);

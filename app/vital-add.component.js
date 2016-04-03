@@ -11,7 +11,7 @@ System.register(['angular2/core', "./vital", "./http.service"], function(exports
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, vital_1, http_service_1;
-    var VitalComponent;
+    var VitalAddComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -24,42 +24,38 @@ System.register(['angular2/core', "./vital", "./http.service"], function(exports
                 http_service_1 = http_service_1_1;
             }],
         execute: function() {
-            VitalComponent = (function () {
-                function VitalComponent(_httpService) {
+            VitalAddComponent = (function () {
+                function VitalAddComponent(_httpService) {
                     this._httpService = _httpService;
                 }
-                VitalComponent.prototype.ngOnInit = function () {
+                VitalAddComponent.prototype.ngOnInit = function () {
                     this.getVitals();
-                    // not needed at the moment
-                    // this.generateNextId();
+                    this.generateNextId();
                 };
-                VitalComponent.prototype.postVitals = function (oxygen_saturation, temperature, blood_pressure, pulse, respiration) {
+                VitalAddComponent.prototype.postVitals = function (oxygen_saturation, temperature, blood_pressure, pulse, respiration) {
                     var _this = this;
                     this._httpService.post({
+                        vid: this.next_vid,
                         oxygen_saturation: oxygen_saturation,
                         temperature: temperature,
                         blood_pressure: blood_pressure,
                         pulse: pulse,
                         respiration: respiration
-                    }, 'vital').subscribe(function (data) {
-                        console.log(data);
-                        console.log('POST success');
-                    }, function (err) { return console.error(err); }, function () { _this.getVitals(); });
+                    }, 'vital').subscribe(function (data) { return console.log(data); }, function (err) { return alert(err); }, function () {
+                        _this.getVitals();
+                        _this.next_vid++;
+                    });
                 };
-                VitalComponent.prototype.getVitals = function () {
+                VitalAddComponent.prototype.getVitals = function () {
                     var _this = this;
                     this.vitals = [];
                     this._httpService.getVIQuery().subscribe(function (data) { return _this.parseVitals(data); }, function (err) { return alert(err); }, function () { return console.log("getVitals() complete"); });
                 };
-                // not needed at the moment
-                // generateNextId() {
-                //     this._httpService.getVIQuery().subscribe(
-                //         data => this.parseVitalsForId(data),
-                //         err => alert(err),
-                //         () => console.log("generateNextId() complete")
-                //     );
-                // }
-                VitalComponent.prototype.parseVitalsForId = function (json) {
+                VitalAddComponent.prototype.generateNextId = function () {
+                    var _this = this;
+                    this._httpService.getVIQuery().subscribe(function (data) { return _this.parseVitalsForId(data); }, function (err) { return alert(err); }, function () { return console.log("generateNextId() complete"); });
+                };
+                VitalAddComponent.prototype.parseVitalsForId = function (json) {
                     var vital_ids = [];
                     var next_id = 0;
                     json.forEach(function (item) {
@@ -69,31 +65,32 @@ System.register(['angular2/core', "./vital", "./http.service"], function(exports
                         if (vital_ids[i] > next_id)
                             next_id = vital_ids[i];
                     }
-                    console.log(next_id + 1);
-                    this.next_id = next_id + 1;
+                    console.log("next id vital " + next_id);
+                    this.next_vid = next_id + 1;
+                    console.log("next vid vital " + this.next_vid);
                 };
-                VitalComponent.prototype.parseVitals = function (json) {
+                VitalAddComponent.prototype.parseVitals = function (json) {
                     var _this = this;
                     json.forEach(function (item) {
                         _this.addVital(item.oxygen_saturation, item.temperature, item.blood_pressure, item.pulse, item.respiration, item.vid);
                     });
                 };
-                VitalComponent.prototype.addVital = function (oxygen_saturation, temperature, blood_pressure, pulse, respiration, vid) {
+                VitalAddComponent.prototype.addVital = function (oxygen_saturation, temperature, blood_pressure, pulse, respiration, vid) {
                     var vital = new vital_1.Vital(oxygen_saturation, temperature, blood_pressure, pulse, respiration, vid);
                     this.vitals.push(vital);
                 };
-                VitalComponent = __decorate([
+                VitalAddComponent = __decorate([
                     core_1.Component({
                         selector: 'vitals',
                         templateUrl: 'templates/vital.component.html',
                         providers: [http_service_1.HTTPService],
                     }), 
                     __metadata('design:paramtypes', [http_service_1.HTTPService])
-                ], VitalComponent);
-                return VitalComponent;
+                ], VitalAddComponent);
+                return VitalAddComponent;
             }());
-            exports_1("VitalComponent", VitalComponent);
+            exports_1("VitalAddComponent", VitalAddComponent);
         }
     }
 });
-//# sourceMappingURL=vital.component.js.map
+//# sourceMappingURL=vital-add.component.js.map

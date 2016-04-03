@@ -6,7 +6,11 @@ var knex = require('knex')({
     connection: {
          host     : 'localhost',
          user     : 'root',
+<<<<<<< HEAD
          password : '19930821',
+=======
+         password : 'thematrix',
+>>>>>>> 96d2548147f9a095c62451507ce0259f53df7767
          database : 'emergency'
     },
     pool:{
@@ -34,6 +38,7 @@ app.get('/vital', function(req,res){getAllFromTable(req,res,'vital');});
 app.get('/visit', function(req,res){getAllFromTable(req,res,'visit');});
 app.get('/report', function(req,res){getAllFromTable(req,res,'report');});
 app.get('/prescription',function(req,res){getAllFromTable(req,res,'prescription')});
+app.get('/vital/max', function(req,res){maxPressure(req,res)});
 
 app.post('/patient',function (req,res){postData(req,res,'patient')});
 app.post('/patients/register',function (req,res){postData(req,res,'patient')});
@@ -132,6 +137,16 @@ function utilizeAllEquipment(req,res,eids){
         .groupBy('pid')
         .havingRaw('count(*) = ?', eids.length)
         .select('pid')
+        .catch(this.errorHandler)
+        .then(rows => res.send(rows))
+}
+
+
+function maxPressure(req,res) {
+    knex("vital")
+        .innerJoin('report', 'vital.vid', 'report.vid')
+        .orderBy('blood_pressure', 'desc')
+        .select('report.pid', 'vital.blood_pressure')
         .catch(this.errorHandler)
         .then(rows => res.send(rows))
 }

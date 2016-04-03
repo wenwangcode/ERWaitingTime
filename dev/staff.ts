@@ -20,9 +20,4 @@ export class Staff{
         this.isDoctor = isDoctor;
         this.experience_in_years = experience_in_years;
     }
-
-    //if we know the staff ID(s_id), then we will know how he/she is in the db
-    constructor(s_id: number){
-        this.s_id = s_id;
-    }
 }

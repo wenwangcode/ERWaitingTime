@@ -2,10 +2,10 @@
  * Created by wendywang on 2016-04-01.
  */
 import {Component, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Router, RouterLink} from 'angular2/router';
+
 import {HTTPService} from "./http.service";
 import {Equipment} from "./equipment";
-import {RouterLink} from "angular2/router";
 
 @Component({
     selector: 'equipment',
@@ -14,29 +14,36 @@ import {RouterLink} from "angular2/router";
     directives: [RouterLink],
 })
 
-export class EquipmentComponent {
-    equipments:Array<Equipment>;
+export class EquipmentComponent implements OnInit {
 
-    constructor(private httpService: HTTPService) {
-        this.equipments = [];
-        this.httpService.getEQuery().subscribe(
-            data => this.parseEquipment(data),
-            err => alert(err),
-            () => console.log("complete")
-        );
+    constructor(private _httpService: HTTPService) {}
+
+    equipments: Equipment[];
+    errorMessage: string;
+
+    ngOnInit() {
+        this.getEquipment();
     }
 
-    parseEquipment(json){
-        json.forEach( item => {
-            this.addEquipment(item.eid,
-                item.type,
-                item.room);
-        })
+    getEquipment() {
+        this._httpService.getAllFromTable('equipment')
+            .subscribe(
+                equipment => this.equipments = equipment,
+                error =>  this.errorMessage = <any>error
+            );
     }
 
-    addEquipment(eid:number, type:string, room:number){
-        let equipment = new Equipment(eid,type,room);
-        this.equipments.push(equipment);
-    }
+    // parseEquipment(json){
+    //     json.forEach( item => {
+    //         this.addEquipment(item.eid,
+    //             item.type,
+    //             item.room);
+    //     })
+    // }
+    //
+    // addEquipment(eid:number, type:string, room:number){
+    //     let equipment = new Equipment(eid,type,room);
+    //     this.equipments.push(equipment);
+    // }
 
 }
