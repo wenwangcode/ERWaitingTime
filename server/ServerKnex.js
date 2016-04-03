@@ -48,24 +48,27 @@ var selectAllTablesOptions = ['equipment','patient','visit'];
 var postTablesOptions = ['patient', 'equipment', 'vital', 'report', 'visit', 'staff',
     'prescription'];
 
-// Update to patient Wendy
+// Update to patient
 app.post('/patient/update/:pid',function(req,res){updatePatient(req,res)});
 
-// Join Visit and Patient table v
+// Join Visit and Patient table
 app.get('/patient_visit', function(req,res){visit_patient(req,res)})
 
-// Join Visit and Report table v
+// Join Visit and Report table
 app.get('/patient_report', function(req,res){patient_report(req,res)})
-// Wendy
+//Aggregation
 app.get('/vital/max', function(req,res){maxPressure(req,res)});
+//Nest-Aggregation
+app.get('/staff/avg/min', function(req,res){poorSpecialization(req,res)});
+app.get('/staff/avg/max', function(req,res){experiencedSpecialization(req,res)});
 
-// Select experienced staff v
+// Select experienced staff
 app.get('/staff/:year', function(req,res){selectExperiencedStaff(req,res,req.params.year)});
 
-// Get All from table v
+// Get All from table
 app.get('/:table', function(req,res){processQuery(req,res, selectAllTablesOptions, getAllFromTable)});
 
-// Post to table v
+// Post to table
 app.post('/:table', function(req,res){processQuery(req,res,postTablesOptions, postData)});
 
 // Utilize all equipment
@@ -74,7 +77,7 @@ app.get('/utilize_equip/:eidList', function(req,res){
     utilizeAllEquipment(req,res, eids);
 });
 
-// Delete patient based on pid v
+// Delete patient based on pid
 app.get('/patient/delete/:id', function(req,res){deleteFromPatient(req,res)});
 
 function processQuery(req,res,options,handler){
@@ -137,8 +140,8 @@ function utilizeAllEquipment(req,res,eids){
         .then(rows => res.send(rows))
 }
 
-function maxPressure(req,res) {
-    knex('vital')
+function maxPressure(req,res){
+    knex("vital")
         .innerJoin('report', 'vital.vid', 'report.vid')
         .orderBy('blood_pressure', 'desc')
         .select('report.pid', 'vital.blood_pressure')
@@ -154,6 +157,23 @@ function updatePatient(req,res){
         .then(res.send(JSON.stringify({status: 'success'})));
 }
 
+function poorSpecialization(req,res){
+    knex.select('t1.specialization', 't1.avg_year').from(function(){
+        this.select('specialization', knex.raw('avg(experience_in_years) as avg_year')).from('staff').groupBy('specialization').as('t1')
+    }).as('ignore')
+        .where('t1.avg_year', knex.raw('(select min(avg_year) from (select specialization, avg(experience_in_years) as avg_year from staff group by specialization) as t2);'))
+        .catch(this.errorHandler)
+        .then(rows => res.send(rows))
+}
+
+function experiencedSpecialization(req,res){
+    knex.select('t1.specialization', 't1.avg_year').from(function(){
+        this.select('specialization', knex.raw('avg(experience_in_years) as avg_year')).from('staff').groupBy('specialization').as('t1')
+    }).as('ignore')
+        .where('t1.avg_year', knex.raw('(select max(avg_year) from (select specialization, avg(experience_in_years) as avg_year from staff group by specialization) as t2);'))
+        .catch(this.errorHandler)
+        .then(rows => res.send(rows))
+}
 
 function errorHandler(error){
     console.error(error);

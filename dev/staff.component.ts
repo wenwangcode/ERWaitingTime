@@ -5,6 +5,7 @@ import {Component} from 'angular2/core';
 import {Staff} from './Staff';
 import {HTTPService} from './http.service';
 import {SelectYears} from "./select-by-years";
+import {MaxMin} from "./maxmin";
 
 @Component({
     selector:'staff',
@@ -14,6 +15,7 @@ import {SelectYears} from "./select-by-years";
 export class StaffComponent{
     staffs:Array<Staff>;
     selectyears:SelectYears[]=[];
+    maxmins:MaxMin[]=[];
 
     constructor(private httpService: HTTPService){
         this.staffs = [];
@@ -27,9 +29,32 @@ export class StaffComponent{
     condition(year:number){
         this.httpService.selectyear(year).subscribe(
             data => this.parseSr(data),
+            err => alert('Year must be between 30 and 50 inclusively'),
+            () => console.log("complete")
+        );
+    }
+    getmaxmin(value:string){
+        this.httpService.getsavg(value).subscribe(
+            data => this.parsemm(data),
             err => alert(err),
             () => console.log("complete")
         );
+    }
+    parsemm(json){
+        console.log(json);
+        json.forEach( item => {
+            this.addmm(item.specialization,
+                item.avg_year);
+        })
+    }
+
+    addmm(specialization: string,
+          avg_year:number){
+        console.log('hey'+avg_year);
+        this.maxmins = [];
+        let maxmin = new MaxMin(specialization,avg_year);
+        console.log(maxmin);
+        this.maxmins.push(maxmin);
     }
     testSsPost(s_id,s_lname,s_fname,specialization,isDoctor,experience_in_years){
         this.httpService.post(
@@ -57,10 +82,7 @@ export class StaffComponent{
 
     addSr(s_lname: string,
           s_fname:string){
-        console.log(s_lname);
         let selectyear = new SelectYears(s_lname,s_fname);
-        console.log(selectyear);
-        console.log(this.selectyears.length);
         this.selectyears.push(selectyear);
     }
 

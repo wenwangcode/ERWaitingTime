@@ -56,13 +56,19 @@ export class HTTPService{
 	delete(input){
 		return this.http.get('http://localhost:3002/patient/delete/'+input).map(res => res.json());
 	}
+	getsavg(input){
+		return this.http.get('http://localhost:3002/staff/avg/'+input).map(res => res.json());
+	}
 	getMaxVital(){
 		return this.http.get('http://localhost:3002/vital/max').map(res => res.json());
 	}
 
 
+
 	post(jstring,table){
+		console.log(jstring);
 		var json = JSON.stringify(jstring);
+		console.log(json);
 		var key = "json=";
 		var param = key + json;
 		var headers = new Headers();

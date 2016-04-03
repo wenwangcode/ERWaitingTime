@@ -26,6 +26,11 @@
 
     <button (click)="condition(selectyear.value)" class="btn btn-success">Who meets the requirement?</button>
     <br><br>
+    <script>
+        if(selectyear.value < 30 || selectyear.value > 50){
+            alert('Input year must be between 30 and 50 inclusively.');
+        }
+    </script>
 </div>
 
 <div ng-app="my-app">
@@ -37,5 +42,23 @@
         <tr *ngFor="#selectyear of selectyears">
             <td> {{selectyear.s_lname}} </td>
             <td> {{selectyear.s_fname}} </td>
+    </table>
+</div>
+
+<div class="col-sm-10">
+    <button (click)="getmaxmin('max')" class="btn btn-success" id="max" name="max">Get Max - Among the Average of experience years</button>
+    <button (click)="getmaxmin('min')" class="btn btn-success" id="min" name="min">Get Min - Among the Average of experience years</button>
+    <br><br>
+</div>
+
+<div ng-app="my-app">
+    <table id="table2" class="table table-striped">
+        <tr>
+            <th> Specialization </th>
+            <th> Avg Years of Experience </th>
+        </tr>
+        <tr *ngFor="#maxmin of maxmins">
+            <td> {{maxmin.specialization}} </td>
+            <td> {{maxmin.avg_year}} </td>
     </table>
 </div>
