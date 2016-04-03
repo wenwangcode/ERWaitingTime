@@ -28,6 +28,10 @@ export class HTTPService{
 	getPRQuery(){
 		return this.http.get("http://localhost:3002/prescription").map(res => res.json());
 	}
+	
+	delete(input){
+		return this.http.get('http://localhost:3002/patient/delete/'+input).map(res => res.json());
+	}
 
 	post(jstring,table){
 		var json = JSON.stringify(jstring);
