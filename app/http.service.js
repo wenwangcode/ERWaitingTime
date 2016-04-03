@@ -60,11 +60,42 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/Observable'], function(
                 HTTPService.prototype.getPRQuery = function () {
                     return this.http.get("http://localhost:3002/prescription").map(function (res) { return res.json(); });
                 };
+                HTTPService.prototype.joinpv = function () {
+                    return this.http.get("http://localhost:3002/patient_visit").map(function (res) { return res.json(); });
+                };
+                HTTPService.prototype.joinpr = function () {
+                    return this.http.get("http://localhost:3002/patient_report").map(function (res) { return res.json(); });
+                };
+                HTTPService.prototype.selectyear = function (year) {
+                    return this.http.get('http://localhost:3002/staff/' + year).map(function (res) { return res.json(); });
+                };
+                HTTPService.prototype.findpid = function (eidlist) {
+                    return this.http.get('http://localhost:3002/utilize_equip/' + eidlist).map(function (res) { return res.json(); });
+                };
                 HTTPService.prototype.delete = function (input) {
                     return this.http.get('http://localhost:3002/patient/delete/' + input).map(function (res) { return res.json(); });
                 };
+                HTTPService.prototype.getsavg = function (input) {
+                    return this.http.get('http://localhost:3002/staff/avg/' + input).map(function (res) { return res.json(); });
+                };
+                HTTPService.prototype.getMaxVital = function () {
+                    return this.http.get('http://localhost:3002/vital/max').map(function (res) { return res.json(); });
+                };
+                HTTPService.prototype.updatePatient_http = function (input, pid) {
+                    var json = JSON.stringify(input);
+                    var key = "json=";
+                    var param = key + json;
+                    console.log(param);
+                    var headers = new http_1.Headers();
+                    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+                    return this.http.post('http://localhost:3002/patient/update/' + pid, param, { headers: headers })
+                        .map(function (res) { return res.json(); });
+                };
+                //Object {pid: 8, p_lname: "werwer", p_fname: "werwer", is_male: 1, dob: "2011-03-04"}
                 HTTPService.prototype.post = function (jstring, table) {
+                    console.log(jstring);
                     var json = JSON.stringify(jstring);
+                    console.log(json);
                     var key = "json=";
                     var param = key + json;
                     var headers = new http_1.Headers();
