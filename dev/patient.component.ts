@@ -34,6 +34,15 @@ export class PatientComponent{
                 item.dob);
         })
     }
+    deletePatient(patientId:number) {
+        return this._httpService.delete(patientId)
+            .subscribe(
+                data => console.log(data),
+                err => alert(err),
+                () => console.log("complete")
+            )
+    }
+
 
     addPatient(p_lname: string, p_fname: string, pid:number, is_male:string, dob:Date){
         let patient = new Patient(p_lname,p_fname,pid,is_male,dob);

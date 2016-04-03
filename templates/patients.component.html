@@ -13,5 +13,6 @@
 		<td>{{patient.is_male.data == '1' ? 'Male' : 'Female'}}</td>
 		<td>{{patient.dob.slice(0,10)}}</td>
 		<td>{{patient.pid}}</td>
+		<button (click)="deletePatient(patient.pid)" class="btn btn-danger">DELETE</button>
 	</tr>
 </table>
