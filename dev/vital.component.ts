@@ -21,7 +21,8 @@ export class VitalComponent {
     
     ngOnInit() {
         this.getVitals();
-        this.generateNextId();
+        // not needed at the moment
+        // this.generateNextId();
     }
 
     postVitals(oxygen_saturation, temperature, blood_pressure, pulse, respiration){
@@ -35,12 +36,12 @@ export class VitalComponent {
             },
             'vital'
         ).subscribe(
-            data => console.log(data),
-            err => alert(err),
-            () => {
-                this.getVitals();
-                this.next_id += 1;
-            }
+            data => {
+                console.log(data);
+                console.log('POST success')
+            },
+            err => console.error(err),
+            () => {this.getVitals()}
         );
     }
     
@@ -53,13 +54,14 @@ export class VitalComponent {
         );
     }
 
-    generateNextId() {
-        this._httpService.getVIQuery().subscribe(
-            data => this.parseVitalsForId(data),
-            err => alert(err),
-            () => console.log("generateNextId() complete")
-        );
-    }
+    // not needed at the moment
+    // generateNextId() {
+    //     this._httpService.getVIQuery().subscribe(
+    //         data => this.parseVitalsForId(data),
+    //         err => alert(err),
+    //         () => console.log("generateNextId() complete")
+    //     );
+    // }
 
     parseVitalsForId(json) {
         let vital_ids: number[] = [];
