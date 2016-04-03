@@ -15,7 +15,6 @@ var knex = require('knex')({
     }
 });
 var app = express();
-var inp = 232;
 
 app.use(function(req,res,next){
     res.header('Access-Control-Allow-Origin', "*");
@@ -49,19 +48,24 @@ var selectAllTablesOptions = ['equipment','patient','visit'];
 var postTablesOptions = ['patient', 'equipment', 'vital', 'report', 'visit', 'staff',
     'prescription'];
 
-// Join Visit and Patient table
+// Update to patient Wendy
+app.post('/patient/update/:pid',function(req,res){updatePatient(req,res)});
+
+// Join Visit and Patient table v
 app.get('/patient_visit', function(req,res){visit_patient(req,res)})
 
-// Join Visit and Report table
+// Join Visit and Report table v
 app.get('/patient_report', function(req,res){patient_report(req,res)})
+// Wendy
+app.get('/vital/max', function(req,res){maxPressure(req,res)});
 
-// Select experienced staff
+// Select experienced staff v
 app.get('/staff/:year', function(req,res){selectExperiencedStaff(req,res,req.params.year)});
 
-// Get All from table
+// Get All from table v
 app.get('/:table', function(req,res){processQuery(req,res, selectAllTablesOptions, getAllFromTable)});
 
-// Post to table
+// Post to table v
 app.post('/:table', function(req,res){processQuery(req,res,postTablesOptions, postData)});
 
 // Utilize all equipment
@@ -70,7 +74,7 @@ app.get('/utilize_equip/:eidList', function(req,res){
     utilizeAllEquipment(req,res, eids);
 });
 
-// Delete patient based on pid
+// Delete patient based on pid v
 app.get('/patient/delete/:id', function(req,res){deleteFromPatient(req,res)});
 
 function processQuery(req,res,options,handler){
@@ -81,22 +85,19 @@ function processQuery(req,res,options,handler){
     }
 }
 
+
 function getAllFromTable(req,res,table){
-	knex.select().from(table).catch(this.errorHandler).then(rows => res.send(rows));
+    knex.select().from(table).catch(this.errorHandler).then(rows => res.send(rows));
 }
 
-
 function postData(req,res,table){
-    console.log(req.body.json);
     var post = JSON.parse(req.body.json);
     knex(table).insert(post)
         .catch(this.errorHandler)
-        .return({success:true});
+        .then(res.send(JSON.stringify({success:true})));
 }
 
-
 function deleteFromPatient(req,res){
-    console.log(req.params.id);
     knex('patient')
         .where('pid',req.params.id)
         .del()
@@ -105,7 +106,6 @@ function deleteFromPatient(req,res){
 }
 
 function visit_patient(req,res){
-    console.log("I am here!!!");
     knex.from('patient').innerJoin('visit', 'visit.pid', 'patient.pid')
         .select()
         .catch(this.errorHandler).then(rows => res.send(rows));
@@ -137,8 +137,7 @@ function utilizeAllEquipment(req,res,eids){
         .then(rows => res.send(rows))
 }
 
-
-function maxPressure(req,res) {
+function maxPressure(req,res){
     knex("vital")
         .innerJoin('report', 'vital.vid', 'report.vid')
         .orderBy('blood_pressure', 'desc')
@@ -147,6 +146,15 @@ function maxPressure(req,res) {
         .then(rows => res.send(rows))
 }
 
+function updatePatient(req,res){
+    knex('patient')
+        .where('pid', req.params.pid)
+        .update(JSON.parse(req.params.json))
+        .catch(this.errorHandler)
+        .then(res.send(JSON.stringify({status: 'success'})));
+}
+
+
 function errorHandler(error){
     console.error(error);
 }
@@ -154,5 +162,6 @@ function errorHandler(error){
 function invalidCondition(res,msg){
     res.send(JSON.stringify({error: msg}));
 }
+
 
 app.listen(3002);

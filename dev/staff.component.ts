@@ -4,6 +4,7 @@
 import {Component} from 'angular2/core';
 import {Staff} from './Staff';
 import {HTTPService} from './http.service';
+import {SelectYears} from "./select-by-years";
 
 @Component({
     selector:'staff',
@@ -12,6 +13,7 @@ import {HTTPService} from './http.service';
 })
 export class StaffComponent{
     staffs:Array<Staff>;
+    selectyears:SelectYears[]=[];
 
     constructor(private httpService: HTTPService){
         this.staffs = [];
@@ -21,9 +23,17 @@ export class StaffComponent{
             () => console.log("complete")
         );
     }
+
+    condition(year:number){
+        this.httpService.selectyear(year).subscribe(
+            data => this.parseSr(data),
+            err => alert(err),
+            () => console.log("complete")
+        );
+    }
     testSsPost(s_id,s_lname,s_fname,specialization,isDoctor,experience_in_years){
         this.httpService.post(
-            {sid:s_id,
+                {sid:s_id,
                 s_lname:s_lname,
                 s_fname:s_fname,
                 specialization:specialization,
@@ -37,6 +47,23 @@ export class StaffComponent{
             () => console.log("complete")
         );
     }
+    parseSr(json){
+        console.log(json);
+        json.forEach( item => {
+            this.addSr(item.s_lname,
+                item.s_fname);
+        })
+    }
+
+    addSr(s_lname: string,
+          s_fname:string){
+        console.log(s_lname);
+        let selectyear = new SelectYears(s_lname,s_fname);
+        console.log(selectyear);
+        console.log(this.selectyears.length);
+        this.selectyears.push(selectyear);
+    }
+
 
     parseStaff(json){
         json.forEach( item => {

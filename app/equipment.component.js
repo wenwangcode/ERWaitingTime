@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "./http.service"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "./http.service", "./patient_id"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', "./http.service"], function
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_service_1;
+    var core_1, router_1, http_service_1, patient_id_1;
     var EquipmentComponent;
     return {
         setters:[
@@ -22,11 +22,15 @@ System.register(['angular2/core', 'angular2/router', "./http.service"], function
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
+            },
+            function (patient_id_1_1) {
+                patient_id_1 = patient_id_1_1;
             }],
         execute: function() {
             EquipmentComponent = (function () {
                 function EquipmentComponent(_httpService) {
                     this._httpService = _httpService;
+                    this.pides = [];
                 }
                 EquipmentComponent.prototype.ngOnInit = function () {
                     this.getEquipment();
@@ -35,6 +39,25 @@ System.register(['angular2/core', 'angular2/router', "./http.service"], function
                     var _this = this;
                     this._httpService.getAllFromTable('equipment')
                         .subscribe(function (equipment) { return _this.equipments = equipment; }, function (error) { return _this.errorMessage = error; });
+                };
+                EquipmentComponent.prototype.getpid = function (eidlist) {
+                    var _this = this;
+                    console.log(eidlist);
+                    this._httpService.findpid(eidlist)
+                        .subscribe(function (data) { return _this.parsepid(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                };
+                EquipmentComponent.prototype.addpid = function (pd) {
+                    console.log(pd);
+                    var pide = new patient_id_1.PatientID(pd);
+                    console.log(pide);
+                    this.pides.push(pide);
+                };
+                EquipmentComponent.prototype.parsepid = function (json) {
+                    var _this = this;
+                    console.log(json);
+                    json.forEach(function (item) {
+                        _this.addpid(item.pid);
+                    });
                 };
                 EquipmentComponent = __decorate([
                     core_1.Component({

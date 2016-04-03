@@ -47,7 +47,12 @@ export class HTTPService{
 	joinpr(){
 		return this.http.get("http://localhost:3002/patient_report").map(res => res.json());
 	}
-	
+	selectyear(year){
+		return this.http.get('http://localhost:3002/staff/'+year).map(res => res.json());
+	}
+	findpid(eidlist){
+		return this.http.get('http://localhost:3002/utilize_equip/'+eidlist).map(res => res.json());
+	}
 	delete(input){
 		return this.http.get('http://localhost:3002/patient/delete/'+input).map(res => res.json());
 	}

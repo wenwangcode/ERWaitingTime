@@ -19,3 +19,24 @@
     </table>
     <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
 </div>
+
+<div>
+Equipment ID (List Format: 1,2,3,... if input more than one eid):
+    <input class="form-control" #pide>
+<button class="btn btn-success" (click)="getpid(pide.value)">Who is Using it?</button>
+    </div>
+
+<div ng-app="my-app">
+    <table id="tablex" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Patient ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#pide of pides">
+            <td> {{pide.pid}} </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
