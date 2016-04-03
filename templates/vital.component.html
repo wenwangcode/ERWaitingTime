@@ -1,15 +1,5 @@
 <h1 class="page-header">Patient Vital Entry</h1>
-<div>ER Waiting patient in Danger</div>
-<table class="table">
-	<tr>
-		<th>Patient ID</th>
-		<th>Highest Blood Pressure</th>
-	</tr>
-	<tr>
-		<td>12</td>
-		<td>100</td>
-	</tr>
-</table>
+
 
 <form method="post" class="form-horizontal">
 	<input name="_csrf" type="hidden"/>
@@ -51,7 +41,7 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button (click)="postVitals(o2.value, temp.value, bp.value, bpm.value, resp.value)" type="submit" class="btn btn-primary">Log Vitals</button>
+			<button type="submit" class="btn btn-primary">Log Vitals</button>
 		</div>
 	</div>
 

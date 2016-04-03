@@ -43,7 +43,7 @@ app.post('/report',function(req,res){postData(req,res,'report')});
 app.post('/visit',function(req,res){postData(req,res,'visit')});
 app.post('/staff',function(req,res){postData(req,res,'staff')});
 app.post('/prescription',function(req,res){postData(req,res,'prescription')});
-
+app.post('/patient/update/:pid',function(req,res){updatePatient(req,res)});
 var selectAllTablesOptions = ['equipment','patient','visit'];
 var postTablesOptions = ['patient', 'equipment', 'vital', 'report', 'visit', 'staff',
     'prescription'];
@@ -137,8 +137,8 @@ function utilizeAllEquipment(req,res,eids){
         .then(rows => res.send(rows))
 }
 
-function maxPressure(req,res){
-    knex("vital")
+function maxPressure(req,res) {
+    knex('vital')
         .innerJoin('report', 'vital.vid', 'report.vid')
         .orderBy('blood_pressure', 'desc')
         .select('report.pid', 'vital.blood_pressure')

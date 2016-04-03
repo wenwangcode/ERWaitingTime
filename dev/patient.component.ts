@@ -1,7 +1,7 @@
 /**
  * Created by Joy on 2016-03-28.
  */
-import {Component, OnInit} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Patient} from './Patient';
 import {HTTPService} from './http.service';
 import {PatientVisit} from "./patient_visit";
@@ -105,6 +105,9 @@ export class PatientComponent {
                 item.dob);
         })
     }
+
+
+
     deletePatient(patientId:number) {
         return this._httpService.delete(patientId)
             .subscribe(
