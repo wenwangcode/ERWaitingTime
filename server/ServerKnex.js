@@ -40,6 +40,9 @@ app.get('/patient_report', function(req,res){patient_report(req,res)})
 
 app.get('/vital/max', function(req,res){maxPressure(req,res)});
 
+app.get('/staff/avg/min', function(req,res){poorSpecialization(req,res)});
+app.get('/staff/avg/max', function(req,res){experiencedSpecialization(req,res)});
+
 // Select experienced staff
 app.get('/staff/:year', function(req,res){selectExperiencedStaff(req,res,req.params.year)});
 
@@ -135,6 +138,23 @@ function updatePatient(req,res){
     .then(res.send(JSON.stringify({status: 'success'})));
 }
 
+function poorSpecialization(req,res){
+    knex.select('t1.specialization', 't1.avg_year').from(function(){
+        this.select('specialization', knex.raw('avg(experience_in_years) as avg_year')).from('staff').groupBy('specialization').as('t1')
+    }).as('ignore')
+    .where('t1.avg_year', knex.raw('(select min(avg_year) from (select specialization, avg(experience_in_years) as avg_year from staff group by specialization) as t2);'))
+    .catch(this.errorHandler)
+    .then(rows => res.send(rows))
+}
+
+function experiencedSpecialization(req,res){
+    knex.select('t1.specialization', 't1.avg_year').from(function(){
+        this.select('specialization', knex.raw('avg(experience_in_years) as avg_year')).from('staff').groupBy('specialization').as('t1')
+    }).as('ignore')
+    .where('t1.avg_year', knex.raw('(select max(avg_year) from (select specialization, avg(experience_in_years) as avg_year from staff group by specialization) as t2);'))
+    .catch(this.errorHandler)
+    .then(rows => res.send(rows))
+}
 
 function errorHandler(error){
     console.error(error);
