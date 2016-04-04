@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {
     RouteConfig,
     ROUTER_DIRECTIVES,
+    ROUTER_PROVIDERS,
     Router,
     CanActivate,
     RouterOutlet,
@@ -31,6 +32,7 @@ import {PrescriptionAddComponent} from "./prescription-add.component";
 import {VitalComponent} from "./vital.component";
 import {VitalAddComponent} from "./vital-add.component";
 import {HTTPService} from './http.service';
+import {PatientUpdateComponent} from "./patient-update.component";
 
 // @CanActivate(() => isLoggedin())
 
@@ -42,6 +44,7 @@ import {HTTPService} from './http.service';
     providers: [
         HTTPService,
         HTTP_PROVIDERS,
+        ROUTER_PROVIDERS,
         Authentication,
         CanActivate,
     ],
@@ -79,6 +82,11 @@ import {HTTPService} from './http.service';
         path: '/patients/visit',
         name: 'Visit',
         component: VisitComponent,
+    },
+    {
+        path: '/patients/update/:pid',
+        name: 'Patient Update',
+        component: PatientUpdateComponent,
     },
     {
         path: '/equipment/list',

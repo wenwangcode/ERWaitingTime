@@ -16,12 +16,12 @@
 	</tr>
 	<tr *ngFor="#patient of patients">
 		<td>{{patient.p_lname}}</td>
-		<td contenteditable='true' >{{patient.p_fname}}</td>
-		<td contenteditable='true' >{{patient.is_male.data == '1' ? 'Male' : 'Female'}}</td>
-		<td contenteditable='true' >{{patient.dob.slice(0,10)}}</td>
-		<td                        >{{patient.pid}}</td>
+		<td>{{patient.p_fname}}</td>
+		<td>{{patient.is_male.data == '1' ? 'Male' : 'Female'}}</td>
+		<td>{{patient.dob.slice(0,10)}}</td>
+		<td>{{patient.pid}}</td>
 		<td><button (click)="deletePatient(patient.pid)" class="btn btn-danger">DELETE</button></td>
-		<td><button (click)="updatePatient_ts(patient.p_lname, patient.p_fname, patient.dob, patient.is_male, patient.pid)" type="button" class="btn btn-success">UPDATE</button>
+		<td><button (click)="goUpdate(patient.pid)" type="button" class="btn btn-success">UPDATE</button>
 		</td>
 	</tr>
 </table>

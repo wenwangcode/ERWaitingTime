@@ -2,17 +2,19 @@
  * Created by Joy on 2016-03-28.
  */
 import {Component, OnInit} from 'angular2/core';
-import {CanActivate} from 'angular2/router';
+import {CanActivate, Router} from 'angular2/router';
 
 import {Patient} from './Patient';
 import {HTTPService} from './http.service';
 import {PatientVisit} from "./patient_visit";
 import {PatientReport} from "./patient_report";
 import {isLoggedin} from "./is-loggedin";
+import {PatientUpdateComponent} from "./patient-update.component";
 
 @Component({
     selector:'patient',
     templateUrl: 'templates/patients.component.html',
+    // directives: [PatientUpdateComponent],
     providers:[HTTPService]
 })
 
@@ -25,7 +27,10 @@ export class PatientComponent implements OnInit {
     patientvisits:PatientVisit[] = [];
     patientreports:PatientReport[] = [];
     sex: number;
-    constructor(private _httpService:HTTPService) {}
+    constructor(
+        private _httpService:HTTPService,
+        private _router: Router
+    ) {}
 
     joinpvs(){
         this._httpService.joinpv()
@@ -195,5 +200,10 @@ export class PatientComponent implements OnInit {
             err => alert(err),
             () => console.log("complete")
         );
+    }
+
+    goUpdate(id: number) {
+        let link = ['Patient Update', {pid: id}];
+        this._router.navigate(link);
     }
 }

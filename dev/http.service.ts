@@ -10,10 +10,35 @@ export class HTTPService{
 	}
 
 	getAllFromTable(table: string){
+		console.log("getAllFromTable called with parameter: '" + table + "'");
 		return this.http.get("http://localhost:3002/" + table)
-			.map(response => response.json())
+			.map(response => response.json()).do(response => console.log(response))
 			.catch(this.handleError);
 	}
+
+	// getFromTableById(table: string, id: number) {
+	// 	console.log("calling getFromTableById");
+	// 	return this.http.get("http://localhost:3002/" + table)
+	// 		.map(response => response.json())
+	// 		.catch(this.handleError);
+	// }
+
+	// private getObjectById(table: string, id, json) {
+	// 	console.log("Calling getObjectById");
+	// 	let id_prefix;
+	// 	if (table == 'patient') {
+	// 		id_prefix = 'pid';
+	// 	}
+	// 	console.log("The id prefix is: " + id_prefix);
+	// 	json.forEach(item => {
+	// 		console.log(item, item[id_prefix]);
+	// 		if (item[id_prefix] == id) {
+	// 			console.log("Correctly selected the item with id: " + id);
+	// 			console.log(item);
+	// 			return item;
+	// 		}
+	// 	});
+	// }
 	
 	private handleError (error: Response) {
 		console.error(error);
