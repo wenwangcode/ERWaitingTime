@@ -1,14 +1,15 @@
 <h1 class="page-header">Patient List</h1>
 
 <table class="table table-striped" id="patient-list">
+	<div class="has-error" *ngIf="errorMessage == 'delete failed'">
+		<p class="control-label">Cannot delete record; other records depend on it.</p>
+	</div>
 	<tr>
 		<th>Last Name</th>
 		<th>First Name</th>
 		<th>Sex</th>
 		<th>Date of Birth</th>
 		<th>Patient ID</th>
-
-
 	</tr>
 	<tr *ngFor="#patient of patients">
 		<td contenteditable='true' >{{patient.p_lname}}</td>

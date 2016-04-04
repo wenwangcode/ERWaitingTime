@@ -2,11 +2,12 @@
  * Created by wendywang on 2016-04-01.
  */
 import {Component, OnInit} from 'angular2/core';
-import {Router, RouterLink} from 'angular2/router';
+import {Router, RouterLink, CanActivate} from 'angular2/router';
 
 import {HTTPService} from "./http.service";
 import {Equipment} from "./equipment";
 import {PatientID} from "./patient_id";
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector: 'equipment',
@@ -14,6 +15,8 @@ import {PatientID} from "./patient_id";
     providers: [HTTPService,RouterLink],
     directives: [RouterLink],
 })
+
+// @CanActivate(() => isLoggedin())
 
 export class EquipmentComponent implements OnInit {
 
@@ -28,7 +31,7 @@ export class EquipmentComponent implements OnInit {
     }
 
     getEquipment() {
-        this._httpService.getAllFromTable('equipme')
+        this._httpService.getAllFromTable('equipment')
             .subscribe(
                 equipment => this.equipments = equipment,
                 error =>  this.errorMessage = <any>error

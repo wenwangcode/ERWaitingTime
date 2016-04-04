@@ -32,13 +32,18 @@ import {VitalComponent} from "./vital.component";
 import {VitalAddComponent} from "./vital-add.component";
 import {HTTPService} from './http.service';
 
+// @CanActivate(() => isLoggedin())
 
 @Component({
     selector: 'my-app',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [
+        ROUTER_DIRECTIVES,
+    ],
     providers: [
         HTTPService,
         HTTP_PROVIDERS,
+        Authentication,
+        CanActivate,
     ],
     templateUrl: 'templates/app.component.html'
 })
@@ -124,6 +129,13 @@ import {HTTPService} from './http.service';
 
 
 export class AppComponent {
+
+    constructor(private _auth: Authentication) {
+
+    }
+    onLogout() {
+        this._auth.logout();
+    }
 }
 
 

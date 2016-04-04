@@ -81,8 +81,19 @@ System.register(['angular2/core', './Patient', './http.service', "./patient_visi
                     });
                 };
                 PatientComponent.prototype.deletePatient = function (patientId) {
+                    var _this = this;
                     return this._httpService.delete(patientId)
-                        .subscribe(function (data) { return console.log(data); }, function (err) { return alert(err); }, function () { return console.log("complete"); });
+                        .subscribe(function (data) { return _this.dbErrorHandler(data); }, function (error) { return _this.errorMessage = error; }, function () { return console.log("patient delete request complete"); });
+                };
+                PatientComponent.prototype.dbErrorHandler = function (error) {
+                    /* The server is not handling the delete error. I can see the server message,
+                    but as far as Angular is concerned, the GET request is a success. I will hack
+                    this on the front end for now since the delete operation cannot happen because
+                    of the database configuration on this table, but for production this would absolutely
+                    have to be changed.
+                    */
+                    console.log("The database returned: " + JSON.stringify(error));
+                    this.errorMessage = "delete failed";
                 };
                 //  dob: "1996-02-26T08:00:00.000Z"
                 PatientComponent.prototype.updatePatient_ts = function (p_lname, p_fname, dob, gender, pid) {

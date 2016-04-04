@@ -1,18 +1,26 @@
 /**
  * Created by Joy on 2016-03-28.
  */
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
+import {CanActivate} from 'angular2/router';
+
 import {Patient} from './Patient';
 import {HTTPService} from './http.service';
 import {PatientVisit} from "./patient_visit";
 import {PatientReport} from "./patient_report";
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector:'patient',
     templateUrl: 'templates/patients.component.html',
     providers:[HTTPService]
 })
-export class PatientComponent {
+
+// @CanActivate(() => isLoggedin())
+
+export class PatientComponent implements OnInit {
+
+    errorMessage: string;
     patients:Patient[] = [];
     patientvisits:PatientVisit[] = [];
     patientreports:PatientReport[] = [];
@@ -103,16 +111,26 @@ export class PatientComponent {
         })
     }
 
-
-
     deletePatient(patientId:number) {
         return this._httpService.delete(patientId)
             .subscribe(
-                data => console.log(data),
-                err => alert(err),
-                () => console.log("complete")
+                data => this.dbErrorHandler(data),
+                error => this.errorMessage = <any>error,
+                () => console.log("patient delete request complete")
             )
     }
+
+    dbErrorHandler(error) {
+        /* The server is not handling the delete error. I can see the server message,
+        but as far as Angular is concerned, the GET request is a success. I will hack
+        this on the front end for now since the delete operation cannot happen because
+        of the database configuration on this table, but for production this would absolutely
+        have to be changed.
+        */
+        console.log("The database returned: " + JSON.stringify(error));
+        this.errorMessage = "delete failed";
+    }
+
   //  dob: "1996-02-26T08:00:00.000Z"
     updatePatient_ts(p_lname: string, p_fname: string, dob:string, gender: string, pid: number){
         //let dob = year + '-' + month + '-' + day;

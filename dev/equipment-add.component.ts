@@ -7,6 +7,7 @@ import {RouterLink} from "angular2/router";
 
 import {Equipment} from './Equipment';
 import {HTTPService} from './http.service';
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector:'equipment',
@@ -14,6 +15,8 @@ import {HTTPService} from './http.service';
     providers: [HTTPService,RouterLink],
     directives: [RouterLink],
 })
+
+// @CanActivate(() => isLoggedin())
 
 export class EquipmentAddComponent{
 

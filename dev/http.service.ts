@@ -54,7 +54,9 @@ export class HTTPService{
 		return this.http.get('http://localhost:3002/utilize_equip/'+eidlist).map(res => res.json());
 	}
 	delete(input){
-		return this.http.get('http://localhost:3002/patient/delete/'+input).map(res => res.json());
+		return this.http.get('http://localhost:3002/patient/delete/'+input)
+			.map(res => res.json())
+			.catch(this.handleError);
 	}
 	getsavg(input){
 		return this.http.get('http://localhost:3002/staff/avg/'+input).map(res => res.json());
@@ -85,7 +87,8 @@ export class HTTPService{
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 		console.log("sending post request");
 		return this.http.post('http://localhost:3002/'+table, param, {headers: headers})
-			.map(res=>res.json());
+			.map(res=>res.json())
+			.catch(this.handleError);
 	}
 
 }

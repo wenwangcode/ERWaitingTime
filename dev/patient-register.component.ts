@@ -12,7 +12,10 @@ import {PatientVisit} from "./patient_visit";
 @Component({
     selector: 'patient-register',
     templateUrl: 'templates/patient-register.component.html',
-    providers: [HTTPService,RouterLink],
+    providers: [
+        HTTPService,
+        RouterLink
+    ],
     directives: [RouterLink],
 
 })
@@ -20,8 +23,16 @@ import {PatientVisit} from "./patient_visit";
 export class PatientRegisterComponent {
 
     patients:Array<Patient>;
+    errorMessage: string;
     next_id: number;
     sex: number;
+    errorMessages = {
+        p_lname: '',
+        p_fname: '',
+        year: '',
+        month: '',
+        day: '',
+    };
     
     constructor(
         private _httpService: HTTPService,
@@ -29,18 +40,47 @@ export class PatientRegisterComponent {
     ) {}
 
     ngOnInit() {
-        this.preprocessPatientForm();
+        // this.preprocessPatientForm();
+        this.getPatients();
+    }
+
+    getPatients() {
+        this._httpService.getAllFromTable('patient')
+            .subscribe(
+                patients => this.patients = patients,
+                error =>  this.errorMessage = <any>error
+            );
     }
     
-    preprocessPatientForm() {
-        this._httpService.getPQuery().subscribe(
-            data => this.getPatientNextId(data),
-            err => alert(err),
-            () => console.log("GET patient data preprocessing complete")
-        );
+    // preprocessPatientForm() {
+    //     this._httpService.getPQuery().subscribe(
+    //         data => this.getPatientNextId(data),
+    //         err => alert(err),
+    //         () => console.log("GET patient data preprocessing complete")
+    //     );
+    // }
+
+    private checkNull(...params) {
+        let nullDetected = false;
+        params.forEach(item => {
+            if (item == '') {
+                nullDetected = true;
+            }
+        });
+        if (nullDetected) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     postPatient(p_lname: string, p_fname: string, year: string, month: string, day: string){
+        this.errorMessage = '';
+        if (this.checkNull.apply(this, arguments)){
+            console.log("missing arguments");
+            this.errorMessage = 'missing';
+            return;
+        }
         let dob = year + '-' + month + '-' + day;
         this._httpService.post(
             {
@@ -53,37 +93,37 @@ export class PatientRegisterComponent {
             'patient'
         ).subscribe(
             data => console.log(data),
-            err => alert(err),
+            error =>  this.errorMessage = <any>error,
             () => console.log("complete")
         );
     }
     
 
     // assigns a unique new patient id (called the pid in the data model)
-    getPatientNextId(json){
-        let patient_ids: number[] = [];
-        let next_id: number = 0;
-        json.forEach( item => {
-            patient_ids.push(item.pid);
-        });
-        for (let i = 0; i < patient_ids.length; i += 1) {
-            if (patient_ids[i] > next_id) next_id = patient_ids[i]
-        }
-        console.log(next_id + 1);
-        this.next_id = next_id + 1;
-    }
+    // getPatientNextId(json){
+    //     let patient_ids: number[] = [];
+    //     let next_id: number = 0;
+    //     json.forEach( item => {
+    //         patient_ids.push(item.pid);
+    //     });
+    //     for (let i = 0; i < patient_ids.length; i += 1) {
+    //         if (patient_ids[i] > next_id) next_id = patient_ids[i]
+    //     }
+    //     console.log(next_id + 1);
+    //     this.next_id = next_id + 1;
+    // }
 
-    parsePatient(json){
-        json.forEach( item => {
-            this.addPatient(
-                item.p_lname,
-                item.p_fname,
-                item.pid,
-                item.is_male,
-                item.dob
-            );
-        })
-    }
+    // parsePatient(json){
+    //     json.forEach( item => {
+    //         this.addPatient(
+    //             item.p_lname,
+    //             item.p_fname,
+    //             item.pid,
+    //             item.is_male,
+    //             item.dob
+    //         );
+    //     })
+    // }
 
 
     addPatient(p_lname:string, p_fname:string, pid:number, is_male:string, dob:Date){

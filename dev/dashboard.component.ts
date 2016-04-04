@@ -13,7 +13,8 @@ import {Authentication} from "./authentication";
 })
 
 
-@CanActivate(() => isLoggedin())
+// @CanActivate(() => isLoggedin())
+
 export class DashboardComponent {
     constructor(public auth: Authentication, public router: Router) {}
 

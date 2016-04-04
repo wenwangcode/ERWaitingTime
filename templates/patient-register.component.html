@@ -209,17 +209,16 @@
 			</ul>
 		</div>
 	</div>
-	<div class="form-group">
+	<div class="form-group" [class.has-error]="errorMessage == 'missing'">
 		<div class="col-sm-offset-2 col-sm-10">
-
-			<a [routerLink]="['Patients']" (click)="postPatient(p_lname.value, p_fname.value, year.value, month.value, day.value)" class="btn btn-primary"> Submit </a>
-
+			<a (click)="postPatient(p_lname.value, p_fname.value, year.value, month.value, day.value)" class="btn btn-primary"> Submit </a>
+			<label class="control-label" *ngIf="errorMessage == 'missing'">All fields are required</label>
 		</div>
 
 	</div>
 </form>
 
-<table *ngIf="patientIds" class="table table-striped" id="patient-list">
+<table *ngIf="patients" class="table table-striped" id="patient-list">
 	<tr>
 		<th>Last Name</th>
 		<th>First Name</th>
@@ -228,12 +227,11 @@
 		<th>Patient ID</th>
 		<th>Status</th>
 	</tr>
-	<tr *ngFor="#patient of patientIds">
+	<tr *ngFor="#patient of patients">
 		<td>{{patient.p_lname}}</td>
 		<td>{{patient.p_fname}}</td>
 		<td>{{patient.is_male == '1' ? 'Male' : 'Female'}}</td>
 		<td>{{patient.dob.slice(0,10)}}</td>
 		<td>{{patient.pid}}</td>
-		<td>Successfully Registered</td>
 	</tr>
 </table>
