@@ -36,11 +36,11 @@ System.register(['angular2/core', './visit', './http.service'], function(exports
                 VisitComponent.prototype.parseVisit = function (json) {
                     var _this = this;
                     json.forEach(function (item) {
-                        _this.addVisit(item.pid, item.sid, item.room, item.visit_date);
+                        _this.addVisit(item.visitId, item.pid, item.sid, item.room, item.visit_date);
                     });
                 };
-                VisitComponent.prototype.addVisit = function (pid, sid, room, date) {
-                    var visit = new visit_1.Visit(pid, sid, room, date);
+                VisitComponent.prototype.addVisit = function (visit_id, pid, sid, room, date) {
+                    var visit = new visit_1.Visit(visit_id, pid, sid, room, date);
                     this.visits.push(visit);
                 };
                 VisitComponent.prototype.postVisit = function (pid, sid, room, visit_date) {
