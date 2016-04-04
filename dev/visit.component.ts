@@ -27,15 +27,18 @@ export class VisitComponent{
 
     parseVisit(json){
         json.forEach( item => {
-            this.addVisit(item.pid,
-            item.sid,
-            item.room,
-            item.visit_date);
+            this.addVisit(
+                item.visitId,
+                item.pid,
+                item.sid,
+                item.room,
+                item.visit_date
+            );
         })
     }
 
-    addVisit(pid:number, sid:number, room:number, date:Date){
-        let visit = new Visit(pid,sid,room,date);
+    addVisit(visit_id: number, pid:number, sid:number, room:number, date:Date){
+        let visit = new Visit(visit_id,pid,sid,room,date);
         this.visits.push(visit);
     }
 
