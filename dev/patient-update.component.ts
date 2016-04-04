@@ -17,7 +17,7 @@ import {isLoggedin} from "./is-loggedin";
     providers:[HTTPService]
 })
 
-// @CanActivate(() => isLoggedin())
+@CanActivate(() => isLoggedin())
 
 export class PatientUpdateComponent implements OnInit {
 

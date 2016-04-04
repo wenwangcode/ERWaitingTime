@@ -16,7 +16,7 @@ import {isLoggedin} from "./is-loggedin";
     directives: [RouterLink],
 })
 
-// @CanActivate(() => isLoggedin())
+@CanActivate(() => isLoggedin())
 
 export class EquipmentAddComponent{
 

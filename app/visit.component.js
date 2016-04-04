@@ -1,4 +1,4 @@
-System.register(['angular2/core', './visit', './http.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './visit', './http.service', "./is-loggedin", "angular2/router"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './visit', './http.service'], function(exports
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, visit_1, http_service_1;
+    var core_1, visit_1, http_service_1, is_loggedin_1, router_1;
     var VisitComponent;
     return {
         setters:[
@@ -22,6 +22,12 @@ System.register(['angular2/core', './visit', './http.service'], function(exports
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
+            },
+            function (is_loggedin_1_1) {
+                is_loggedin_1 = is_loggedin_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             VisitComponent = (function () {
@@ -79,7 +85,8 @@ System.register(['angular2/core', './visit', './http.service'], function(exports
                         selector: 'visit',
                         templateUrl: 'templates/visit.component.html',
                         providers: [http_service_1.HTTPService]
-                    }), 
+                    }),
+                    router_1.CanActivate(function () { return is_loggedin_1.isLoggedin(); }), 
                     __metadata('design:paramtypes', [http_service_1.HTTPService])
                 ], VisitComponent);
                 return VisitComponent;

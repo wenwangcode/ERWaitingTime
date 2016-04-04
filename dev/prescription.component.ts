@@ -4,13 +4,18 @@
 import {Component, OnInit} from 'angular2/core';
 import {HTTPService} from './http.service';
 import {Prescription} from "./prescription";
+import {CanActivate} from "angular2/router";
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector:'prescription',
     templateUrl: 'templates/prescription.html',
     providers:[HTTPService]
 })
-export class PrescriptionComponent{
+
+@CanActivate(() => isLoggedin())
+
+export class PrescriptionComponent implements OnInit{
 
     prescriptions: Prescription[] = [];
 

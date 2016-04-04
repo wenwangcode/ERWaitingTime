@@ -18,7 +18,7 @@ import {PatientUpdateComponent} from "./patient-update.component";
     providers:[HTTPService]
 })
 
-// @CanActivate(() => isLoggedin())
+@CanActivate(() => isLoggedin())
 
 export class PatientComponent implements OnInit {
 

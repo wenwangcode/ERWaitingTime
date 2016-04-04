@@ -6,12 +6,17 @@ import {Staff} from './Staff';
 import {HTTPService} from './http.service';
 import {SelectYears} from "./select-by-years";
 import {MaxMin} from "./maxmin";
+import {isLoggedin} from "./is-loggedin";
+import {CanActivate} from "angular2/router";
 
 @Component({
     selector:'staff',
     templateUrl:'/templates/staff.html',
     providers:[HTTPService]
 })
+
+@CanActivate(() => isLoggedin())
+
 export class StaffComponent{
     staffs:Array<Staff>;
     selectyears:SelectYears[]=[];

@@ -6,6 +6,8 @@ import {Component, OnInit} from 'angular2/core';
 import {Vital} from "./vital";
 import {HTTPService} from "./http.service";
 import {Vital_Patient_Max} from "./vital_patient_max";
+import {CanActivate} from "angular2/router";
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector: 'vitals',
@@ -13,7 +15,8 @@ import {Vital_Patient_Max} from "./vital_patient_max";
     providers: [HTTPService],
 })
 
-export class VitalComponent {
+@CanActivate(() => isLoggedin())
+export class VitalComponent implements OnInit{
 
     vitals: Vital[];
     next_vid: number;

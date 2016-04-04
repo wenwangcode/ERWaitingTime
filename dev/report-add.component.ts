@@ -5,7 +5,8 @@ import {Component, OnInit} from 'angular2/core';
 import {Patient} from './Patient';
 import {HTTPService} from './http.service';
 import {Report} from "./report";
-import {RouterLink} from "angular2/router";
+import {RouterLink, CanActivate} from "angular2/router";
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector:'report',
@@ -13,7 +14,8 @@ import {RouterLink} from "angular2/router";
     providers: [HTTPService,RouterLink],
     directives: [RouterLink],
 })
-export class ReportAddComponent{
+@CanActivate(() => isLoggedin())
+export class ReportAddComponent implements OnInit{
 
     reports: Report[] = [];
     nextr_id:number;

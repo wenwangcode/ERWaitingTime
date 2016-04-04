@@ -3,6 +3,8 @@ import {Visit} from './visit';
 import {HTTPService} from './http.service';
 import {Patient} from "./patient";
 import {PatientComponent} from "./patient.component";
+import {isLoggedin} from "./is-loggedin";
+import {CanActivate} from "angular2/router";
 
 @Component({
     selector:'visit',
@@ -10,7 +12,8 @@ import {PatientComponent} from "./patient.component";
     providers: [HTTPService]
 })
 
-export class VisitComponent{
+@CanActivate(() => isLoggedin())
+export class VisitComponent implements OnInit {
 
     visits:Array<Visit>;
     patientIds: number[];

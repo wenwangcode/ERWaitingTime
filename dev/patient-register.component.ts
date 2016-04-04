@@ -3,11 +3,12 @@
  */
 
 import {Component, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Router, CanActivate} from 'angular2/router';
 import {HTTPService} from "./http.service";
 import {Patient} from "./patient";
 import {RouterLink} from "angular2/router";
 import {PatientVisit} from "./patient_visit";
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector: 'patient-register',
@@ -17,8 +18,9 @@ import {PatientVisit} from "./patient_visit";
         RouterLink
     ],
     directives: [RouterLink],
-
 })
+
+@CanActivate(() => isLoggedin())
 
 export class PatientRegisterComponent {
 

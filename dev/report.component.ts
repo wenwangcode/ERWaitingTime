@@ -5,13 +5,17 @@ import {Component, OnInit} from 'angular2/core';
 import {Patient} from './Patient';
 import {HTTPService} from './http.service';
 import {Report} from "./report";
+import {CanActivate} from "angular2/router";
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector:'report',
     templateUrl: 'templates/report.html',
     providers:[HTTPService]
 })
-export class ReportComponent{
+
+@CanActivate(() => isLoggedin())
+export class ReportComponent implements OnInit {
 
     reports: Report[] = [];
 

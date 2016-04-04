@@ -4,7 +4,8 @@
 import {Component} from 'angular2/core';
 import {Staff} from './Staff';
 import {HTTPService} from './http.service';
-import {RouterLink} from "angular2/router";
+import {RouterLink, CanActivate} from "angular2/router";
+import {isLoggedin} from "./is-loggedin";
 
 @Component({
     selector:'staff',
@@ -12,6 +13,8 @@ import {RouterLink} from "angular2/router";
     providers: [HTTPService,RouterLink],
     directives: [RouterLink]
 })
+
+@CanActivate(() => isLoggedin())
 export class StaffRegisterComponent{
     staffs:Array<Staff>;
     nexts_id: number;
