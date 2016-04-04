@@ -131,9 +131,28 @@ export class PatientComponent implements OnInit {
         this.errorMessage = "delete failed";
     }
 
+    private checkNull(...params) {
+        let nullDetected = false;
+        params.forEach(item => {
+            if (item == '') {
+                nullDetected = true;
+            }
+        });
+        if (nullDetected) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
   //  dob: "1996-02-26T08:00:00.000Z"
     updatePatient_ts(p_lname: string, p_fname: string, dob:string, gender: string, pid: number){
         //let dob = year + '-' + month + '-' + day;
+        if (this.checkNull.apply(this, arguments)){
+            console.log("missing arguments");
+            this.errorMessage = 'update missing';
+            return;
+        }
         console.log(gender);
         console.log(gender.data[0]);
         this._httpService.updatePatient_http (

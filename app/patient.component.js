@@ -95,9 +95,32 @@ System.register(['angular2/core', './Patient', './http.service', "./patient_visi
                     console.log("The database returned: " + JSON.stringify(error));
                     this.errorMessage = "delete failed";
                 };
+                PatientComponent.prototype.checkNull = function () {
+                    var params = [];
+                    for (var _i = 0; _i < arguments.length; _i++) {
+                        params[_i - 0] = arguments[_i];
+                    }
+                    var nullDetected = false;
+                    params.forEach(function (item) {
+                        if (item == '') {
+                            nullDetected = true;
+                        }
+                    });
+                    if (nullDetected) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                };
                 //  dob: "1996-02-26T08:00:00.000Z"
                 PatientComponent.prototype.updatePatient_ts = function (p_lname, p_fname, dob, gender, pid) {
                     //let dob = year + '-' + month + '-' + day;
+                    if (this.checkNull.apply(this, arguments)) {
+                        console.log("missing arguments");
+                        this.errorMessage = 'update missing';
+                        return;
+                    }
                     console.log(gender);
                     console.log(gender.data[0]);
                     this._httpService.updatePatient_http({
