@@ -1,7 +1,7 @@
 /**
  * Created by joshua on 2016-04-03.
  */
-System.register(['angular2/core', 'angular2/router', './http.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './http.service', "./is-loggedin"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/router', './http.service'], function
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_service_1;
+    var core_1, router_1, http_service_1, is_loggedin_1;
     var PatientUpdateComponent;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['angular2/core', 'angular2/router', './http.service'], function
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
+            },
+            function (is_loggedin_1_1) {
+                is_loggedin_1 = is_loggedin_1_1;
             }],
         execute: function() {
             PatientUpdateComponent = (function () {
@@ -107,7 +110,8 @@ System.register(['angular2/core', 'angular2/router', './http.service'], function
                         selector: 'patient-update',
                         templateUrl: 'templates/patient-update.component.html',
                         providers: [http_service_1.HTTPService]
-                    }), 
+                    }),
+                    router_1.CanActivate(function () { return is_loggedin_1.isLoggedin(); }), 
                     __metadata('design:paramtypes', [router_1.RouteParams, http_service_1.HTTPService])
                 ], PatientUpdateComponent);
                 return PatientUpdateComponent;
